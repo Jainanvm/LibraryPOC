@@ -1,0 +1,27 @@
+name: Validate use cases
+
+# Runs automatically on every push and pull request so a broken or
+# malformed entry in data/use-cases.json never reaches the live site.
+# This is entirely free on GitHub's public-repo/free-tier Actions minutes.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install jsonschema
+
+      - name: Validate data/use-cases.json against schema
+        run: python3 scripts/validate.py

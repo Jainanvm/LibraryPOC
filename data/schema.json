@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Personalization Use Case",
+  "description": "Schema for a single entry in data/use-cases.json. Used by scripts/validate.py and the GitHub Action to catch mistakes before they reach the live library.",
+  "type": "object",
+  "required": [
+    "id", "title", "oneLiner", "channels", "funnelStage",
+    "personalizationTactic", "cdpDataUsed", "businessProblems", "dataMaturity",
+    "complexity", "quickWin", "journey", "exampleBefore",
+    "exampleAfter", "kpis", "toolsNeeded", "tags"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Unique, URL-safe slug, e.g. 'browse-abandonment-recall'"
+    },
+    "title": { "type": "string", "minLength": 5, "maxLength": 80 },
+    "oneLiner": { "type": "string", "minLength": 10, "maxLength": 160 },
+    "channels": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["web", "app", "email"] },
+      "minItems": 1
+    },
+    "funnelStage": {
+      "type": "string",
+      "enum": ["Awareness", "Consideration", "Conversion", "Onboarding", "Retention", "Loyalty", "Reactivation"]
+    },
+    "personalizationTactic": { "type": "string", "minLength": 5 },
+    "cdpDataUsed": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "businessProblems": {
+      "type": "array",
+      "description": "Ids from data/business-problems.json — the client-facing problems this use case addresses.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "low-email-open-rate", "high-unsubscribe-rate", "low-loyalty-engagement",
+          "high-cart-abandonment", "low-repeat-purchase", "poor-search-conversion",
+          "low-app-retention", "generic-experience", "poor-new-visitor-conversion",
+          "high-return-rate", "low-cross-sell", "inconsistent-cross-channel-experience",
+          "wasted-ad-spend", "insufficient-zero-party-data", "low-post-purchase-engagement",
+          "low-review-ugc-volume", "poor-win-back-performance", "cdp-data-not-activated"
+        ]
+      },
+      "minItems": 1
+    },
+    "dataMaturity": {
+      "type": "string",
+      "enum": ["Foundational", "Intermediate", "Advanced"],
+      "description": "How much CDP capability a client needs before this use case is realistic."
+    },
+    "complexity": { "type": "string", "enum": ["Low", "Medium", "High"] },
+    "quickWin": { "type": "boolean" },
+    "journey": { "type": "string", "minLength": 20 },
+    "exampleBefore": { "type": "string", "minLength": 5 },
+    "exampleAfter": { "type": "string", "minLength": 5 },
+    "kpis": {
+      "type": "object",
+      "required": ["primary", "secondary"],
+      "properties": {
+        "primary": { "type": "string" },
+        "secondary": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "toolsNeeded": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "tags": { "type": "array", "items": { "type": "string" }, "minItems": 3 }
+  }
+}

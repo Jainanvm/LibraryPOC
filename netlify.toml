@@ -1,0 +1,10 @@
+[build]
+  publish = "."
+  command = ""
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# No build step — this is a static site. Netlify still needs an empty
+# command declared above so it doesn't try to guess a framework.

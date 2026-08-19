@@ -1,0 +1,95 @@
+{
+  "$comment": "Canonical list of business problems clients describe. Each use case references these by id in its businessProblems array. Used to power the 'Browse by problem' view and as context for the AI diagnose function.",
+  "problems": [
+    {
+      "id": "low-email-open-rate",
+      "label": "Low email open rate",
+      "description": "Email opens and clicks are declining or flat, even though the list is healthy in size."
+    },
+    {
+      "id": "high-unsubscribe-rate",
+      "label": "High unsubscribe / opt-out rate",
+      "description": "Customers are opting out of email or push faster than expected, often cited as 'too many irrelevant emails'."
+    },
+    {
+      "id": "low-loyalty-engagement",
+      "label": "Low loyalty program engagement",
+      "description": "Members sign up but rarely check their points, redeem rewards, or engage with the program after enrollment."
+    },
+    {
+      "id": "high-cart-abandonment",
+      "label": "High cart / browse abandonment",
+      "description": "Visitors add to cart or browse extensively but leave without purchasing."
+    },
+    {
+      "id": "low-repeat-purchase",
+      "label": "Low repeat purchase rate / CLV",
+      "description": "Customers buy once and don't come back; low customer lifetime value relative to acquisition cost."
+    },
+    {
+      "id": "poor-search-conversion",
+      "label": "Poor onsite search & discovery conversion",
+      "description": "Visitors who use search or browse categories convert worse than expected; catalog feels hard to navigate."
+    },
+    {
+      "id": "low-app-retention",
+      "label": "Low app retention / engagement",
+      "description": "App installs don't translate into repeat sessions; high uninstall or dormancy rate after the first week."
+    },
+    {
+      "id": "generic-experience",
+      "label": "Generic, one-size-fits-all experience",
+      "description": "Every visitor sees the same homepage, emails, and offers regardless of who they are or what they've done before — 'batch and blast'."
+    },
+    {
+      "id": "poor-new-visitor-conversion",
+      "label": "Poor first-purchase conversion for new visitors",
+      "description": "New/anonymous visitors bounce or browse without converting on their first session."
+    },
+    {
+      "id": "high-return-rate",
+      "label": "High product return rate",
+      "description": "Returns driven by wrong size, fit, or product-fit expectations rather than defects."
+    },
+    {
+      "id": "low-cross-sell",
+      "label": "Low cross-sell / upsell attach rate",
+      "description": "Customers buy a single item and rarely add complementary products, despite an obvious catalog fit."
+    },
+    {
+      "id": "inconsistent-cross-channel-experience",
+      "label": "Inconsistent experience across channels",
+      "description": "A customer's context (recently viewed, cart, offers) doesn't carry over between web, app, and email — it feels like three different brands."
+    },
+    {
+      "id": "wasted-ad-spend",
+      "label": "Wasted retargeting / ad spend",
+      "description": "Paid media keeps targeting customers with products they've already bought, or excludes customers it shouldn't — audiences aren't synced with real customer data."
+    },
+    {
+      "id": "insufficient-zero-party-data",
+      "label": "Not enough declared / zero-party data",
+      "description": "The CDP has plenty of behavioral data but little of what the customer explicitly wants, so personalization for new customers is thin."
+    },
+    {
+      "id": "low-post-purchase-engagement",
+      "label": "Low post-purchase engagement",
+      "description": "Communication mostly stops after checkout; little follow-through on usage, care, or building the relationship further."
+    },
+    {
+      "id": "low-review-ugc-volume",
+      "label": "Low review / user-generated content volume",
+      "description": "Few customers leave reviews or photos, hurting social proof and product-page conversion."
+    },
+    {
+      "id": "poor-win-back-performance",
+      "label": "Poor win-back / reactivation performance",
+      "description": "Lapsed customers rarely respond to generic 'we miss you' campaigns, and churn isn't caught early."
+    },
+    {
+      "id": "cdp-data-not-activated",
+      "label": "CDP data isn't reaching customer-facing channels",
+      "description": "The core problem behind most of the above: the data and infrastructure exist, but very little of it is actually changing what the customer sees, day to day."
+    }
+  ]
+}

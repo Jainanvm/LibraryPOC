@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Personalization Use Case Library</title>
+<meta name="description" content="A searchable library of tangible CDP-powered personalization use cases for web, app, and email." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232f5dff'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Arial'%3E%E2%97%86%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark">◆</span>
+        <div class="brand-text">
+          <span class="brand-title">Personalization Use Case Library</span>
+          <span class="brand-sub">From CDP data to real customer experiences</span>
+        </div>
+      </div>
+      <a class="add-link" href="https://github.com/" target="_blank" rel="noopener" id="repoLink">View on GitHub</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section class="intro">
+      <p>Most brands already have the data &mdash; a CDP, a loyalty platform, purchase history, browsing behavior. What's usually missing is a short list of <strong>tangible, ready-to-pitch experiences</strong> that turn that data into something a customer actually sees. Search or filter below, open a case for the full journey, example copy, KPIs, and what it takes to build.</p>
+    </section>
+
+    <section class="ai-panel">
+      <div class="ai-panel-head">
+        <span class="ai-badge">AI</span>
+        <div>
+          <h2 class="ai-title">Have a specific problem instead?</h2>
+          <p class="ai-sub">Describe it in your own words — e.g. <em>"low open rate on our lifecycle emails"</em> or <em>"little engagement with our loyalty program"</em> — and this will read the whole library and match cases to it.</p>
+        </div>
+      </div>
+      <div class="ai-input-row">
+        <textarea id="aiProblemInput" rows="2" placeholder="Describe the problem you're seeing…" maxlength="500"></textarea>
+        <button id="aiSubmitBtn" class="ai-submit-btn">Find relevant use cases</button>
+      </div>
+      <div id="aiStatus" class="ai-status" hidden></div>
+    </section>
+
+    <section class="search-panel">
+      <div class="search-row">
+        <div class="search-input-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="text" id="searchInput" placeholder="Or just search by keyword: “app”, “loyalty”, “quick win”…" autocomplete="off" />
+          <button id="clearSearch" class="clear-btn" title="Clear search" aria-label="Clear search">×</button>
+        </div>
+        <span id="resultCount" class="result-count">10 use cases</span>
+      </div>
+
+      <div class="filter-groups" id="filterGroups">
+        <!-- populated by JS -->
+      </div>
+    </section>
+
+    <div id="aiResultsBanner" class="ai-results-banner" hidden>
+      <span id="aiResultsText"></span>
+      <button id="aiClearBtn" class="ai-clear-btn">← Back to browsing</button>
+    </div>
+
+    <section id="cardGrid" class="card-grid" aria-live="polite">
+      <!-- cards injected by JS -->
+    </section>
+
+    <p id="emptyState" class="empty-state" hidden>No use cases match your search or filters yet. Try clearing a filter, or this might be a good gap to add to the library.</p>
+
+  </main>
+
+  <!-- Detail panel -->
+  <div id="overlay" class="overlay" hidden></div>
+  <aside id="detailPanel" class="detail-panel" hidden aria-hidden="true">
+    <div class="detail-inner" id="detailContent">
+      <!-- populated by JS -->
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <p>Built for internal &amp; client use &mdash; add new cases via <code>data/use-cases.json</code>. See <code>SETUP.md</code> in the repo for hosting and maintenance instructions.</p>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

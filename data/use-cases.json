@@ -1,0 +1,1227 @@
+{
+  "$schemaVersion": "1.0",
+  "lastUpdated": "2026-08-19",
+  "useCases": [
+    {
+      "id": "browse-abandonment-recall",
+      "title": "\"Continue Where You Left Off\" Browse Recall",
+      "oneLiner": "Bring back recently viewed products and categories on return visits and via a follow-up email.",
+      "channels": [
+        "web",
+        "email"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Behavioral retargeting / dynamic content block",
+      "cdpDataUsed": [
+        "Recently viewed products (session behavior)",
+        "Category affinity score",
+        "Time since last visit"
+      ],
+      "businessProblems": [
+        "high-cart-abandonment",
+        "generic-experience"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "A visitor browses trail running shoes for 6 minutes, views 3 product pages, then leaves without buying. The CDP captures the viewed SKUs and category signal in real time. On their next visit within 7 days, the homepage swaps its generic hero for a \"Continue browsing\" module showing those exact products plus two complementary items. If they don't return within 24 hours, a single triggered email repeats the same logic.",
+      "exampleBefore": "Generic homepage hero: \"New Season Arrivals\"",
+      "exampleAfter": "\"Still thinking about the GEL-KAYANO 30? Runners who viewed this also loved these trail-ready picks.\"",
+      "kpis": {
+        "primary": "Click-through to product page",
+        "secondary": [
+          "Return-visit conversion rate",
+          "Revenue per visitor"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with real-time event capture",
+        "Web personalization / tag-based content engine",
+        "ESP for the follow-up email"
+      ],
+      "tags": [
+        "web",
+        "email",
+        "behavioral data",
+        "retargeting",
+        "browse abandonment",
+        "recently viewed",
+        "quick win",
+        "low complexity",
+        "consideration",
+        "session data"
+      ]
+    },
+    {
+      "id": "purchase-history-homepage",
+      "title": "Purchase-History-Driven Homepage Hero",
+      "oneLiner": "Swap the homepage hero and featured collection based on a customer's past category and sport affinity.",
+      "channels": [
+        "web",
+        "app"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Dynamic hero / module swapping by segment",
+      "cdpDataUsed": [
+        "Purchase history (SKU, category)",
+        "Sport/category affinity score",
+        "Gender",
+        "Recency of last order"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "low-repeat-purchase"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": true,
+      "journey": "A customer who bought trail running shoes three months ago logs back in. Instead of the same generic seasonal banner every visitor sees, the homepage hero and the first product carousel are swapped for new trail-shoe arrivals and matching trail apparel, using a simple rule built on their purchase category history.",
+      "exampleBefore": "Homepage hero: \"Shop the New Collection\" (identical for every visitor)",
+      "exampleAfter": "\"Back for more trails? Here's what just landed in Trail Running.\"",
+      "kpis": {
+        "primary": "Homepage-to-PDP click-through rate",
+        "secondary": [
+          "Session depth",
+          "Repeat purchase rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with unified purchase history",
+        "Web/app personalization engine or CMS with segment rules"
+      ],
+      "tags": [
+        "web",
+        "app",
+        "purchase history",
+        "affinity",
+        "homepage personalization",
+        "retention",
+        "segment rules",
+        "medium complexity"
+      ]
+    },
+    {
+      "id": "loyalty-tier-perks",
+      "title": "Loyalty-Tier Aware Perks Bar",
+      "oneLiner": "Show a persistent, tier-specific perks message instead of the same static banner for everyone.",
+      "channels": [
+        "web",
+        "app"
+      ],
+      "funnelStage": "Loyalty",
+      "personalizationTactic": "Segment-based UI component (sticky bar / banner)",
+      "cdpDataUsed": [
+        "Loyalty tier",
+        "Points balance",
+        "Points needed to next tier",
+        "Membership status"
+      ],
+      "businessProblems": [
+        "low-loyalty-engagement",
+        "generic-experience"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "A Gold-tier loyalty member sees a sticky top bar reading \"You're 200 points from Platinum — free shipping is already unlocked.\" A non-member browsing the same page instead sees \"Join ASICS ID and get 10% off your first order.\" Both use the exact same UI slot; only the CDP-driven content differs.",
+      "exampleBefore": "Static banner: \"Free shipping over €75\" for all visitors",
+      "exampleAfter": "\"200 points to Platinum\" (member) vs. \"Join free, get 10% off\" (guest)",
+      "kpis": {
+        "primary": "Loyalty program engagement rate",
+        "secondary": [
+          "Tier upgrade rate",
+          "Sign-up conversion for guests"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP integrated with loyalty platform",
+        "Web/app personalization engine"
+      ],
+      "tags": [
+        "web",
+        "app",
+        "loyalty",
+        "tier",
+        "points",
+        "membership",
+        "quick win",
+        "low complexity",
+        "retention",
+        "declared data"
+      ]
+    },
+    {
+      "id": "weather-location-push",
+      "title": "Weather & Location-Triggered Recommendations",
+      "oneLiner": "Trigger a push notification and matching landing page when local weather or season shifts align with a customer's habits.",
+      "channels": [
+        "app",
+        "web"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Contextual trigger campaign",
+      "cdpDataUsed": [
+        "Geolocation / postcode (consented)",
+        "Local weather feed matched to profile",
+        "Seasonal purchase pattern",
+        "Preferred running terrain"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "low-app-retention",
+        "cdp-data-not-activated"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "journey": "Rain is forecast tomorrow in a customer's region, and their profile shows a history of road running plus no waterproof shoe in their purchase history. A push notification fires: \"Rain expected tomorrow — here's a shoe that handles it.\" Tapping it opens an app landing page pre-filtered to GORE-TEX products in their size and gender.",
+      "exampleBefore": "Generic push: \"20% off this weekend\" sent to the entire app user base",
+      "exampleAfter": "\"Rain tomorrow in Amsterdam — the GEL-NIMBUS GORE-TEX keeps you dry\" sent only to relevant road runners in that postcode",
+      "kpis": {
+        "primary": "Push open rate",
+        "secondary": [
+          "App session rate",
+          "Conversion on weather-triggered landing page"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with geo/consent management",
+        "Push notification provider",
+        "Third-party weather API",
+        "Real-time decisioning engine"
+      ],
+      "tags": [
+        "app",
+        "web",
+        "weather",
+        "location",
+        "context",
+        "push notification",
+        "high complexity",
+        "advanced",
+        "real-time trigger"
+      ]
+    },
+    {
+      "id": "replenishment-lifecycle-email",
+      "title": "Product Lifecycle Replenishment Series",
+      "oneLiner": "Remind customers to replace a product right when it's statistically due, not on an arbitrary calendar date.",
+      "channels": [
+        "email",
+        "app"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Triggered lifecycle email/push sequence",
+      "cdpDataUsed": [
+        "Purchase date",
+        "Category average lifespan (e.g. running shoe ≈ 500-800km or 6 months)",
+        "Stated weekly mileage or activity level",
+        "Connected app/wearable data (optional)"
+      ],
+      "businessProblems": [
+        "low-repeat-purchase",
+        "low-post-purchase-engagement"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A customer bought running shoes 5 months ago and told the brand (via app or loyalty quiz) that they run 30km/week. The CDP calculates their shoes are approaching typical end-of-life around month 5.5. A timed email arrives: \"Your GEL-KAYANOs have probably covered ~450km — here's when runners like you usually replace them,\" with a tailored replacement SKU and a trade-in/recycle CTA.",
+      "exampleBefore": "No reminder — customer discovers worn-out shoes mid-run and buys a competitor's product",
+      "exampleAfter": "\"Time for fresh legs? Your shoes are due for retirement around now.\"",
+      "kpis": {
+        "primary": "Repurchase rate within category",
+        "secondary": [
+          "Email CTR",
+          "Customer lifetime value"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with triggered/lifecycle journey builder",
+        "ESP",
+        "Optional wearable/app mileage integration"
+      ],
+      "tags": [
+        "email",
+        "app",
+        "lifecycle",
+        "replenishment",
+        "repurchase",
+        "transactional data",
+        "medium complexity",
+        "retention"
+      ]
+    },
+    {
+      "id": "personalized-search-sort",
+      "title": "Personalized Search & Category Sort Order",
+      "oneLiner": "Re-rank search and category results so the most relevant products for this specific shopper appear first.",
+      "channels": [
+        "web",
+        "app"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Personalized ranking / re-ranking of search & PLP results",
+      "cdpDataUsed": [
+        "Declared preferences (sport, foot type, gender)",
+        "Past purchases",
+        "Size history",
+        "Brand/model affinity"
+      ],
+      "businessProblems": [
+        "poor-search-conversion",
+        "generic-experience"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "journey": "A customer who has previously bought women's trail shoes in size 39 searches \"running shoes.\" Instead of a one-size-fits-all relevance sort, results are re-ranked so women's trail options in size 39 surface first — without hiding the rest of the catalog, so discovery isn't lost.",
+      "exampleBefore": "Search \"running shoes\" returns the same generic best-seller order for every visitor",
+      "exampleAfter": "Same search returns her usual size, gender, and terrain preference first, best-sellers below",
+      "kpis": {
+        "primary": "Search-to-conversion rate",
+        "secondary": [
+          "Add-to-cart rate from search",
+          "Search abandonment rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP feeding a search/merchandising platform (e.g. Algolia, Coveo) with a personalization API",
+        "Real-time profile sync"
+      ],
+      "tags": [
+        "web",
+        "app",
+        "search personalization",
+        "ranking",
+        "declared data",
+        "high complexity",
+        "advanced",
+        "conversion",
+        "merchandising"
+      ]
+    },
+    {
+      "id": "cart-recovery-value-tiering",
+      "title": "Value-Tiered Cart Recovery",
+      "oneLiner": "Recover abandoned carts with an incentive matched to the customer's value and discount sensitivity, not a blanket coupon.",
+      "channels": [
+        "email",
+        "web"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Segmented incentive logic in a triggered journey",
+      "cdpDataUsed": [
+        "Cart contents",
+        "Customer lifetime value (CLV) segment",
+        "Historical discount/promo sensitivity"
+      ],
+      "businessProblems": [
+        "high-cart-abandonment"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": true,
+      "journey": "A high-CLV customer who has never redeemed a discount code abandons a cart. Their recovery email leads with free shipping and a styling tip — no discount, protecting margin. A first-time, price-sensitive visitor who abandons the same cart instead receives a 10%-off code, because the CDP's segment data shows this nudge is what typically converts them.",
+      "exampleBefore": "Everyone who abandons a cart gets the same 15% discount code, including customers who would have paid full price",
+      "exampleAfter": "High-value customers get a no-discount nudge; price-sensitive segments get a targeted incentive",
+      "kpis": {
+        "primary": "Cart recovery rate",
+        "secondary": [
+          "Margin protected vs. blanket discounting",
+          "Incremental revenue"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with CLV/segment scoring",
+        "ESP with conditional content",
+        "Onsite cart-recovery banner (optional)"
+      ],
+      "tags": [
+        "email",
+        "web",
+        "cart abandonment",
+        "clv",
+        "segmentation",
+        "discounting",
+        "medium complexity",
+        "quick win",
+        "conversion"
+      ]
+    },
+    {
+      "id": "new-vs-returning-onsite-messaging",
+      "title": "New vs. Returning Visitor Onsite Messaging",
+      "oneLiner": "Stop offering first-purchase discounts to loyal customers — differentiate the welcome message by identity.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Awareness",
+      "personalizationTactic": "Real-time onsite message / banner personalization",
+      "cdpDataUsed": [
+        "Identity resolution (known vs. anonymous)",
+        "Visit count",
+        "Account status",
+        "Last purchase recency"
+      ],
+      "businessProblems": [
+        "poor-new-visitor-conversion",
+        "generic-experience"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "A first-time anonymous visitor lands on the site and sees \"New here? Get 15% off your first pair.\" A recognized returning customer who bought last month instead sees \"Welcome back, Alex — here's what's new in Running,\" with no discount offered, preserving margin on a customer who didn't need one to convert.",
+      "exampleBefore": "Every visitor, new or loyal, sees the same first-purchase discount banner",
+      "exampleAfter": "New visitors see an acquisition offer; recognized customers see relevant new arrivals instead",
+      "kpis": {
+        "primary": "First-purchase conversion rate (new visitors)",
+        "secondary": [
+          "Bounce rate",
+          "Margin saved on returning customers"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with identity resolution",
+        "Web personalization engine"
+      ],
+      "tags": [
+        "web",
+        "identity resolution",
+        "new vs returning",
+        "onsite messaging",
+        "quick win",
+        "low complexity",
+        "awareness",
+        "margin protection"
+      ]
+    },
+    {
+      "id": "onboarding-quiz-zero-party",
+      "title": "Zero-Party Onboarding Quiz → Personalized App Feed",
+      "oneLiner": "Ask 3-4 quick questions at sign-up so the app can personalize from day one, before any behavioral data exists.",
+      "channels": [
+        "app"
+      ],
+      "funnelStage": "Onboarding",
+      "personalizationTactic": "Progressive profiling + personalized content feed",
+      "cdpDataUsed": [
+        "Zero-party data: running goal, terrain preference, injury history, foot strike",
+        "Enriched later with behavioral/app usage data"
+      ],
+      "businessProblems": [
+        "insufficient-zero-party-data",
+        "low-app-retention"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": true,
+      "journey": "A new app user completes a 4-question quiz: \"What's your main goal — road, trail, or race training?\" The CDP stores the answers as zero-party data immediately, and the app's home feed, training content, and push cadence adapt from the very first session, instead of showing generic content until enough behavioral data accumulates over weeks.",
+      "exampleBefore": "New users see a generic \"Getting Started\" feed identical for everyone, for their first several weeks",
+      "exampleAfter": "\"You told us you're training for a trail race — here's a 12-week plan and gear picks for it.\"",
+      "kpis": {
+        "primary": "Onboarding completion rate",
+        "secondary": [
+          "Day-7 / Day-30 retention",
+          "Feed engagement rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with zero-party data capture",
+        "App CMS / feed personalization layer"
+      ],
+      "tags": [
+        "app",
+        "zero-party data",
+        "onboarding",
+        "quiz",
+        "progressive profiling",
+        "medium complexity",
+        "quick win",
+        "personalized feed"
+      ]
+    },
+    {
+      "id": "churn-win-back-predictive",
+      "title": "Predictive Churn / Win-Back Journey",
+      "oneLiner": "Use a predictive lifecycle score to reach out before a good customer fully disengages, not months after.",
+      "channels": [
+        "email",
+        "web",
+        "app"
+      ],
+      "funnelStage": "Reactivation",
+      "personalizationTactic": "Predictive segment-triggered win-back campaign",
+      "cdpDataUsed": [
+        "RFM score",
+        "Predictive churn/lifecycle score",
+        "Engagement decay signals (email opens, app opens, site visits)"
+      ],
+      "businessProblems": [
+        "poor-win-back-performance",
+        "low-repeat-purchase"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "journey": "The CDP's lifecycle model flags a previously frequent customer as \"at risk\": no purchase or engagement in 90 days, versus their usual ~45-day cadence. An automated journey begins with a value-reminder email, followed by a personalized product email based on their past category if they don't respond, then light-touch retargeting. The journey stops automatically the moment the customer shows a reactivation signal.",
+      "exampleBefore": "A blanket \"We miss you\" email sent to the entire inactive list every quarter, regardless of past value or cadence",
+      "exampleAfter": "A targeted, staged journey triggered the moment a high-value customer's own normal cadence is broken",
+      "kpis": {
+        "primary": "Reactivation rate",
+        "secondary": [
+          "Revenue recovered",
+          "Unsubscribe rate reduction vs. blanket campaigns"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with predictive/ML scoring",
+        "ESP with staged journey logic",
+        "Ad platform audience sync (optional)"
+      ],
+      "tags": [
+        "email",
+        "web",
+        "app",
+        "churn",
+        "win-back",
+        "predictive",
+        "rfm",
+        "high complexity",
+        "advanced",
+        "reactivation"
+      ]
+    },
+    {
+      "id": "email-send-time-optimization",
+      "title": "Send-Time & Frequency Personalization",
+      "oneLiner": "Deliver each email when that individual actually tends to open it, instead of one blast time for everyone.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Individual send-time optimization",
+      "cdpDataUsed": [
+        "Historical email open times per customer",
+        "Device/timezone",
+        "Engagement recency"
+      ],
+      "businessProblems": [
+        "low-email-open-rate",
+        "high-unsubscribe-rate"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": true,
+      "journey": "Two customers get the same weekly newsletter. One consistently opens emails around 7am before work; the other almost always opens around 9pm. Instead of a single 10am send time for the whole list, the ESP uses each person's historical open-time pattern (fed by the CDP) to deliver the same email at the moment each is most likely to actually see it.",
+      "exampleBefore": "Entire list receives the campaign at 10:00 AM, regardless of individual behavior",
+      "exampleAfter": "Same email, delivered at 7:03 AM to morning openers and 9:15 PM to evening openers",
+      "kpis": {
+        "primary": "Email open rate",
+        "secondary": [
+          "Click-through rate",
+          "Unsubscribe rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP or ESP with send-time optimization capability",
+        "Historical engagement data feed"
+      ],
+      "tags": [
+        "email",
+        "send time",
+        "frequency",
+        "open rate",
+        "medium complexity",
+        "personalization",
+        "retention",
+        "engagement data"
+      ]
+    },
+    {
+      "id": "subject-line-segment-personalization",
+      "title": "Segment-Aware Subject Lines & Preview Text",
+      "oneLiner": "Swap subject line framing by segment (deal-seeker vs. loyalist vs. category fan) instead of one subject line for the whole send.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Dynamic subject line / preview text by segment",
+      "cdpDataUsed": [
+        "Discount sensitivity segment",
+        "Loyalty tier",
+        "Category affinity"
+      ],
+      "businessProblems": [
+        "low-email-open-rate"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "The same new-arrivals campaign goes out to the full list, but the subject line adapts: price-sensitive segments see \"20% off new arrivals\", loyalty members see \"Early access: new arrivals before anyone else\", and category-affine customers see a subject naming their specific sport. Same email content, three subject line variants driving the open.",
+      "exampleBefore": "\"New Arrivals Are Here\" sent to 100% of the list, identical subject line",
+      "exampleAfter": "\"Early access: new arrivals before anyone else\" (loyalty) vs. \"20% off new arrivals\" (deal-seekers)",
+      "kpis": {
+        "primary": "Email open rate",
+        "secondary": [
+          "Click-through rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with segment scoring",
+        "ESP with dynamic subject line blocks"
+      ],
+      "tags": [
+        "email",
+        "subject line",
+        "segmentation",
+        "open rate",
+        "quick win",
+        "low complexity",
+        "consideration"
+      ]
+    },
+    {
+      "id": "inactive-subscriber-sunset-flow",
+      "title": "Inactive Subscriber Re-Engagement & Sunset Flow",
+      "oneLiner": "Win back fading email subscribers before they go cold, and stop mailing the ones who won't come back.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Reactivation",
+      "personalizationTactic": "Engagement-decay triggered re-engagement + list hygiene",
+      "cdpDataUsed": [
+        "Email engagement decay signal",
+        "Days since last open",
+        "Historical purchase value"
+      ],
+      "businessProblems": [
+        "low-email-open-rate",
+        "high-unsubscribe-rate",
+        "poor-win-back-performance"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A subscriber who used to open every campaign hasn't opened in 60 days. Before they're marked fully inactive, they get a short re-engagement series asking what they'd rather hear about (or offering to reduce frequency). Those who still don't engage after the series are automatically suppressed from regular sends, protecting deliverability for everyone else instead of quietly mailing a growing dead list forever.",
+      "exampleBefore": "Dead subscribers keep receiving full-frequency campaigns indefinitely, dragging down open rates and deliverability",
+      "exampleAfter": "\"We've noticed you haven't opened lately — want fewer, more relevant emails?\" before automatic suppression",
+      "kpis": {
+        "primary": "List-wide open rate / deliverability",
+        "secondary": [
+          "Reactivation rate of the sunset series",
+          "Unsubscribe rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with engagement scoring",
+        "ESP with suppression logic"
+      ],
+      "tags": [
+        "email",
+        "re-engagement",
+        "sunset flow",
+        "deliverability",
+        "list hygiene",
+        "medium complexity",
+        "reactivation"
+      ]
+    },
+    {
+      "id": "loyalty-progress-gamification",
+      "title": "Gamified Points Progress Nudges",
+      "oneLiner": "Turn a static points balance into an active nudge — \"you're this close\" — shown right when it's motivating.",
+      "channels": [
+        "web",
+        "app"
+      ],
+      "funnelStage": "Loyalty",
+      "personalizationTactic": "Progress-based behavioral nudge",
+      "cdpDataUsed": [
+        "Points balance",
+        "Points needed for next reward/tier",
+        "Cart contents"
+      ],
+      "businessProblems": [
+        "low-loyalty-engagement"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "A member has 380 of the 400 points needed for a reward, and just added an item to cart that would push them over. At checkout, a small module shows: \"This order gets you to your next reward — 20 points away.\" The nudge only appears when it's actually true and close, not as a generic reminder.",
+      "exampleBefore": "Points balance is only visible if the customer digs into their account page",
+      "exampleAfter": "\"This order unlocks your next reward — only 20 points away!\" shown at checkout",
+      "kpis": {
+        "primary": "Loyalty program engagement rate",
+        "secondary": [
+          "Average order value",
+          "Redemption rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP integrated with loyalty platform",
+        "Web/app personalization engine"
+      ],
+      "tags": [
+        "web",
+        "app",
+        "loyalty",
+        "gamification",
+        "points",
+        "quick win",
+        "low complexity",
+        "nudge"
+      ]
+    },
+    {
+      "id": "loyalty-personalized-redemption",
+      "title": "Personalized Reward Redemption Suggestions",
+      "oneLiner": "Tell members exactly what they can redeem right now, in terms of products they actually want.",
+      "channels": [
+        "email",
+        "app"
+      ],
+      "funnelStage": "Loyalty",
+      "personalizationTactic": "Triggered redemption recommendation",
+      "cdpDataUsed": [
+        "Points balance",
+        "Redeemable reward catalog",
+        "Category/product affinity"
+      ],
+      "businessProblems": [
+        "low-loyalty-engagement"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": true,
+      "journey": "A member has enough points sitting unused for months to redeem for a free pair of socks or a discount — but never has, because they never made the connection. A monthly email shows exactly what their balance can get them right now, framed around products from their preferred category, instead of a generic \"don't forget your points!\" reminder.",
+      "exampleBefore": "\"You have 850 points!\" with no indication of what that's actually worth",
+      "exampleAfter": "\"Your 850 points = a free pair of running socks, or €15 off your next pair of GEL-KAYANOs\"",
+      "kpis": {
+        "primary": "Redemption rate",
+        "secondary": [
+          "Loyalty program engagement rate",
+          "Email CTR"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP integrated with loyalty platform",
+        "ESP with dynamic content"
+      ],
+      "tags": [
+        "email",
+        "app",
+        "loyalty",
+        "redemption",
+        "points",
+        "medium complexity",
+        "quick win"
+      ]
+    },
+    {
+      "id": "preference-center-frequency",
+      "title": "Customer-Controlled Frequency & Channel Preference Center",
+      "oneLiner": "Let customers set their own contact frequency and topics instead of guessing — and actually honor it.",
+      "channels": [
+        "email",
+        "web"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Zero-party preference capture + suppression logic",
+      "cdpDataUsed": [
+        "Declared frequency preference",
+        "Declared topic interests",
+        "Channel opt-ins"
+      ],
+      "businessProblems": [
+        "high-unsubscribe-rate",
+        "insufficient-zero-party-data",
+        "low-email-open-rate"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": true,
+      "journey": "Instead of a binary subscribe/unsubscribe link, the footer of every email links to a preference center: how often (weekly / monthly / sale-only), and what topics (new arrivals, promotions, training content). A customer who sets \"monthly, promotions only\" simply stops receiving the daily general newsletter — before they get frustrated enough to unsubscribe entirely.",
+      "exampleBefore": "Only choice is \"unsubscribe from everything\"",
+      "exampleAfter": "\"Tell us how often you'd like to hear from us\" — frequency and topic controls that are actually respected",
+      "kpis": {
+        "primary": "Unsubscribe rate",
+        "secondary": [
+          "Email engagement rate",
+          "Preference center completion rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with zero-party preference storage",
+        "ESP with suppression by preference"
+      ],
+      "tags": [
+        "email",
+        "web",
+        "preference center",
+        "zero-party data",
+        "frequency",
+        "unsubscribe",
+        "medium complexity",
+        "quick win"
+      ]
+    },
+    {
+      "id": "app-push-cadence-decay",
+      "title": "Engagement-Based Push Notification Cadence",
+      "oneLiner": "Send push less often to people who are tuning it out, and reserve high-frequency pushes for people who actually engage.",
+      "channels": [
+        "app"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Adaptive send-frequency by engagement segment",
+      "cdpDataUsed": [
+        "Push open/tap rate",
+        "Session frequency",
+        "Days since last app open"
+      ],
+      "businessProblems": [
+        "low-app-retention",
+        "high-unsubscribe-rate"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "Two users get 4 push notifications a week by default. One taps almost every one; cadence for them can safely increase during a launch week. The other hasn't tapped one in a month — instead of continuing to push (and risking a full opt-out or uninstall), cadence automatically tapers down and shifts to only the highest-relevance moments.",
+      "exampleBefore": "Every user gets the same push frequency regardless of whether they engage with it",
+      "exampleAfter": "Highly engaged users get more; disengaging users get fewer, more relevant-only pushes",
+      "kpis": {
+        "primary": "Push opt-out rate",
+        "secondary": [
+          "App session frequency",
+          "Push tap-through rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with push engagement tracking",
+        "Push provider with frequency capping rules"
+      ],
+      "tags": [
+        "app",
+        "push notification",
+        "cadence",
+        "retention",
+        "engagement decay",
+        "medium complexity"
+      ]
+    },
+    {
+      "id": "app-milestone-celebration",
+      "title": "In-App Milestone & Achievement Moments",
+      "oneLiner": "Recognize meaningful personal milestones (distance run, order count, membership anniversary) inside the app, not just marketing sends.",
+      "channels": [
+        "app"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Behavioral milestone trigger",
+      "cdpDataUsed": [
+        "Cumulative activity/order data",
+        "Membership start date",
+        "Logged app activity"
+      ],
+      "businessProblems": [
+        "low-app-retention",
+        "low-loyalty-engagement"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": true,
+      "journey": "A customer logs their 100th kilometer in the app, or hits their one-year membership anniversary. Instead of that passing unnoticed, the app surfaces a small in-the-moment celebration screen — a badge, a related reward, or just recognition — right when it happens, not in a batch email days later.",
+      "exampleBefore": "Milestones pass silently; the app has no idea (or doesn't act on it)",
+      "exampleAfter": "\"100km logged! Here's a small thank-you.\" surfaced the moment the milestone is hit",
+      "kpis": {
+        "primary": "App session frequency",
+        "secondary": [
+          "Day-30 retention",
+          "Loyalty engagement rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with activity/milestone tracking",
+        "App feed/notification layer"
+      ],
+      "tags": [
+        "app",
+        "milestone",
+        "gamification",
+        "retention",
+        "loyalty",
+        "medium complexity",
+        "quick win"
+      ]
+    },
+    {
+      "id": "cross-channel-recently-viewed-sync",
+      "title": "Cross-Device Recently Viewed Sync",
+      "oneLiner": "Carry \"recently viewed\" and cart context between app and web instead of resetting every time the customer switches device.",
+      "channels": [
+        "web",
+        "app"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Cross-device identity resolution + state sync",
+      "cdpDataUsed": [
+        "Identity resolution across devices",
+        "Session/browsing history",
+        "Cart contents"
+      ],
+      "businessProblems": [
+        "inconsistent-cross-channel-experience",
+        "high-cart-abandonment"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "journey": "A customer browses running shoes on the app during their commute, then opens the website on their laptop that evening. Instead of starting from zero, the site recognizes them (once logged in or identity-resolved) and shows \"Continue where you left off\" with the same products and cart contents — the two channels behave like one brand instead of two disconnected ones.",
+      "exampleBefore": "Cart and browsing history reset completely when switching from app to web",
+      "exampleAfter": "Cart and recently-viewed items carry over seamlessly between app and web",
+      "kpis": {
+        "primary": "Cross-device conversion rate",
+        "secondary": [
+          "Cart abandonment rate",
+          "Session-to-purchase time"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with cross-device identity resolution",
+        "Unified cart/session API shared by web and app"
+      ],
+      "tags": [
+        "web",
+        "app",
+        "cross-channel",
+        "identity resolution",
+        "high complexity",
+        "advanced",
+        "consistency"
+      ]
+    },
+    {
+      "id": "consistent-offer-sync",
+      "title": "One Consistent Offer Across Channels",
+      "oneLiner": "Make sure a customer sees the same active offer everywhere, instead of a different (or conflicting) one per channel.",
+      "channels": [
+        "web",
+        "app",
+        "email"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Centralized offer/promotion state via CDP",
+      "cdpDataUsed": [
+        "Active assigned offer/promo code",
+        "Offer eligibility rules",
+        "Channel engagement history"
+      ],
+      "businessProblems": [
+        "inconsistent-cross-channel-experience"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A customer is emailed a 15%-off code. Later that day they open the app, where a completely different (and lower-value) generic promo is showing, creating confusion about what's actually valid. Centralizing \"what offer is this customer currently eligible for\" in the CDP and reading from that single source everywhere means the app, site, and email all show the same, current offer.",
+      "exampleBefore": "Email says 15% off; app banner shows a different, unrelated 10% off promo the same day",
+      "exampleAfter": "The same active 15% offer is reflected consistently in email, app, and onsite messaging",
+      "kpis": {
+        "primary": "Promo redemption rate",
+        "secondary": [
+          "Customer trust/satisfaction proxy (support contacts about offers)"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP as single source of truth for active offers",
+        "Shared promo API consumed by all channels"
+      ],
+      "tags": [
+        "web",
+        "app",
+        "email",
+        "consistency",
+        "offers",
+        "promotions",
+        "medium complexity",
+        "conversion"
+      ]
+    },
+    {
+      "id": "guided-selling-quiz",
+      "title": "Guided Selling / Shop-by-Activity Quiz",
+      "oneLiner": "Help overwhelmed shoppers narrow hundreds of SKUs down to 3-4 relevant picks through a short guided quiz.",
+      "channels": [
+        "web",
+        "app"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Guided selling / decision-tree personalization",
+      "cdpDataUsed": [
+        "Quiz answers (zero-party)",
+        "Past purchase category",
+        "Stated experience level"
+      ],
+      "businessProblems": [
+        "poor-search-conversion",
+        "insufficient-zero-party-data"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": true,
+      "journey": "A first-time visitor lands on a category page with 200+ shoe options and doesn't know where to start. A \"Find your shoe\" guided quiz (3 questions: activity, terrain, arch support need) narrows it to 3 recommended products immediately — and those answers are stored in the CDP as zero-party data for every future visit and email.",
+      "exampleBefore": "A 200-product grid with generic filters (size, color, price) and no guidance",
+      "exampleAfter": "\"Answer 3 quick questions and we'll find your shoe\" → 3 tailored recommendations",
+      "kpis": {
+        "primary": "Category-page-to-purchase conversion rate",
+        "secondary": [
+          "Quiz completion rate",
+          "Return rate (better fit)"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with zero-party capture",
+        "Web/app guided-selling module"
+      ],
+      "tags": [
+        "web",
+        "app",
+        "guided selling",
+        "quiz",
+        "discovery",
+        "zero-party data",
+        "medium complexity",
+        "quick win",
+        "conversion"
+      ]
+    },
+    {
+      "id": "size-fit-recommendation",
+      "title": "Personalized Size & Fit Recommendation",
+      "oneLiner": "Recommend the right size using a customer's own purchase and return history, not a generic size chart.",
+      "channels": [
+        "web",
+        "app"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Personalized fit prediction",
+      "cdpDataUsed": [
+        "Past purchased sizes",
+        "Return/exchange history and reason",
+        "Brand-specific fit feedback"
+      ],
+      "businessProblems": [
+        "high-return-rate",
+        "generic-experience"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "journey": "A returning customer previously bought a size 42 in one model and exchanged it for a 42.5 because it ran small. On a new product page, instead of a generic size chart, they see \"Based on your past orders, we recommend size 42.5 in this model\" — reducing the guesswork that normally drives size-related returns.",
+      "exampleBefore": "Generic size chart identical for every visitor, regardless of purchase/return history",
+      "exampleAfter": "\"We recommend size 42.5 for you in this style, based on your past orders\"",
+      "kpis": {
+        "primary": "Size-related return rate",
+        "secondary": [
+          "Product page conversion rate",
+          "Customer satisfaction / reviews"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with purchase + returns history",
+        "Fit-prediction logic (rules-based or ML)"
+      ],
+      "tags": [
+        "web",
+        "app",
+        "size",
+        "fit",
+        "returns",
+        "high complexity",
+        "advanced",
+        "conversion"
+      ]
+    },
+    {
+      "id": "post-purchase-care-content",
+      "title": "Post-Purchase Care & Styling Content",
+      "oneLiner": "Follow up after a purchase with content relevant to that exact product, not silence until the next promotional blast.",
+      "channels": [
+        "email",
+        "app"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Product-triggered content sequence",
+      "cdpDataUsed": [
+        "Purchased SKU/category",
+        "Purchase date",
+        "Category affinity"
+      ],
+      "businessProblems": [
+        "low-post-purchase-engagement",
+        "low-repeat-purchase"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "A customer buys their first pair of trail running shoes. A week later — once they've likely worn them — they get a short, useful email: care tips for trail shoes, and how to break them in properly, with a soft nudge toward matching trail apparel. It's helpful first, promotional second, and it's the first message they get after checkout instead of nothing until the next sale email.",
+      "exampleBefore": "No communication between the order confirmation and the next generic marketing email",
+      "exampleAfter": "\"5 tips for breaking in your new trail shoes\" one week after delivery, with related product ideas",
+      "kpis": {
+        "primary": "Post-purchase email engagement rate",
+        "secondary": [
+          "Repeat purchase rate",
+          "Cross-sell attach rate"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with purchase-triggered journeys",
+        "ESP or app messaging"
+      ],
+      "tags": [
+        "email",
+        "app",
+        "post-purchase",
+        "content",
+        "care",
+        "low complexity",
+        "quick win",
+        "retention"
+      ]
+    },
+    {
+      "id": "review-request-lifecycle-timing",
+      "title": "Lifecycle-Timed Review Requests",
+      "oneLiner": "Ask for a review when the customer has actually used the product long enough to have an opinion — not the day after delivery.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Usage-timed triggered request",
+      "cdpDataUsed": [
+        "Delivery date",
+        "Product category (typical time-to-first-use)",
+        "Past review submission history"
+      ],
+      "businessProblems": [
+        "low-review-ugc-volume"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "Instead of a review request 2 days after delivery (before the product has even been used), the email is timed to typical usage patterns — for running shoes, that might be 10-14 days, enough for a few runs. Customers who've already left several reviews in the past might get asked sooner, since they're known to respond quickly.",
+      "exampleBefore": "\"Rate your purchase!\" sent 2 days after delivery, before the product has been used",
+      "exampleAfter": "Review request timed to when the customer has plausibly used the product enough to have a real opinion",
+      "kpis": {
+        "primary": "Review submission rate",
+        "secondary": [
+          "Review quality/length",
+          "Product page conversion (more reviews)"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with delivery/usage-window triggers",
+        "ESP or review platform integration"
+      ],
+      "tags": [
+        "email",
+        "reviews",
+        "ugc",
+        "timing",
+        "low complexity",
+        "quick win",
+        "retention"
+      ]
+    },
+    {
+      "id": "suppression-ad-sync",
+      "title": "Purchase-Based Ad Suppression via CDP Audience Sync",
+      "oneLiner": "Stop paying to retarget customers with a product they already bought — sync real purchase data straight to ad platforms.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "CDP-to-ad-platform audience sync (suppression + smarter targeting)",
+      "cdpDataUsed": [
+        "Recent purchase data",
+        "Product category owned",
+        "Customer value segment"
+      ],
+      "businessProblems": [
+        "wasted-ad-spend",
+        "cdp-data-not-activated"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": true,
+      "journey": "A customer buys a pair of running shoes on Monday. Under the old setup, retargeting ads for that exact shoe keep following them around for the next two weeks anyway, because the ad platform doesn't know they already bought it. Syncing purchase events from the CDP to the ad platform's audience in near-real-time suppresses that specific product from their retargeting — and can redirect the budget toward a complementary category instead.",
+      "exampleBefore": "Retargeting ads keep showing a product for weeks after the customer already bought it",
+      "exampleAfter": "Purchased products are suppressed from retargeting within hours; budget shifts to complementary categories",
+      "kpis": {
+        "primary": "Retargeting spend efficiency (cost per incremental conversion)",
+        "secondary": [
+          "Ad relevance / complaint rate",
+          "Cross-sell conversion from redirected budget"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with real-time audience sync",
+        "Ad platform integration (Meta/Google Customer Match or equivalent)"
+      ],
+      "tags": [
+        "web",
+        "ads",
+        "retargeting",
+        "suppression",
+        "wasted spend",
+        "medium complexity",
+        "quick win",
+        "cdp activation"
+      ]
+    },
+    {
+      "id": "progressive-profiling-microsurvey",
+      "title": "In-Content Progressive Profiling Micro-Surveys",
+      "oneLiner": "Collect a little zero-party data at a time through short, contextual one-question prompts instead of one long form nobody finishes.",
+      "channels": [
+        "web",
+        "app"
+      ],
+      "funnelStage": "Onboarding",
+      "personalizationTactic": "Progressive profiling via micro-surveys",
+      "cdpDataUsed": [
+        "Existing profile completeness",
+        "Declared answers to prior micro-surveys"
+      ],
+      "businessProblems": [
+        "insufficient-zero-party-data",
+        "generic-experience"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "Instead of a 15-field signup form that most people abandon, the site asks one short, relevant question at a time, in context — e.g. after someone views three trail-running product pages, a small non-blocking prompt asks \"What's your main terrain — road, trail, or track?\" Answering instantly sharpens their profile; skipping costs nothing. Over a few sessions, a rich profile builds up with almost no friction at any single moment.",
+      "exampleBefore": "One long signup form up front; most fields left blank or the form abandoned entirely",
+      "exampleAfter": "\"Quick one — what's your main terrain?\" asked in context, one question at a time, over multiple visits",
+      "kpis": {
+        "primary": "Profile completeness rate",
+        "secondary": [
+          "Micro-survey response rate",
+          "Downstream personalization engagement"
+        ]
+      },
+      "toolsNeeded": [
+        "CDP with zero-party data capture",
+        "Web/app micro-interaction component"
+      ],
+      "tags": [
+        "web",
+        "app",
+        "zero-party data",
+        "progressive profiling",
+        "onboarding",
+        "low complexity",
+        "quick win"
+      ]
+    }
+  ]
+}
