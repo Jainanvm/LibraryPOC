@@ -18,10 +18,16 @@
                           so this is intentionally not hardcoded here.
 */
 
-const path = require("path");
-
-const useCaseData = require(path.join(__dirname, "../../data/use-cases.json"));
-const problemData = require(path.join(__dirname, "../../data/business-problems.json"));
+// IMPORTANT: these must be literal string paths, not built with path.join()/
+// __dirname. Netlify's function bundler (esbuild) can only detect and pack
+// files referenced by a literal require() path at build time; a computed
+// path is invisible to it, so the data files never make it into the
+// deployed function and this would fail at runtime with "Cannot find
+// module" — which Netlify surfaces to the browser as an opaque 502, not a
+// helpful error. Literal paths let esbuild inline the JSON directly into
+// the bundled function, so no file lookup happens at runtime at all.
+const useCaseData = require("../../data/use-cases.json");
+const problemData = require("../../data/business-problems.json");
 
 const MAX_PROBLEM_LENGTH = 500;
 const ANTHROPIC_VERSION = "2023-06-01";
@@ -42,6 +48,20 @@ function buildCatalog() {
 }
 
 exports.handler = async (event) => {
+  // Top-level safety net: if anything below throws unexpectedly, return a
+  // readable JSON error instead of letting Netlify surface a bare 502 with
+  // no explanation. Makes future issues self-diagnosing from the browser.
+  try {
+    return await handleRequest(event);
+  } catch (err) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Unexpected function error: " + (err && err.message ? err.message : String(err)) }),
+    };
+  }
+};
+
+async function handleRequest(event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: JSON.stringify({ error: "Use POST" }) };
   }
@@ -164,4 +184,4 @@ exports.handler = async (event) => {
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ matches }),
   };
-};
+}
