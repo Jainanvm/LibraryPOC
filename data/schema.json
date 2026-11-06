@@ -5,7 +5,7 @@
   "type": "object",
   "required": [
     "id", "title", "oneLiner", "channels", "funnelStage",
-    "personalizationTactic", "cdpDataUsed", "businessProblems", "dataMaturity",
+    "personalizationTactic", "cdpDataUsed", "businessProblems", "industries", "dataMaturity",
     "complexity", "quickWin", "journey", "exampleBefore",
     "exampleAfter", "kpis", "toolsNeeded", "tags"
   ],
@@ -44,6 +44,18 @@
           "high-return-rate", "low-cross-sell", "inconsistent-cross-channel-experience",
           "wasted-ad-spend", "insufficient-zero-party-data", "low-post-purchase-engagement",
           "low-review-ugc-volume", "poor-win-back-performance", "cdp-data-not-activated"
+        ]
+      },
+      "minItems": 1
+    },
+    "industries": {
+      "type": "array",
+      "description": "Ids from data/industries.json — the industries/branches this use case is relevant for.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "retail-consumer-goods", "financial-services", "telecom-media-technology",
+          "travel-hospitality", "automotive-manufacturing", "healthcare-public-sector-utilities"
         ]
       },
       "minItems": 1

@@ -6,6 +6,10 @@ availability, but need a fast way to see (and pitch) what that data can
 actually *do* for the end customer across web, app, and email.
 
 Three ways to find something relevant:
+- **Filter by industry** — Retail & Consumer Goods, Financial Services,
+  Telecom/Media/Technology, Travel & Hospitality, Automotive &
+  Manufacturing, or Healthcare/Public Sector/Utilities — to narrow the
+  library to cases that are actually relevant for that kind of business.
 - **Browse by business problem** — "low email open rate", "low loyalty
   engagement", "high cart abandonment", etc. — the filter chips at the top.
 - **Keyword search** — fuzzy, typo-tolerant, with synonyms built in
@@ -30,6 +34,7 @@ assets/css/style.css             all styling
 assets/js/app.js                 search, filtering, synonyms, AI search wiring, detail panel
 data/use-cases.json              the 26 use cases — this is what you'll edit/extend
 data/business-problems.json      the canonical "business problem" taxonomy used for filtering + AI matching
+data/industries.json             the six industries used for the industry filter + AI matching
 data/schema.json                 the validation schema for every use case entry
 netlify/functions/diagnose.js    the AI problem-search function (optional — see SETUP.md)
 netlify.toml                     Netlify config (static site + function)
