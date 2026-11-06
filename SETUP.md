@@ -97,11 +97,14 @@ one-line rationale — instead of only being able to search by keyword.
 
 `netlify/functions/diagnose.js` is a small serverless function. The
 browser sends it the freeform problem text; the function sends Claude the
-full use-case catalog (id, title, one-liner, tags, and the business
-problems each case already addresses) plus that text, and asks it — via a
-forced tool call, so the response is always structured JSON, not prose to
-parse — to return the 3-5 most relevant use case ids with a short
-rationale each. The front-end then renders exactly those cards.
+full use-case catalog (id, title, one-liner, tags, the business problems
+each case already addresses, and the industries it's relevant for) plus
+that text, and asks it — via a forced tool call, so the response is
+always structured JSON, not prose to parse — to return the 3-5 most
+relevant use case ids with a short rationale each. The front-end then
+renders exactly those cards. It does not currently filter by the
+industry chip the visitor may have selected — it's told about
+`industries` purely as matching context, alongside the whole catalog.
 
 Your API key lives only on the server side (Netlify's environment
 variables), never in the browser or the repo.
@@ -159,8 +162,8 @@ AI box is for, just via clicking instead of typing a sentence.
 ## 4. How the app works (so maintenance makes sense)
 
 - `index.html` loads `assets/js/app.js`, which `fetch()`es
-  `data/use-cases.json` and `data/business-problems.json` and renders
-  everything client-side.
+  `data/use-cases.json`, `data/business-problems.json`, and
+  `data/industries.json`, and renders everything client-side.
 - **Keyword search** is a small dependency-free fuzzy/keyword scorer in
   `app.js`, with a synonym dictionary (so "mobile app" matches things
   tagged `app`, "newsletter" matches `email`, "rewards" matches `loyalty`,
@@ -168,10 +171,11 @@ AI box is for, just via clicking instead of typing a sentence.
   as you notice more gaps) and typo tolerance on longer words.
 - **AI problem search** (optional, see section 3) handles genuinely
   freeform sentences the keyword search isn't meant to parse.
-- **Filters** (business problem, channel, funnel stage, complexity, CDP
-  maturity needed, quick win) are generated automatically from whatever
-  values exist in the data files — you don't need to touch `app.js` to
-  add a new *use case*, only if you want to add a new *filter category*.
+- **Filters** (industry, business problem, channel, funnel stage,
+  complexity, CDP maturity needed, quick win) are generated automatically
+  from whatever values exist in the data files — you don't need to touch
+  `app.js` to add a new *use case*, only if you want to add a new *filter
+  category*.
 
 ---
 
@@ -194,6 +198,7 @@ against `data/schema.json`. Required fields:
 | `personalizationTactic` | Short label, e.g. "Behavioral retargeting" |
 | `cdpDataUsed` | List of the CDP data points the use case relies on |
 | `businessProblems` | Ids from `data/business-problems.json` — the client-facing problems this case addresses. This is what both the "Browse by business problem" filter and the AI search key off of. |
+| `industries` | Ids from `data/industries.json` — which of the six industries this case is relevant for. Powers the "Industry" filter and the AI search. |
 | `dataMaturity` | Foundational / Intermediate / Advanced — how much CDP capability a client needs first |
 | `complexity` | Low / Medium / High implementation effort |
 | `quickWin` | `true`/`false` — powers the "Quick wins only" filter |
@@ -212,6 +217,20 @@ reuse an existing tag. If a genuinely new problem type comes up often
 enough to be worth its own entry, add it to this file first (the schema's
 enum list in `data/schema.json` needs the new id added too), then
 reference it from use cases.
+
+### The industry taxonomy
+
+`data/industries.json` holds the six industries a visitor can filter by:
+Retail & Consumer Goods, Financial Services, Telecom/Media/Technology,
+Travel & Hospitality, Automotive & Manufacturing, and Healthcare/Public
+Sector/Utilities. Every use case's `industries` array says which of these
+it's actually relevant for — this is a judgment call (e.g. a fit/size
+recommendation is fashion-specific; a churn/win-back journey applies to
+almost every subscription-style business), so review and adjust it as the
+library grows and you learn more about what does or doesn't land per
+industry. Adding a seventh industry works the same way as adding a
+business problem: add it to `data/industries.json`, add the id to the
+`industries` enum in `data/schema.json`, then reference it from use cases.
 
 ### Tagging convention (keep this consistent as the library grows)
 

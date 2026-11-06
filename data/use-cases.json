@@ -50,6 +50,11 @@
         "low complexity",
         "consideration",
         "session data"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality",
+        "automotive-manufacturing"
       ]
     },
     {
@@ -98,6 +103,11 @@
         "retention",
         "segment rules",
         "medium complexity"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality",
+        "automotive-manufacturing"
       ]
     },
     {
@@ -148,6 +158,12 @@
         "low complexity",
         "retention",
         "declared data"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality",
+        "telecom-media-technology",
+        "financial-services"
       ]
     },
     {
@@ -200,6 +216,10 @@
         "high complexity",
         "advanced",
         "real-time trigger"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality"
       ]
     },
     {
@@ -249,6 +269,11 @@
         "transactional data",
         "medium complexity",
         "retention"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "healthcare-public-sector-utilities",
+        "automotive-manufacturing"
       ]
     },
     {
@@ -298,6 +323,12 @@
         "advanced",
         "conversion",
         "merchandising"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality",
+        "telecom-media-technology",
+        "automotive-manufacturing"
       ]
     },
     {
@@ -346,6 +377,11 @@
         "medium complexity",
         "quick win",
         "conversion"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality",
+        "telecom-media-technology"
       ]
     },
     {
@@ -393,6 +429,14 @@
         "low complexity",
         "awareness",
         "margin protection"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "financial-services",
+        "telecom-media-technology",
+        "travel-hospitality",
+        "automotive-manufacturing",
+        "healthcare-public-sector-utilities"
       ]
     },
     {
@@ -438,6 +482,12 @@
         "medium complexity",
         "quick win",
         "personalized feed"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "financial-services",
+        "telecom-media-technology",
+        "healthcare-public-sector-utilities"
       ]
     },
     {
@@ -489,6 +539,13 @@
         "high complexity",
         "advanced",
         "reactivation"
+      ],
+      "industries": [
+        "financial-services",
+        "telecom-media-technology",
+        "travel-hospitality",
+        "retail-consumer-goods",
+        "healthcare-public-sector-utilities"
       ]
     },
     {
@@ -535,6 +592,13 @@
         "personalization",
         "retention",
         "engagement data"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "financial-services",
+        "telecom-media-technology",
+        "travel-hospitality",
+        "healthcare-public-sector-utilities"
       ]
     },
     {
@@ -578,6 +642,13 @@
         "quick win",
         "low complexity",
         "consideration"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "financial-services",
+        "telecom-media-technology",
+        "travel-hospitality",
+        "healthcare-public-sector-utilities"
       ]
     },
     {
@@ -624,6 +695,12 @@
         "list hygiene",
         "medium complexity",
         "reactivation"
+      ],
+      "industries": [
+        "telecom-media-technology",
+        "retail-consumer-goods",
+        "financial-services",
+        "healthcare-public-sector-utilities"
       ]
     },
     {
@@ -670,6 +747,12 @@
         "quick win",
         "low complexity",
         "nudge"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality",
+        "telecom-media-technology",
+        "financial-services"
       ]
     },
     {
@@ -715,6 +798,12 @@
         "points",
         "medium complexity",
         "quick win"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality",
+        "telecom-media-technology",
+        "financial-services"
       ]
     },
     {
@@ -763,6 +852,14 @@
         "unsubscribe",
         "medium complexity",
         "quick win"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "financial-services",
+        "telecom-media-technology",
+        "travel-hospitality",
+        "automotive-manufacturing",
+        "healthcare-public-sector-utilities"
       ]
     },
     {
@@ -807,6 +904,13 @@
         "retention",
         "engagement decay",
         "medium complexity"
+      ],
+      "industries": [
+        "telecom-media-technology",
+        "retail-consumer-goods",
+        "financial-services",
+        "travel-hospitality",
+        "healthcare-public-sector-utilities"
       ]
     },
     {
@@ -852,6 +956,12 @@
         "loyalty",
         "medium complexity",
         "quick win"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "financial-services",
+        "healthcare-public-sector-utilities",
+        "telecom-media-technology"
       ]
     },
     {
@@ -898,6 +1008,12 @@
         "high complexity",
         "advanced",
         "consistency"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality",
+        "automotive-manufacturing",
+        "financial-services"
       ]
     },
     {
@@ -944,6 +1060,12 @@
         "promotions",
         "medium complexity",
         "conversion"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "financial-services",
+        "telecom-media-technology",
+        "travel-hospitality"
       ]
     },
     {
@@ -992,6 +1114,12 @@
         "medium complexity",
         "quick win",
         "conversion"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality",
+        "automotive-manufacturing",
+        "financial-services"
       ]
     },
     {
@@ -1039,6 +1167,9 @@
         "high complexity",
         "advanced",
         "conversion"
+      ],
+      "industries": [
+        "retail-consumer-goods"
       ]
     },
     {
@@ -1086,6 +1217,11 @@
         "low complexity",
         "quick win",
         "retention"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "automotive-manufacturing",
+        "healthcare-public-sector-utilities"
       ]
     },
     {
@@ -1130,6 +1266,11 @@
         "low complexity",
         "quick win",
         "retention"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "travel-hospitality",
+        "automotive-manufacturing"
       ]
     },
     {
@@ -1176,6 +1317,13 @@
         "medium complexity",
         "quick win",
         "cdp activation"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "financial-services",
+        "telecom-media-technology",
+        "travel-hospitality",
+        "automotive-manufacturing"
       ]
     },
     {
@@ -1221,6 +1369,14 @@
         "onboarding",
         "low complexity",
         "quick win"
+      ],
+      "industries": [
+        "retail-consumer-goods",
+        "financial-services",
+        "telecom-media-technology",
+        "travel-hospitality",
+        "automotive-manufacturing",
+        "healthcare-public-sector-utilities"
       ]
     }
   ]
