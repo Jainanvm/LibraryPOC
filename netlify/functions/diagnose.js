@@ -28,23 +28,29 @@
 // the bundled function, so no file lookup happens at runtime at all.
 const useCaseData = require("../../data/use-cases.json");
 const problemData = require("../../data/business-problems.json");
+const industryData = require("../../data/industries.json");
 
 const MAX_PROBLEM_LENGTH = 500;
 const ANTHROPIC_VERSION = "2023-06-01";
 const ANTHROPIC_ENDPOINT = "https://api.anthropic.com/v1/messages";
 
-function buildCatalog() {
+function buildCatalog(selectedIndustries) {
   const problemLabels = {};
   (problemData.problems || []).forEach((p) => (problemLabels[p.id] = p.label));
+  const industryLabels = {};
+  (industryData.industries || []).forEach((industry) => (industryLabels[industry.id] = industry.label));
 
-  return useCaseData.useCases.map((uc) => ({
-    id: uc.id,
-    title: uc.title,
-    oneLiner: uc.oneLiner,
-    channels: uc.channels,
-    businessProblemsAddressed: (uc.businessProblems || []).map((id) => problemLabels[id] || id),
-    tags: uc.tags,
-  }));
+  return useCaseData.useCases
+    .filter((uc) => !selectedIndustries.size || (uc.industries || []).some((id) => selectedIndustries.has(id)))
+    .map((uc) => ({
+      id: uc.id,
+      title: uc.title,
+      oneLiner: uc.oneLiner,
+      channels: uc.channels,
+      businessProblemsAddressed: (uc.businessProblems || []).map((id) => problemLabels[id] || id),
+      industries: (uc.industries || []).map((id) => industryLabels[id] || id),
+      tags: uc.tags,
+    }));
 }
 
 exports.handler = async (event) => {
@@ -84,9 +90,18 @@ async function handleRequest(event) {
   }
 
   let problem;
+  let industries;
   try {
     const body = JSON.parse(event.body || "{}");
     problem = (body.problem || "").toString().trim();
+    const industryIds = new Set((industryData.industries || []).map((industry) => industry.id));
+    if (body.industries !== undefined && !Array.isArray(body.industries)) {
+      return { statusCode: 400, body: JSON.stringify({ error: "'industries' must be an array" }) };
+    }
+    industries = body.industries || [];
+    if (industries.some((id) => typeof id !== "string" || !industryIds.has(id))) {
+      return { statusCode: 400, body: JSON.stringify({ error: "'industries' contains an unknown industry" }) };
+    }
   } catch (e) {
     return { statusCode: 400, body: JSON.stringify({ error: "Malformed JSON body" }) };
   }
@@ -98,7 +113,13 @@ async function handleRequest(event) {
     problem = problem.slice(0, MAX_PROBLEM_LENGTH);
   }
 
-  const catalog = buildCatalog();
+  const selectedIndustries = new Set(industries);
+  const catalog = buildCatalog(selectedIndustries);
+  const industryContext = industries.length
+    ? "Selected industry: " +
+      industries.map((id) => industryData.industries.find((industry) => industry.id === id).label).join(", ") +
+      ". Only recommend use cases relevant to the selected industry.\n\n"
+    : "";
 
   const payload = {
     model: process.env.ANTHROPIC_MODEL,
@@ -112,6 +133,7 @@ async function handleRequest(event) {
           "that most directly help address the described problem. If fewer than 3 are genuinely " +
           "relevant, return fewer rather than padding the list. Only use ids that appear exactly " +
           "in the catalog.\n\n" +
+          industryContext +
           'Problem described: "' +
           problem +
           '"\n\n' +
