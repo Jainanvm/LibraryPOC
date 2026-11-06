@@ -102,9 +102,9 @@ each case already addresses, and the industries it's relevant for) plus
 that text, and asks it — via a forced tool call, so the response is
 always structured JSON, not prose to parse — to return the 3-5 most
 relevant use case ids with a short rationale each. The front-end then
-renders exactly those cards. It does not currently filter by the
-industry chip the visitor may have selected — it's told about
-`industries` purely as matching context, alongside the whole catalog.
+renders those cards. If the visitor selected one or more industry chips,
+the function narrows the catalog to use cases tagged for those industries
+and only recommends from that subset.
 
 Your API key lives only on the server side (Netlify's environment
 variables), never in the browser or the repo.
