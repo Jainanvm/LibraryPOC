@@ -1,130 +1,270 @@
 {
-  "createdAt": "2026-11-09T09:56:08Z",
-  "query": "Marketing personalization case study",
+  "createdAt": "2026-11-09T10:40:07Z",
+  "query": "Healthcare Marketing personalization case study",
   "drafts": [
     {
-      "reviewNotes": "The page is a CleverTap blog post that describes concrete customer-facing personalization examples (dynamic homepage, geo-based offers, lifecycle emails, in-app messages, WhatsApp, push) that rely on customer data and a customer engagement platform, making it relevant to a CDP use case. Its explicit examples are mostly third-party brands and some describe CleverTap customer results. Recommendations below are proposals, not source claims.",
-      "proposalNote": "The useCase below is a suggested implementation. Its tactics, data requirements, journey, examples, and KPIs are recommendations unless supported by the source evidence.",
-      "sourceSummary": "CleverTap's blog post describes personalized marketing as using individual customer data and context to tailor each person's experience with a brand. It states that deep personalization relies on richer data such as past purchases, browsing behavior, location, and AI predictions. The page describes cross-channel examples including geo-based offers on websites (REI shows nearest store and pickup availability by ZIP code), lifecycle-triggered emails, behavior-triggered in-app messages (WinZO personalized in-app messaging based on real-time behavior and reported a 40% retention increase), and event-based push notifications. It also describes Ixigo using CleverTap automated lifecycle email campaigns, which the page reports produced a 54% increase in email open rates.",
-      "sourceEvidence": [
-        {
-          "claim": "Personalized marketing is described as using individual customer data and context to tailor each person's experience with a brand.",
-          "excerpt": "Personalized marketing is the practice of using individual customer data and context to tailor each person’s experience with your brand.",
-          "location": "What Is Personalized Marketing?"
-        },
-        {
-          "claim": "The page states deep personalization relies on richer data signals such as past purchases, browsing behavior, location, and AI predictions.",
-          "excerpt": "Today’s top marketers use data signals like past purchases, browsing behavior, location, and even AI predictions to make every message or page highly relevant.",
-          "location": "What Is Personalized Marketing?"
-        },
-        {
-          "claim": "REI is described as detecting each shopper's ZIP code and automatically showing the nearest store and relevant gear.",
-          "excerpt": "Outdoor retailer REI detects each shopper’s ZIP code and automatically shows the nearest store and relevant gear.",
-          "location": "3. Geo-Based Offers And Information"
-        },
-        {
-          "claim": "Ixigo's use of CleverTap automated lifecycle email campaigns is reported to have produced a 54% increase in email open rates.",
-          "excerpt": "The result was a 54% increase in email open rates and a 3% lift in click-through rates, driving stronger engagement and revenue growth.",
-          "location": "4. Lifecycle-Triggered Email Sequences"
-        },
-        {
-          "claim": "WinZO used CleverTap for personalized in-app messaging based on real-time user behavior, reported as a 40% increase in retention rate.",
-          "excerpt": "Using CleverTap, WinZO personalized in-app messaging based on real-time user behavior.",
-          "location": "7. Behavior-Triggered In-App Messages"
-        },
-        {
-          "claim": "The WinZO case is reported to have yielded a 40% increase in retention rate.",
-          "excerpt": "This strategic implementation yielded a 40% increase in retention rate for WinZO.",
-          "location": "7. Behavior-Triggered In-App Messages"
-        },
-        {
-          "claim": "Event-based push notifications are triggered by a user action or lack of it, such as abandoned cart reminders or back-in-stock alerts.",
-          "excerpt": "The signal here is a user action or lack of it, which triggers a targeted push.",
-          "location": "9. Event-Based Push Notifications"
-        }
-      ],
+      "reviewNotes": "Review the proposed use case and its source before importing.",
       "source": {
-        "title": "20 Standout Examples of Personalization in Marketing That Drive Conversions",
-        "url": "https://clevertap.com/blog/examples-of-personalization/",
-        "retrievedAt": "2026-11-09T09:55:57Z",
-        "searchQuery": "Marketing personalization case study"
+        "title": "Email marketing personalization case study | Deloitte US",
+        "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/cloud-transformation/case-studies/email-marketing-personalization-case-study.html",
+        "retrievedAt": "2026-11-09T10:39:39Z",
+        "searchQuery": "Healthcare Marketing personalization case study"
       },
       "useCase": {
-        "id": "lifecycle-triggered-personalized-messaging",
-        "title": "Lifecycle and behavior-triggered cross-channel messaging",
-        "oneLiner": "Trigger web, app, and email messages from customer events and profile data.",
+        "id": "hcp-email-preference-frequency-personalization",
+        "title": "Per-Provider Email Cadence and Content Personalization for HCPs",
+        "oneLiner": "Learn each prescriber's preferred content, timing, frequency and format to cut email opt-outs.",
         "channels": [
-          "web",
-          "app",
-          "email"
+          "email",
+          "web"
         ],
         "funnelStage": "Retention",
-        "personalizationTactic": "Trigger personalized messages from unified behavioral events",
+        "personalizationTactic": "Tailor send frequency, content, and timing per provider",
         "cdpDataUsed": [
-          "Unified customer profile",
-          "Behavioral events (browse, cart, app sessions)",
-          "Lifecycle stage",
-          "Location or ZIP code (where consented)",
-          "Purchase history"
+          "Email engagement history (opens, clicks, opt-outs) across brands",
+          "Provider specialty and practice profile",
+          "Content and brand interaction history",
+          "Preferred send time and channel signals",
+          "Website content consumption"
         ],
         "businessProblems": [
+          "high-unsubscribe-rate",
           "low-email-open-rate",
           "generic-experience",
+          "inconsistent-cross-channel-experience"
+        ],
+        "industries": [
+          "healthcare-public-sector-utilities"
+        ],
+        "dataMaturity": "Intermediate",
+        "complexity": "High",
+        "quickWin": false,
+        "journey": "The CDP unifies several years of email engagement data for healthcare providers across all brands, then a model scores each provider on preferred content, send times, frequency, and format. Brands are consolidated into one per-provider engagement plan. Providers who opened or clicked a topic receive more of it, while low-interest or over-contacted brands are throttled or suppressed. Plans refresh on a regular cadence, and the same preferences are shared with web and other channels so messaging stays consistent.",
+        "exampleBefore": "A provider receives dozens of promotional emails a month from many brands, including ones unrelated to their practice, and opts out of all email.",
+        "exampleAfter": "The provider gets two relevant emails a month on their preferred topic, sent on Tuesday mornings in a short format, and opt-outs fall by half.",
+        "kpis": {
+          "primary": "Email opt-out rate per provider segment",
+          "secondary": [
+            "Email open rate",
+            "Click-through rate on relevant content",
+            "Email reach across brands",
+            "Opt-in rate"
+          ]
+        },
+        "toolsNeeded": [
+          "CDP with unified profile and identity resolution",
+          "Machine learning propensity and send-time model",
+          "Email service provider with frequency caps",
+          "Preference center on web"
+        ],
+        "tags": [
+          "healthcare",
+          "email",
+          "frequency-capping",
+          "preference-management",
+          "machine-learning"
+        ]
+      }
+    },
+    {
+      "reviewNotes": "Review the proposed use case and its source before importing.",
+      "source": {
+        "title": "Personalization in Healthcare: Patient Experience Use Cases - Mphasis Silverline",
+        "url": "https://silverlinecrm.com/blog/healthcare/personalization-in-healthcare-patient-experience-use-cases/",
+        "retrievedAt": "2026-11-09T10:39:48Z",
+        "searchQuery": "Healthcare Marketing personalization case study"
+      },
+      "useCase": {
+        "id": "healthcare-patient-website-education-personalization",
+        "title": "Personalized Patient Website and Education Journey",
+        "oneLiner": "Tailor patient website content, care prompts, and education by known condition and encounter data.",
+        "channels": [
+          "web",
+          "email",
+          "app"
+        ],
+        "funnelStage": "Consideration",
+        "personalizationTactic": "Show condition-specific content and care prompts based on encounters",
+        "cdpDataUsed": [
+          "Encounter and visit history",
+          "Website browsing and search behavior",
+          "Declared health interests and preferences",
+          "Primary care provider status",
+          "Location and nearest clinic",
+          "Email and app engagement"
+        ],
+        "businessProblems": [
+          "generic-experience",
+          "low-post-purchase-engagement",
           "inconsistent-cross-channel-experience",
+          "insufficient-zero-party-data",
           "cdp-data-not-activated"
         ],
         "industries": [
-          "retail-consumer-goods",
-          "telecom-media-technology"
+          "healthcare-public-sector-utilities"
         ],
         "dataMaturity": "Intermediate",
         "complexity": "Medium",
         "quickWin": false,
-        "journey": "Map key lifecycle and behavioral events, unify them in the customer profile, define trigger rules per channel, then personalize message content and timing with suppression rules to avoid over-messaging.",
-        "exampleBefore": "All subscribers receive the same newsletter regardless of their recent browsing or app activity.",
-        "exampleAfter": "A shopper who abandons a cart receives a reminder email, and a push notification for the same item if they have the app installed.",
+        "journey": "A patient visits the provider website or app. The CDP unifies known patient attributes (condition flags, recent encounter type, preferred location, declared interests) with anonymous browsing and search signals. Homepage and landing modules swap in relevant content: a find-a-PCP prompt for patients without a primary care provider, nearby specialists and closest open office hours, and education on the condition tied to a recent urgent care visit or search. The same segment drives matching follow-up emails with condition tips and appointment reminders, so the patient sees one consistent story across channels. Content must follow consent and health-privacy rules, so sensitive attributes are used only with explicit opt-in and never exposed in visible messaging.",
+        "exampleBefore": "A patient who had a recent urgent care visit for a sinus infection lands on the homepage and sees the same generic service banners as every other visitor, then receives a generic newsletter a week later.",
+        "exampleAfter": "The same patient sees a sinus-care guide, the closest open clinic with hours, and a book-appointment prompt on the homepage, followed by a matching email with self-care tips and a reminder for a follow-up visit.",
         "kpis": {
-          "primary": "Email open rate and in-app retention rate for triggered segments versus control",
+          "primary": "Appointment booking conversion rate from personalized web and email journeys",
           "secondary": [
-            "Click-through rate",
+            "Patient portal and app engagement rate",
+            "Share of patients with a primary care provider linked",
+            "Email click-through rate on education content",
+            "Content engagement depth on condition pages"
+          ]
+        },
+        "toolsNeeded": [
+          "Marketing Cloud Personalization",
+          "Marketing Cloud Engagement",
+          "CDP with identity resolution",
+          "EHR or encounter data feed with consent management"
+        ],
+        "tags": [
+          "healthcare",
+          "patient experience",
+          "web personalization",
+          "consent-first",
+          "education content"
+        ]
+      }
+    },
+    {
+      "reviewNotes": "Review the proposed use case and its source before importing.",
+      "source": {
+        "title": "personalized marketing campaigns: Healthcare Articles | MarketScale",
+        "url": "https://www.marketscale.com/industries/healthcare/topic/personalized-marketing-campaigns",
+        "retrievedAt": "2026-11-09T10:39:55Z",
+        "searchQuery": "Healthcare Marketing personalization case study"
+      },
+      "useCase": {
+        "id": "healthcare-appointment-reminder-personalized-email",
+        "title": "Personalized Patient Appointment and Care-Reminder Emails",
+        "oneLiner": "Tailor patient reminder and care-program emails by service line, preferences, and declared needs.",
+        "channels": [
+          "email",
+          "web"
+        ],
+        "funnelStage": "Retention",
+        "personalizationTactic": "Vary reminder content and send timing by service line and preference",
+        "cdpDataUsed": [
+          "Appointment history and service line",
+          "Declared communication preferences and channel opt-ins",
+          "Web portal engagement and content views",
+          "Preferred send time and language"
+        ],
+        "businessProblems": [
+          "low-email-open-rate",
+          "high-unsubscribe-rate",
+          "generic-experience",
+          "insufficient-zero-party-data"
+        ],
+        "industries": [
+          "healthcare-public-sector-utilities"
+        ],
+        "dataMaturity": "Foundational",
+        "complexity": "Low",
+        "quickWin": true,
+        "journey": "A patient books an appointment or enrolls in a care program on the provider's website. The CDP stores the service line, appointment date, and communication preferences. Before each visit, the patient receives a tailored reminder email with prep instructions relevant to that service, a clear reschedule link, and a preferred send time. Patients who opt for fewer messages receive only essential reminders. Preference updates made in the portal flow back to the CDP and change future sends.",
+        "exampleBefore": "All patients receive the same generic reminder email, sent at 8 a.m. on the day before the visit, with no prep details and a single unsubscribe option for all messages.",
+        "exampleAfter": "A patient booked for a physical therapy session gets a reminder with warm-up instructions, a reschedule link, and a text-or-email choice, sent at their preferred time. Patients who limit messages receive only essential reminders, and unsubscribe rates fall.",
+        "kpis": {
+          "primary": "Appointment reminder email open rate",
+          "secondary": [
+            "Unsubscribe rate per reminder",
+            "No-show rate",
+            "Preference center completion rate",
+            "Reschedule-link click-through rate"
+          ]
+        },
+        "toolsNeeded": [
+          "CDP",
+          "Email service provider",
+          "Practice management or EHR scheduling system",
+          "Preference center on patient portal"
+        ],
+        "tags": [
+          "healthcare",
+          "appointment reminders",
+          "email personalization",
+          "patient preferences",
+          "zero-party data"
+        ]
+      }
+    },
+    {
+      "reviewNotes": "Review the proposed use case and its source before importing.",
+      "source": {
+        "title": "Personalized Email Marketing: A Healthcare Marketer's Guide",
+        "url": "https://www.tophealthcareleads.com/blog/personalized-email-marketing-for-healthcare-marketers/",
+        "retrievedAt": "2026-11-09T10:40:06Z",
+        "searchQuery": "Healthcare Marketing personalization case study"
+      },
+      "useCase": {
+        "id": "healthcare-preventive-care-reminder-emails",
+        "title": "Personalized Preventive Care Reminder Emails for Patients",
+        "oneLiner": "Send patients screening and appointment reminders tailored to age, history, and declared preferences.",
+        "channels": [
+          "email"
+        ],
+        "funnelStage": "Retention",
+        "personalizationTactic": "Tailor screening reminders by age, history, and channel preference",
+        "cdpDataUsed": [
+          "Patient profile (first name, age, sex, location)",
+          "Care history and upcoming appointments",
+          "Preventive screening due dates",
+          "Declared communication preferences and topic interests",
+          "Email engagement events (opens, clicks, unsubscribes)"
+        ],
+        "businessProblems": [
+          "low-email-open-rate",
+          "high-unsubscribe-rate",
+          "low-post-purchase-engagement",
+          "generic-experience",
+          "cdp-data-not-activated"
+        ],
+        "industries": [
+          "healthcare-public-sector-utilities"
+        ],
+        "dataMaturity": "Intermediate",
+        "complexity": "Medium",
+        "quickWin": false,
+        "journey": "A patient joins the provider's email list and declares preferred topics and contact frequency in a preference center. The CDP unifies profile, appointment, and care-gap data. When a screening or follow-up becomes due, the CDP triggers a reminder email whose content, timing, and call-to-action match the patient's age, sex, due item, and preferred frequency. If a patient opens but does not book, a single follow-up is sent after a set delay. Patients who stop engaging move to a lower-frequency educational track instead of being unsubscribed. Booking events and unsubscribes flow back to the CDP to suppress and refine future sends.",
+        "exampleBefore": "A generic monthly newsletter goes to the entire patient list with the same \"Schedule your checkup\" message, regardless of age or care status.",
+        "exampleAfter": "A 52-year-old patient overdue for a colorectal screening receives a short email with her name, the screening details, and a one-click booking link, sent on her preferred weekday morning. Patients who ignore it get one follow-up, then a lower-frequency track.",
+        "kpis": {
+          "primary": "Screening or appointment booking rate from reminder emails",
+          "secondary": [
+            "Email open rate",
             "Unsubscribe rate",
-            "Conversion rate from triggered messages",
-            "Cross-channel consistency of messages"
+            "Share of due screenings completed within 90 days",
+            "Reminder-to-booking conversion by segment"
           ]
         },
         "toolsNeeded": [
           "Customer data platform",
-          "Email service",
-          "Mobile push and in-app messaging tool",
-          "Web personalization layer",
-          "Analytics platform"
+          "Email service provider with dynamic content",
+          "Preference center",
+          "Scheduling system integration"
         ],
         "tags": [
-          "lifecycle",
-          "triggers",
-          "cross-channel",
-          "CDP",
-          "retention"
+          "healthcare",
+          "email",
+          "preventive-care",
+          "dynamic-content",
+          "preference-management"
         ]
       }
     }
   ],
   "skipped": [
     {
-      "url": "https://www.moengage.com/learn/examples-of-personalization/",
-      "reason": "Source evidence item 1 does not match the cited page heading."
-    },
-    {
-      "url": "https://www.socialtargeter.com/blogs/the-power-of-personalization-case-studies-of-brands-that-achieved-success-through-tailored-marketing",
-      "reason": "The page is a general blog post about personalization in marketing. Its case-study sections (Amazon, Netflix, Coca-Cola, Sephora) describe brand-level recommendation and campaign examples, but it does not describe a concrete, customer-facing personalization implementation with enough detail to ground a customer data platform use case. Its statistics are secondhand citations, and its tools section only names CRM and analytics products without describing a specific CDP-enabled experience. Per the instructions, relevant is set to false and the research-note fields are left empty."
-    },
-    {
-      "url": "https://www.optimonk.com/personalization-results",
-      "reason": "Generated source evidence is missing."
-    },
-    {
-      "url": "https://www.strong.io/blog/case-study-optimizing-personalized-marketing-campaigns-at-scale",
-      "reason": "Generated source summary is missing."
+      "url": "https://feeds.houseofsummary.com/blog/healthcare-advertising-case-studies",
+      "reason": "Could not resolve public host feeds.houseofsummary.com: [Errno 11001] getaddrinfo failed"
     }
   ]
 }
