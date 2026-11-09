@@ -1,0 +1,130 @@
+{
+  "createdAt": "2026-11-09T09:56:08Z",
+  "query": "Marketing personalization case study",
+  "drafts": [
+    {
+      "reviewNotes": "The page is a CleverTap blog post that describes concrete customer-facing personalization examples (dynamic homepage, geo-based offers, lifecycle emails, in-app messages, WhatsApp, push) that rely on customer data and a customer engagement platform, making it relevant to a CDP use case. Its explicit examples are mostly third-party brands and some describe CleverTap customer results. Recommendations below are proposals, not source claims.",
+      "proposalNote": "The useCase below is a suggested implementation. Its tactics, data requirements, journey, examples, and KPIs are recommendations unless supported by the source evidence.",
+      "sourceSummary": "CleverTap's blog post describes personalized marketing as using individual customer data and context to tailor each person's experience with a brand. It states that deep personalization relies on richer data such as past purchases, browsing behavior, location, and AI predictions. The page describes cross-channel examples including geo-based offers on websites (REI shows nearest store and pickup availability by ZIP code), lifecycle-triggered emails, behavior-triggered in-app messages (WinZO personalized in-app messaging based on real-time behavior and reported a 40% retention increase), and event-based push notifications. It also describes Ixigo using CleverTap automated lifecycle email campaigns, which the page reports produced a 54% increase in email open rates.",
+      "sourceEvidence": [
+        {
+          "claim": "Personalized marketing is described as using individual customer data and context to tailor each person's experience with a brand.",
+          "excerpt": "Personalized marketing is the practice of using individual customer data and context to tailor each person’s experience with your brand.",
+          "location": "What Is Personalized Marketing?"
+        },
+        {
+          "claim": "The page states deep personalization relies on richer data signals such as past purchases, browsing behavior, location, and AI predictions.",
+          "excerpt": "Today’s top marketers use data signals like past purchases, browsing behavior, location, and even AI predictions to make every message or page highly relevant.",
+          "location": "What Is Personalized Marketing?"
+        },
+        {
+          "claim": "REI is described as detecting each shopper's ZIP code and automatically showing the nearest store and relevant gear.",
+          "excerpt": "Outdoor retailer REI detects each shopper’s ZIP code and automatically shows the nearest store and relevant gear.",
+          "location": "3. Geo-Based Offers And Information"
+        },
+        {
+          "claim": "Ixigo's use of CleverTap automated lifecycle email campaigns is reported to have produced a 54% increase in email open rates.",
+          "excerpt": "The result was a 54% increase in email open rates and a 3% lift in click-through rates, driving stronger engagement and revenue growth.",
+          "location": "4. Lifecycle-Triggered Email Sequences"
+        },
+        {
+          "claim": "WinZO used CleverTap for personalized in-app messaging based on real-time user behavior, reported as a 40% increase in retention rate.",
+          "excerpt": "Using CleverTap, WinZO personalized in-app messaging based on real-time user behavior.",
+          "location": "7. Behavior-Triggered In-App Messages"
+        },
+        {
+          "claim": "The WinZO case is reported to have yielded a 40% increase in retention rate.",
+          "excerpt": "This strategic implementation yielded a 40% increase in retention rate for WinZO.",
+          "location": "7. Behavior-Triggered In-App Messages"
+        },
+        {
+          "claim": "Event-based push notifications are triggered by a user action or lack of it, such as abandoned cart reminders or back-in-stock alerts.",
+          "excerpt": "The signal here is a user action or lack of it, which triggers a targeted push.",
+          "location": "9. Event-Based Push Notifications"
+        }
+      ],
+      "source": {
+        "title": "20 Standout Examples of Personalization in Marketing That Drive Conversions",
+        "url": "https://clevertap.com/blog/examples-of-personalization/",
+        "retrievedAt": "2026-11-09T09:55:57Z",
+        "searchQuery": "Marketing personalization case study"
+      },
+      "useCase": {
+        "id": "lifecycle-triggered-personalized-messaging",
+        "title": "Lifecycle and behavior-triggered cross-channel messaging",
+        "oneLiner": "Trigger web, app, and email messages from customer events and profile data.",
+        "channels": [
+          "web",
+          "app",
+          "email"
+        ],
+        "funnelStage": "Retention",
+        "personalizationTactic": "Trigger personalized messages from unified behavioral events",
+        "cdpDataUsed": [
+          "Unified customer profile",
+          "Behavioral events (browse, cart, app sessions)",
+          "Lifecycle stage",
+          "Location or ZIP code (where consented)",
+          "Purchase history"
+        ],
+        "businessProblems": [
+          "low-email-open-rate",
+          "generic-experience",
+          "inconsistent-cross-channel-experience",
+          "cdp-data-not-activated"
+        ],
+        "industries": [
+          "retail-consumer-goods",
+          "telecom-media-technology"
+        ],
+        "dataMaturity": "Intermediate",
+        "complexity": "Medium",
+        "quickWin": false,
+        "journey": "Map key lifecycle and behavioral events, unify them in the customer profile, define trigger rules per channel, then personalize message content and timing with suppression rules to avoid over-messaging.",
+        "exampleBefore": "All subscribers receive the same newsletter regardless of their recent browsing or app activity.",
+        "exampleAfter": "A shopper who abandons a cart receives a reminder email, and a push notification for the same item if they have the app installed.",
+        "kpis": {
+          "primary": "Email open rate and in-app retention rate for triggered segments versus control",
+          "secondary": [
+            "Click-through rate",
+            "Unsubscribe rate",
+            "Conversion rate from triggered messages",
+            "Cross-channel consistency of messages"
+          ]
+        },
+        "toolsNeeded": [
+          "Customer data platform",
+          "Email service",
+          "Mobile push and in-app messaging tool",
+          "Web personalization layer",
+          "Analytics platform"
+        ],
+        "tags": [
+          "lifecycle",
+          "triggers",
+          "cross-channel",
+          "CDP",
+          "retention"
+        ]
+      }
+    }
+  ],
+  "skipped": [
+    {
+      "url": "https://www.moengage.com/learn/examples-of-personalization/",
+      "reason": "Source evidence item 1 does not match the cited page heading."
+    },
+    {
+      "url": "https://www.socialtargeter.com/blogs/the-power-of-personalization-case-studies-of-brands-that-achieved-success-through-tailored-marketing",
+      "reason": "The page is a general blog post about personalization in marketing. Its case-study sections (Amazon, Netflix, Coca-Cola, Sephora) describe brand-level recommendation and campaign examples, but it does not describe a concrete, customer-facing personalization implementation with enough detail to ground a customer data platform use case. Its statistics are secondhand citations, and its tools section only names CRM and analytics products without describing a specific CDP-enabled experience. Per the instructions, relevant is set to false and the research-note fields are left empty."
+    },
+    {
+      "url": "https://www.optimonk.com/personalization-results",
+      "reason": "Generated source evidence is missing."
+    },
+    {
+      "url": "https://www.strong.io/blog/case-study-optimizing-personalized-marketing-campaigns-at-scale",
+      "reason": "Generated source summary is missing."
+    }
+  ]
+}
