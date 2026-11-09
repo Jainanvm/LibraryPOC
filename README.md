@@ -40,6 +40,8 @@ netlify/functions/diagnose.js    the AI problem-search function (optional — se
 netlify.toml                     Netlify config (static site + function)
 scripts/validate.py              checks data/use-cases.json against the schema
 scripts/import_csv.py            bulk-import new use cases from a CSV/spreadsheet
+scripts/crawl_use_cases.py       searches the web and creates use-case drafts (requires Brave + Anthropic API keys)
+scripts/import_crawl_drafts.py   validates and imports selected crawler drafts
 scripts/import_template.csv      a filled-in example row to copy from
 .github/workflows/validate.yml   runs validate.py automatically on every push/PR
 SETUP.md                         full hosting + maintenance instructions
