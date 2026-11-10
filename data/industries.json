@@ -1,0 +1,35 @@
+{
+  "$comment": "Canonical list of industries/branches a visitor can select. Each use case references these by id in its industries array, so the library can be filtered to what's actually relevant for that industry.",
+  "industries": [
+    {
+      "id": "retail-consumer-goods",
+      "label": "Retail & Consumer Goods",
+      "description": "Ecommerce, fashion, grocery, and other direct-to-consumer product brands across web, app, and store."
+    },
+    {
+      "id": "financial-services",
+      "label": "Financial Services",
+      "description": "Banks, insurers, and fintechs personalizing around accounts, products, and financial goals."
+    },
+    {
+      "id": "telecom-media-technology",
+      "label": "Telecom, Media & Technology",
+      "description": "Telecom operators, streaming/media platforms, and SaaS/tech companies with subscription or usage-based relationships."
+    },
+    {
+      "id": "travel-hospitality",
+      "label": "Travel & Hospitality",
+      "description": "Airlines, hotels, travel booking platforms, and leisure brands personalizing around trips and stays."
+    },
+    {
+      "id": "automotive-manufacturing",
+      "label": "Automotive & Manufacturing",
+      "description": "Automotive OEMs/dealers and manufacturers with direct customer relationships around purchase, ownership, and service."
+    },
+    {
+      "id": "healthcare-public-sector-utilities",
+      "label": "Healthcare, Public Sector & Utilities",
+      "description": "Healthcare providers/payers, government/public-sector services, and utility providers personalizing citizen or patient communication."
+    }
+  ]
+}

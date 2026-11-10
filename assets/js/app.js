@@ -1,8 +1,8 @@
 /*
   Personalization Use Case Library — front-end logic.
   No frameworks, no build step, no external dependencies.
-  Data lives in data/use-cases.json — edit that file (or use scripts/import_csv.py)
-  to add cases; this file only needs to change if you add a new *filter type*.
+  Data lives in JSON files under data/ — edit those files (or use scripts/import_csv.py)
+  to add cases or taxonomy values; this file changes only for a new *filter type*.
 */
 
 (function () {
@@ -11,8 +11,10 @@
   const state = {
     all: [],
     problemsById: {},
+    industriesById: {},
     query: "",
     filters: {
+      industries: new Set(),
       channels: new Set(),
       funnelStage: new Set(),
       complexity: new Set(),
@@ -57,11 +59,18 @@
       if (!r.ok) throw new Error("HTTP " + r.status + " loading business-problems.json");
       return r.json();
     }),
+    fetch("data/industries.json", { cache: "no-store" }).then((r) => {
+      if (!r.ok) throw new Error("HTTP " + r.status + " loading industries.json");
+      return r.json();
+    }),
   ])
-    .then(([useCaseData, problemData]) => {
+    .then(([useCaseData, problemData, industryData]) => {
       state.all = useCaseData.useCases || [];
       (problemData.problems || []).forEach((p) => {
         state.problemsById[p.id] = p;
+      });
+      (industryData.industries || []).forEach((industry) => {
+        state.industriesById[industry.id] = industry;
       });
       buildFilterGroups();
       render();
@@ -148,6 +157,10 @@
       .map((id) => (state.problemsById[id] ? state.problemsById[id].label : id))
       .join(" | ")
       .toLowerCase();
+    const industryLabels = (uc.industries || [])
+      .map((id) => (state.industriesById[id] ? state.industriesById[id].label : id))
+      .join(" | ")
+      .toLowerCase();
     uc.__tokens = {
       tags: (uc.tags || []).map((t) => t.toLowerCase()),
       title: uc.title.toLowerCase(),
@@ -157,6 +170,7 @@
       journey: uc.journey.toLowerCase(),
       channels: uc.channels.join(" ").toLowerCase(),
       problems: problemLabels,
+      industries: industryLabels,
     };
     return uc.__tokens;
   }
@@ -175,6 +189,7 @@
     if (f.oneLiner.includes(token)) score = Math.max(score, 5);
     if (f.cdp.includes(token)) score = Math.max(score, 5);
     if (f.problems.includes(token)) score = Math.max(score, 7);
+    if (f.industries.includes(token)) score = Math.max(score, 7);
     if (f.journey.includes(token)) score = Math.max(score, 2);
 
     // Fuzzy fallback: typo tolerance against tags + title words for tokens of length >= 4
@@ -213,6 +228,7 @@
 
   function passesFilters(uc) {
     const f = state.filters;
+    if (f.industries.size && !(uc.industries || []).some((id) => f.industries.has(id))) return false;
     if (f.channels.size && !uc.channels.some((c) => f.channels.has(c))) return false;
     if (f.funnelStage.size && !f.funnelStage.has(uc.funnelStage)) return false;
     if (f.complexity.size && !f.complexity.has(uc.complexity)) return false;
@@ -251,41 +267,17 @@
   function buildFilterGroups() {
     els.filterGroups.innerHTML = "";
 
+    const usedIndustryIds = new Set();
+    state.all.forEach((uc) => (uc.industries || []).forEach((id) => usedIndustryIds.add(id)));
+    const industryEntries = Object.values(state.industriesById).filter((industry) => usedIndustryIds.has(industry.id));
+    appendTaxonomyFilterGroup("Industry", industryEntries, "industries");
+
     // Business problem is the primary lens — build it first, from whatever
     // problem ids are actually referenced by at least one use case.
     const usedProblemIds = new Set();
     state.all.forEach((uc) => (uc.businessProblems || []).forEach((id) => usedProblemIds.add(id)));
     const problemEntries = Object.values(state.problemsById).filter((p) => usedProblemIds.has(p.id));
-
-    if (problemEntries.length) {
-      const group = document.createElement("div");
-      group.className = "filter-group filter-group-wide";
-      const label = document.createElement("span");
-      label.className = "filter-group-label";
-      label.textContent = "Business problem";
-      const chips = document.createElement("div");
-      chips.className = "filter-chips";
-
-      problemEntries.forEach((p) => {
-        const chip = document.createElement("button");
-        chip.type = "button";
-        chip.className = "chip";
-        chip.textContent = p.label;
-        chip.title = p.description || "";
-        chip.addEventListener("click", () => {
-          const set = state.filters.businessProblems;
-          if (set.has(p.id)) set.delete(p.id);
-          else set.add(p.id);
-          chip.classList.toggle("active");
-          render();
-        });
-        chips.appendChild(chip);
-      });
-
-      group.appendChild(label);
-      group.appendChild(chips);
-      els.filterGroups.appendChild(group);
-    }
+    appendTaxonomyFilterGroup("Business problem", problemEntries, "businessProblems");
 
     FILTER_DEFS.forEach((def) => {
       const presentValues = def.values.filter((v) =>
@@ -306,11 +298,14 @@
         chip.type = "button";
         chip.className = "chip";
         chip.textContent = v;
+        chip.setAttribute("aria-pressed", "false");
         chip.addEventListener("click", () => {
           const set = state.filters[def.key];
-          if (set.has(v)) set.delete(v);
-          else set.add(v);
-          chip.classList.toggle("active");
+          const active = !set.has(v);
+          if (active) set.add(v);
+          else set.delete(v);
+          chip.classList.toggle("active", active);
+          chip.setAttribute("aria-pressed", String(active));
           render();
         });
         chips.appendChild(chip);
@@ -333,15 +328,51 @@
     qwChip.type = "button";
     qwChip.className = "chip";
     qwChip.textContent = "⚡ Quick wins only";
+    qwChip.setAttribute("aria-pressed", "false");
     qwChip.addEventListener("click", () => {
       state.filters.quickWin = !state.filters.quickWin;
       qwChip.classList.toggle("active");
+      qwChip.setAttribute("aria-pressed", String(state.filters.quickWin));
       render();
     });
     qwChips.appendChild(qwChip);
     qwGroup.appendChild(qwLabel);
     qwGroup.appendChild(qwChips);
     els.filterGroups.appendChild(qwGroup);
+  }
+
+  function appendTaxonomyFilterGroup(labelText, entries, filterKey) {
+    if (!entries.length) return;
+    const group = document.createElement("div");
+    group.className = "filter-group filter-group-wide";
+    const label = document.createElement("span");
+    label.className = "filter-group-label";
+    label.textContent = labelText;
+    const chips = document.createElement("div");
+    chips.className = "filter-chips";
+
+    entries.forEach((entry) => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "chip";
+      chip.textContent = entry.label;
+      chip.title = entry.description || "";
+      chip.setAttribute("aria-pressed", "false");
+      chip.addEventListener("click", () => {
+        const set = state.filters[filterKey];
+        const active = !set.has(entry.id);
+        if (active) set.add(entry.id);
+        else set.delete(entry.id);
+        chip.classList.toggle("active", active);
+        chip.setAttribute("aria-pressed", String(active));
+        render();
+      });
+      chips.appendChild(chip);
+    });
+
+    group.appendChild(label);
+    group.appendChild(chips);
+    els.filterGroups.appendChild(group);
   }
 
   // ---------- Rendering ----------
@@ -396,15 +427,53 @@
 
   // ---------- Detail panel ----------
 
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[character]);
+  }
+
   function detailHTML(uc) {
     const channels = uc.channels.map((c) => `<span class="meta-pill">${channelLabel(c)}</span>`).join("");
     const cdpList = uc.cdpDataUsed.map((d) => `<li>${d}</li>`).join("");
     const toolsList = uc.toolsNeeded.map((t) => `<li>${t}</li>`).join("");
     const secondaryKpis = uc.kpis.secondary.map((k) => `<span class="kpi-secondary">${k}</span>`).join("");
+    const source = uc.source && typeof uc.source === "object" ? uc.source : null;
+    let sourceSection = "";
+    if (source && typeof source.url === "string" && source.url.trim()) {
+      const sourceUrl = source.url.trim();
+      const sourceTitle = typeof source.title === "string" && source.title.trim()
+        ? source.title.trim()
+        : sourceUrl;
+      let sourceLink = escapeHTML(sourceTitle);
+      try {
+        const parsedUrl = new URL(sourceUrl);
+        if (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") {
+          sourceLink = `<a href="${escapeHTML(parsedUrl.href)}" target="_blank" rel="noopener noreferrer">${escapeHTML(sourceTitle)}</a>`;
+        }
+      } catch (error) {
+        if (!(error instanceof TypeError)) throw error;
+      }
+      sourceSection = `
+        <div class="detail-section">
+          <h3>Source</h3>
+          <p>${sourceLink}<span class="detail-source-url">${escapeHTML(sourceUrl)}</span></p>
+        </div>
+      `;
+    }
     const problemPills = (uc.businessProblems || [])
       .map((id) => state.problemsById[id])
       .filter(Boolean)
       .map((p) => `<span class="problem-pill" title="${p.description || ""}">${p.label}</span>`)
+      .join("");
+    const industryPills = (uc.industries || [])
+      .map((id) => state.industriesById[id])
+      .filter(Boolean)
+      .map((industry) => `<span class="industry-pill" title="${industry.description || ""}">${industry.label}</span>`)
       .join("");
 
     return `
@@ -412,6 +481,8 @@
       <p class="detail-eyebrow">${uc.personalizationTactic}</p>
       <h2 class="detail-title">${uc.title}</h2>
       <p class="detail-oneliner">${uc.oneLiner}</p>
+
+      ${sourceSection}
 
       <div class="detail-badges">
         ${channels}
@@ -422,6 +493,7 @@
       </div>
 
       ${problemPills ? `<div class="detail-section"><h3>Solves for</h3><div class="detail-badges">${problemPills}</div></div>` : ""}
+      ${industryPills ? `<div class="detail-section"><h3>Relevant industries</h3><div class="detail-badges">${industryPills}</div></div>` : ""}
 
       <div class="detail-section">
         <h3>Customer journey</h3>
@@ -556,7 +628,7 @@
       const res = await fetch("/.netlify/functions/diagnose", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ problem }),
+        body: JSON.stringify({ problem, industries: Array.from(state.filters.industries) }),
       });
 
       if (!res.ok) {

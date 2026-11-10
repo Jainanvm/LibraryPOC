@@ -13,16 +13,18 @@ Usage:
 
 CSV columns (see scripts/import_template.csv for a filled-in example):
     id, title, oneLiner, channels, funnelStage, personalizationTactic,
-    cdpDataUsed, businessProblems, dataMaturity, complexity, quickWin, journey,
+    cdpDataUsed, businessProblems, industries, dataMaturity, complexity, quickWin, journey,
     exampleBefore, exampleAfter, kpiPrimary, kpiSecondary, toolsNeeded, tags
 
-List-type columns (channels, cdpDataUsed, businessProblems, kpiSecondary,
-toolsNeeded, tags) use "|" as the separator between multiple values in a
-single cell, e.g.:
+List-type columns (channels, cdpDataUsed, businessProblems, industries,
+kpiSecondary, toolsNeeded, tags) use "|" as the separator between multiple
+values in a single cell, e.g.:
     channels:         web|email
     cdpDataUsed:      Purchase history|Loyalty tier|Email engagement score
     businessProblems: low-loyalty-engagement|generic-experience
                        (must match ids in data/business-problems.json)
+    industries:        retail-consumer-goods|travel-hospitality
+                       (must match ids in data/industries.json)
     quickWin:         true / false / yes / no
 """
 import argparse
@@ -34,11 +36,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA_FILE = ROOT / "data" / "use-cases.json"
 
-LIST_FIELDS = {"channels", "cdpDataUsed", "businessProblems", "kpiSecondary", "toolsNeeded", "tags"}
+LIST_FIELDS = {"channels", "cdpDataUsed", "businessProblems", "industries", "kpiSecondary", "toolsNeeded", "tags"}
 BOOL_FIELDS = {"quickWin"}
 REQUIRED_COLUMNS = [
     "id", "title", "oneLiner", "channels", "funnelStage", "personalizationTactic",
-    "cdpDataUsed", "businessProblems", "dataMaturity", "complexity", "quickWin", "journey",
+    "cdpDataUsed", "businessProblems", "industries", "dataMaturity", "complexity", "quickWin", "journey",
     "exampleBefore", "exampleAfter", "kpiPrimary", "kpiSecondary", "toolsNeeded", "tags",
 ]
 
