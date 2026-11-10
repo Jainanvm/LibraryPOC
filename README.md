@@ -5,7 +5,7 @@ built for consultants and clients who already have a CDP and good data
 availability, but need a fast way to see (and pitch) what that data can
 actually *do* for the end customer across web, app, and email.
 
-Three ways to find something relevant:
+Several ways to find something relevant:
 - **Filter by industry** — Retail & Consumer Goods, Financial Services,
   Telecom/Media/Technology, Travel & Hospitality, Automotive &
   Manufacturing, or Healthcare/Public Sector/Utilities — to narrow the
@@ -19,6 +19,10 @@ Three ways to find something relevant:
   returns the most relevant cases with a rationale for each. (Optional;
   needs a small amount of setup and has a small usage-based cost — see
   SETUP.md. Everything else on this page works with zero cost or setup.)
+- **Research new ideas with the crawler** — search the web for public
+  personalization case studies and create source-linked drafts for review.
+  Drafts are never added to the live library automatically. See
+  **[SETUP.md](SETUP.md)** to configure and run the crawler.
 
 **Mostly backend-free.** It's a static site: HTML, CSS, and vanilla
 JavaScript, with all content in editable JSON files. The one exception is
@@ -40,9 +44,10 @@ netlify/functions/diagnose.js    the AI problem-search function (optional — se
 netlify.toml                     Netlify config (static site + function)
 scripts/validate.py              checks data/use-cases.json against the schema
 scripts/import_csv.py            bulk-import new use cases from a CSV/spreadsheet
-scripts/crawl_use_cases.py       searches the web and creates use-case drafts (requires Brave + Anthropic API keys)
+scripts/crawl_use_cases.py       searches public web pages and creates reviewable, source-linked drafts
 scripts/import_crawl_drafts.py   validates and imports selected crawler drafts
 scripts/import_template.csv      a filled-in example row to copy from
+data/use-case-crawl-drafts.json  default output location for crawler drafts (generated locally)
 .github/workflows/validate.yml   runs validate.py automatically on every push/PR
 SETUP.md                         full hosting + maintenance instructions
 ```
@@ -72,5 +77,11 @@ Two ways, both validated automatically:
    the column reference, export as CSV, then run
    `python3 scripts/import_csv.py your_file.csv`.
 
+3. **Crawling:** To discover source material and generate draft ideas, you can also use the
+optional research crawler in `scripts/crawl_use_cases.py`. It requires
+Brave Search and Anthropic API credentials; review and selectively import
+its output with `scripts/import_crawl_drafts.py`. See **[SETUP.md](SETUP.md)**
+for configuration, commands, and the review workflow.
+
 Full details, the business-problem taxonomy, tagging conventions, and the
-review workflow are in **[SETUP.md](SETUP.md)**.
+maintenance, crawler, and review workflows are in **[SETUP.md](SETUP.md)**.
