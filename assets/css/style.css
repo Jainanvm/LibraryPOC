@@ -254,6 +254,7 @@ a { color: var(--accent-text); }
 .detail-section { margin-bottom: 22px; }
 .detail-section h3 { font-size: 12px; font-weight: 650; text-transform: uppercase; letter-spacing: .05em; color: var(--text-faint); margin: 0 0 8px; }
 .detail-section p { font-size: 14px; line-height: 1.65; margin: 0; color: var(--text); }
+.detail-source-url { display: block; margin-top: 4px; color: var(--text-muted); font-size: 12px; overflow-wrap: anywhere; }
 .detail-section ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.7; color: var(--text); }
 
 .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }

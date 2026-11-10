@@ -427,11 +427,44 @@
 
   // ---------- Detail panel ----------
 
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[character]);
+  }
+
   function detailHTML(uc) {
     const channels = uc.channels.map((c) => `<span class="meta-pill">${channelLabel(c)}</span>`).join("");
     const cdpList = uc.cdpDataUsed.map((d) => `<li>${d}</li>`).join("");
     const toolsList = uc.toolsNeeded.map((t) => `<li>${t}</li>`).join("");
     const secondaryKpis = uc.kpis.secondary.map((k) => `<span class="kpi-secondary">${k}</span>`).join("");
+    const source = uc.source && typeof uc.source === "object" ? uc.source : null;
+    let sourceSection = "";
+    if (source && typeof source.url === "string" && source.url.trim()) {
+      const sourceUrl = source.url.trim();
+      const sourceTitle = typeof source.title === "string" && source.title.trim()
+        ? source.title.trim()
+        : sourceUrl;
+      let sourceLink = escapeHTML(sourceTitle);
+      try {
+        const parsedUrl = new URL(sourceUrl);
+        if (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") {
+          sourceLink = `<a href="${escapeHTML(parsedUrl.href)}" target="_blank" rel="noopener noreferrer">${escapeHTML(sourceTitle)}</a>`;
+        }
+      } catch (error) {
+        if (!(error instanceof TypeError)) throw error;
+      }
+      sourceSection = `
+        <div class="detail-section">
+          <h3>Source</h3>
+          <p>${sourceLink}<span class="detail-source-url">${escapeHTML(sourceUrl)}</span></p>
+        </div>
+      `;
+    }
     const problemPills = (uc.businessProblems || [])
       .map((id) => state.problemsById[id])
       .filter(Boolean)
@@ -448,6 +481,8 @@
       <p class="detail-eyebrow">${uc.personalizationTactic}</p>
       <h2 class="detail-title">${uc.title}</h2>
       <p class="detail-oneliner">${uc.oneLiner}</p>
+
+      ${sourceSection}
 
       <div class="detail-badges">
         ${channels}
