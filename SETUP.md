@@ -306,7 +306,131 @@ ever going live, with no extra tooling.
 
 ---
 
-## 6. Cost summary
+## 6. Research crawler — find and draft new use cases
+
+The optional crawler searches public web pages for personalization case
+studies, extracts readable page text, and asks an Anthropic model to turn
+each suitable page into a draft matching `data/schema.json`. Each draft
+includes its source title, URL, retrieval time, and search query.
+
+The crawler is a research assistant, not an automatic importer. It writes
+to `data/use-case-crawl-drafts.json` by default, never to the live
+`data/use-cases.json` catalog. Generated descriptions and recommendations
+can go beyond what a source explicitly states, so check the source and
+every field before importing. The crawler may skip pages because of
+robots.txt rules, access restrictions, unsupported content, duplicate
+cases, or network/API errors.
+
+### Configure credentials
+
+You need:
+
+1. A Brave Search API subscription and API key. The crawler uses Brave's
+   web search API to find candidate URLs.
+2. An Anthropic API key and a model id enabled for your account. The
+   crawler sends extracted page text and the library's schema and
+   taxonomies to Anthropic to generate structured drafts.
+3. Python 3 and the existing `jsonschema` dependency used by the
+   validation and import scripts.
+
+Install the dependency if it is not already available:
+
+```powershell
+python -m pip install jsonschema
+```
+
+Set the three credentials/configuration values in your terminal before
+running the script. In PowerShell:
+
+```powershell
+$env:BRAVE_SEARCH_API_KEY = "your-brave-search-api-key"
+$env:ANTHROPIC_API_KEY = "your-anthropic-api-key"
+$env:ANTHROPIC_MODEL = "your-enabled-model-id"
+```
+
+In Bash or zsh:
+
+```bash
+export BRAVE_SEARCH_API_KEY="your-brave-search-api-key"
+export ANTHROPIC_API_KEY="your-anthropic-api-key"
+export ANTHROPIC_MODEL="your-enabled-model-id"
+```
+
+These are environment variables for the current terminal session. Set
+them again in a new terminal as needed. Do not put keys in the repository,
+source files, draft output, or command-line arguments; do not commit them.
+Check the current Brave and Anthropic account documentation for
+subscription, model availability, and pricing.
+
+### Run a search
+
+From the repository root, provide a focused query describing the type of
+case study you want. The default examines at most five search results:
+
+```powershell
+python scripts/crawl_use_cases.py "retail loyalty personalization case study"
+```
+
+The default draft bundle is `data/use-case-crawl-drafts.json`. You can
+change how many result pages are inspected (maximum 20), the request
+timeout, the minimum delay between requests to the same site, and the
+output path:
+
+```powershell
+python scripts/crawl_use_cases.py "travel customer lifecycle personalization" `
+  --limit 8 `
+  --timeout 30 `
+  --delay 2 `
+  --output data/travel-crawl-drafts.json
+```
+
+The output JSON contains:
+
+- `drafts`: generated use cases with source details and a review reminder.
+- `skipped`: pages the crawler could not use, with a reason.
+- `query` and `createdAt`: information about the run.
+
+The crawler checks that target pages use public HTTP(S) hosts, honors
+robots.txt and crawl-delay instructions, limits page size and extracted
+text, and does not execute page scripts. Search results can still be
+irrelevant, blocked, or unsuitable; inspect the source URL for every
+draft. Treat page content as untrusted reference material and do not rely
+on generated claims without verifying them against the source.
+
+### Review and selectively import drafts
+
+Open the output JSON and review each draft's `useCase` and `source`. Keep
+only cases that add something useful, have a credible source, and fit
+the library's scope and taxonomy. Copy the `useCase.id` values you want
+to import. First run a dry run, replacing the sample ids and file path
+with values from your draft bundle:
+
+```powershell
+python scripts/import_crawl_drafts.py data/use-case-crawl-drafts.json `
+  --ids personalized-loyalty-reward reminder-after-purchase `
+  --dry-run
+```
+
+If validation succeeds, repeat without `--dry-run` to append the selected
+entries to `data/use-cases.json`:
+
+```powershell
+python scripts/import_crawl_drafts.py data/use-case-crawl-drafts.json `
+  --ids personalized-loyalty-reward reminder-after-purchase
+python scripts/validate.py
+```
+
+The importer rejects duplicate ids or titles, missing/invalid source
+URLs, and entries that fail the use-case schema. It adds source title,
+URL, and retrieval time to each imported use case. Review the resulting
+diff, verify claims and taxonomy choices, and submit the changes through
+the normal pull-request review process.
+
+To keep multiple research runs separate, pass a distinct `--output` path
+for each run. You can run the crawler again with a revised search query
+without losing earlier draft bundles.
+
+## 7. Cost summary
 
 | Component | Cost |
 |---|---|
@@ -316,5 +440,6 @@ ever going live, with no extra tooling.
 | Custom domain | Free to configure (you only pay if you buy a new domain) |
 | Keyword search + filters | Free (runs entirely in the visitor's browser) |
 | **AI problem search** | **Usage-based**, billed by Anthropic directly. Each query sends a short catalog (~26 short entries, a few hundred tokens) plus the problem text, and gets back a short structured response — on a small/fast model this is a fraction of a cent per query. Even at a few hundred searches a month, this is a few dollars, not a recurring subscription. |
+| **Research crawler** | **Usage-based**, subject to your Brave Search and Anthropic account plans. Each run uses a Brave search request and may make page requests and an Anthropic draft-generation request for each usable result up to `--limit`. Costs depend on the providers' current pricing and how many results you process. |
 
-**Total recurring cost: €0 for the core library. Cents-per-query, pay-as-you-go, only if you turn on AI search.**
+**Total recurring cost: €0 for the core library. AI search and the crawler are optional, usage-based features billed by their respective providers.**
