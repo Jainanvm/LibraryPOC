@@ -26,7 +26,7 @@
       "quickWin": true,
       "journey": "A visitor browses trail running shoes for 6 minutes, views 3 product pages, then leaves without buying. The CDP captures the viewed SKUs and category signal in real time. On their next visit within 7 days, the homepage swaps its generic hero for a \"Continue browsing\" module showing those exact products plus two complementary items. If they don't return within 24 hours, a single triggered email repeats the same logic.",
       "exampleBefore": "Generic homepage hero: \"New Season Arrivals\"",
-      "exampleAfter": "\"Still thinking about the GEL-KAYANO 30? Runners who viewed this also loved these trail-ready picks.\"",
+      "exampleAfter": "\"Still thinking about the Velocity Trail 30? Runners who viewed this also loved these trail-ready picks.\"",
       "kpis": {
         "primary": "Click-through to product page",
         "secondary": [
@@ -133,7 +133,7 @@
       "dataMaturity": "Foundational",
       "complexity": "Low",
       "quickWin": true,
-      "journey": "A Gold-tier loyalty member sees a sticky top bar reading \"You're 200 points from Platinum — free shipping is already unlocked.\" A non-member browsing the same page instead sees \"Join ASICS ID and get 10% off your first order.\" Both use the exact same UI slot; only the CDP-driven content differs.",
+      "journey": "A Gold-tier loyalty member sees a sticky top bar reading \"You're 200 points from Platinum — free shipping is already unlocked.\" A non-member browsing the same page instead sees \"Join Insider Rewards and get 10% off your first order.\" Both use the exact same UI slot; only the CDP-driven content differs.",
       "exampleBefore": "Static banner: \"Free shipping over €75\" for all visitors",
       "exampleAfter": "\"200 points to Platinum\" (member) vs. \"Join free, get 10% off\" (guest)",
       "kpis": {
@@ -192,7 +192,7 @@
       "quickWin": false,
       "journey": "Rain is forecast tomorrow in a customer's region, and their profile shows a history of road running plus no waterproof shoe in their purchase history. A push notification fires: \"Rain expected tomorrow — here's a shoe that handles it.\" Tapping it opens an app landing page pre-filtered to GORE-TEX products in their size and gender.",
       "exampleBefore": "Generic push: \"20% off this weekend\" sent to the entire app user base",
-      "exampleAfter": "\"Rain tomorrow in Amsterdam — the GEL-NIMBUS GORE-TEX keeps you dry\" sent only to relevant road runners in that postcode",
+      "exampleAfter": "\"Rain tomorrow in Amsterdam — the Velocity Storm GTX keeps you dry\" sent only to relevant road runners in that postcode",
       "kpis": {
         "primary": "Push open rate",
         "secondary": [
@@ -245,7 +245,7 @@
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
-      "journey": "A customer bought running shoes 5 months ago and told the brand (via app or loyalty quiz) that they run 30km/week. The CDP calculates their shoes are approaching typical end-of-life around month 5.5. A timed email arrives: \"Your GEL-KAYANOs have probably covered ~450km — here's when runners like you usually replace them,\" with a tailored replacement SKU and a trade-in/recycle CTA.",
+      "journey": "A customer bought running shoes 5 months ago and told the brand (via app or loyalty quiz) that they run 30km/week. The CDP calculates their shoes are approaching typical end-of-life around month 5.5. A timed email arrives: \"Your Velocity Trail 30s have probably covered ~450km — here's when runners like you usually replace them,\" with a tailored replacement SKU and a trade-in/recycle CTA.",
       "exampleBefore": "No reminder — customer discovers worn-out shoes mid-run and buys a competitor's product",
       "exampleAfter": "\"Time for fresh legs? Your shoes are due for retirement around now.\"",
       "kpis": {
@@ -778,7 +778,7 @@
       "quickWin": true,
       "journey": "A member has enough points sitting unused for months to redeem for a free pair of socks or a discount — but never has, because they never made the connection. A monthly email shows exactly what their balance can get them right now, framed around products from their preferred category, instead of a generic \"don't forget your points!\" reminder.",
       "exampleBefore": "\"You have 850 points!\" with no indication of what that's actually worth",
-      "exampleAfter": "\"Your 850 points = a free pair of running socks, or €15 off your next pair of GEL-KAYANOs\"",
+      "exampleAfter": "\"Your 850 points = a free pair of running socks, or €15 off your next pair of Velocity Trail 30s\"",
       "kpis": {
         "primary": "Redemption rate",
         "secondary": [
