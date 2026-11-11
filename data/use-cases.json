@@ -1808,6 +1808,507 @@
         "url": "https://www.braze.com/resources/articles/personalization-in-retail",
         "retrievedAt": "2026-11-11T08:05:10Z"
       }
+    },
+    {
+      "id": "telecom-ecosystem-homepage-dynamic-service-icons",
+      "title": "Dynamic service-icon ordering for first-time telecom homepage visitors",
+      "oneLiner": "A telecom operator used dynamic icon allocation to surface ecosystem services for unknown homepage visitors.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Dynamic service icon ordering for unknown homepage visitors",
+      "cdpDataUsed": [
+        "Real-time on-site interaction and widget CTR for homepage visitors",
+        "Visitor status (new vs. returning) used to split results"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "poor-new-visitor-conversion"
+      ],
+      "industries": [
+        "telecom-media-technology"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "Unauthenticated visitors arriving from organic search land on the homepage, where the operator's ecosystem services are shown as icons. Because the company had no data on these visitors, a machine-learning engine dynamically ordered the service icons per visitor in real time, compared against a control group with a fixed icon order.",
+      "exampleBefore": "Homepage service icons appear in a fixed order for every visitor, including first-time visitors with no data.",
+      "exampleAfter": "The engine ranks service icons per visitor in real time by likelihood of conversion, with CTR compared against a fixed-order control group.",
+      "kpis": {
+        "primary": "Widget CTR to product pages versus fixed-order control group",
+        "secondary": [
+          "CTR uplift for new users (reported 94.9%)",
+          "CTR uplift for returning users (reported 193.5%)"
+        ]
+      },
+      "toolsNeeded": [
+        "Gravity Field dynamic allocation engine (multi-armed / contextual bandit)"
+      ],
+      "tags": [
+        "telecom",
+        "homepage",
+        "dynamic-allocation",
+        "new-visitors",
+        "cold-start",
+        "case-study"
+      ],
+      "source": {
+        "title": "How a leading telecom operator promoted its ecosystem products with personalisation | Gravity Field",
+        "url": "https://gravityfield.ai/cases/telecom-ecosystem-products-personalization-ctr-uplift/",
+        "retrievedAt": "2026-11-11T08:40:55Z",
+        "summary": "A telecom operator transforming into an ecosystem of 30+ services used Gravity Field to promote ecosystem products on its homepage. Most homepage traffic came from unauthenticated organic-search visitors with no data, so Gravity Field launched dynamic allocation of service icons, a bandit-based engine that picks the optimal offer per user in real time. Compared with a control group that saw a fixed icon order, the source reports a 94.9% CTR uplift for new users and 193.5% for returning users (the body text attributes 193.5% to returning users; the results summary lists it as the homepage dynamic-allocation uplift).",
+        "evidence": [
+          {
+            "claim": "Most homepage traffic came from unauthenticated users with no data on them yet.",
+            "quote": "Most of the traffic on the company’s homepage comes from unauthenticated users who arrive from organic search, and we have no data on them yet."
+          },
+          {
+            "claim": "Gravity Field proposed dynamic allocation of service icons on the homepage as the solution.",
+            "quote": "As a solution, the Gravity Field team proposed launching a campaign with dynamic allocation of the service icons on the homepage."
+          },
+          {
+            "claim": "The engine serves the offer or interface variant optimal for each user at the moment of interaction, using machine learning.",
+            "quote": "At the very moment of interaction, the engine picks the offer or interface variant that is optimal for that user"
+          },
+          {
+            "claim": "Services were ranked per visitor by likelihood of conversion in real time.",
+            "quote": "In real time, the Gravity Field engine selected the most useful services for each user and ranked them by the likelihood of conversion"
+          },
+          {
+            "claim": "After launch for new users, visitors moved to product pages more often, measured by widget CTR.",
+            "quote": "Once dynamic allocation went live for new users — those the platform had no data on yet — it became clear that visitors were moving through to product pages more often."
+          },
+          {
+            "claim": "Reported CTR uplifts versus a fixed-order control group: 94.9% and 193.5%.",
+            "quote": "The numbers back it up: CTR uplift reached 94.9%, and for returning users 193.5%*."
+          },
+          {
+            "claim": "The control group had a fixed icon order.",
+            "quote": "*Results compared with the control group, for which the icon order was fixed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "automaker-behavior-based-email-and-offers",
+      "title": "Automaker Targeted Campaigns with Personalized Email and Offers",
+      "oneLiner": "An automaker uses data analytics for personalized email, tailored recommendations, and customized offers.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Loyalty",
+      "personalizationTactic": "Email, product recommendations, and offers tailored to behavior",
+      "cdpDataUsed": [
+        "Customer behavior and preferences data (via data analytics)"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "low-loyalty-engagement"
+      ],
+      "industries": [
+        "automotive-manufacturing"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "Automaker customers receive targeted marketing campaigns based on their behavior and preferences, including personalized email communications, tailored product recommendations, and customized offers.",
+      "exampleBefore": "Illustrative only, not from source: one generic campaign sent to all customers regardless of behavior.",
+      "exampleAfter": "Illustrative only, not from source: campaign content and offers selected per customer based on behavior and preferences.",
+      "kpis": {
+        "primary": "Customer engagement",
+        "secondary": [
+          "Customer loyalty"
+        ]
+      },
+      "toolsNeeded": [
+        "Data analytics tools"
+      ],
+      "tags": [
+        "automotive",
+        "personalized email",
+        "product recommendations",
+        "customized offers",
+        "customer loyalty"
+      ],
+      "source": {
+        "title": "Personalizing Automotive Marketing to Drive Sales & Loyalty",
+        "url": "https://axeno.co/insight/blog/personalizing-automotive-marketing-using-data-to-drive-sales-service-loyalty",
+        "retrievedAt": "2026-11-11T09:30:17Z",
+        "summary": "The page includes a short real-world example in which an automaker is described as using data analytics to create targeted marketing campaigns that cater to individual customer preferences. The campaigns are described as including personalized email communications, tailored product recommendations, and customized offers based on customer behavior and preferences. The page states the automaker has witnessed increased customer engagement and loyalty, without providing metrics.",
+        "evidence": [
+          {
+            "claim": "The automaker uses data analytics to create targeted marketing campaigns for individual customer preferences.",
+            "quote": "targeted marketing campaigns that cater to individual customer preferences"
+          },
+          {
+            "claim": "The campaigns include personalized email communications, tailored product recommendations, and customized offers based on customer behavior and preferences.",
+            "quote": "This includes personalized email communications, tailored product recommendations, and customized offers based on customer behavior and preferences."
+          },
+          {
+            "claim": "The automaker reportedly saw increased customer engagement and loyalty from this personalization (no metrics given).",
+            "quote": "has witnessed increased customer engagement and loyalty."
+          }
+        ]
+      }
+    },
+    {
+      "id": "personalized-offers-service-reminders-automotive",
+      "title": "Personalized Offers and Automated Service Reminders for Automotive Owners",
+      "oneLiner": "Automotive brand used purchase and service data for personalized offers and automated reminders.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Personalized offers from purchase, service, and ownership data",
+      "cdpDataUsed": [
+        "customer purchase data",
+        "service data",
+        "vehicle preferences",
+        "vehicle ownership history",
+        "buyer behavior"
+      ],
+      "businessProblems": [
+        "inconsistent-cross-channel-experience",
+        "generic-experience",
+        "low-repeat-purchase",
+        "low-loyalty-engagement",
+        "low-post-purchase-engagement"
+      ],
+      "industries": [
+        "automotive-manufacturing"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "Prospects and existing owners receive coordinated offers, service reminders, and loyalty or re-engagement messages across email, SMS, direct mail, and customer portals, based on purchase and service data.",
+      "exampleBefore": "Communication with prospects and customers was inconsistent, with fragmented channels and little personalization.",
+      "exampleAfter": "Offers and reminders are tailored to vehicle ownership history and service needs, delivered consistently across channels.",
+      "kpis": {
+        "primary": "Increase in vehicle sales driven by personalized offers",
+        "secondary": [
+          "Boost in service appointments",
+          "Increase in customer retention"
+        ]
+      },
+      "toolsNeeded": [
+        "omnichannel marketing platform",
+        "email",
+        "SMS",
+        "direct mail",
+        "customer portal",
+        "marketing automation workflows"
+      ],
+      "tags": [
+        "automotive",
+        "personalized offers",
+        "service reminders",
+        "loyalty",
+        "omnichannel",
+        "retention"
+      ],
+      "source": {
+        "title": "Driving Sales & Customer Retention - Experiture | Omnichannel Marketing Automation Platform",
+        "url": "https://www.experiture.com/resources/case-studies/driving-sales-and-customer-retention/",
+        "retrievedAt": "2026-11-11T09:31:20Z",
+        "summary": "A leading automotive brand worked with an omnichannel marketing provider to integrate customer purchase and service data and deliver personalized offers, consistent messaging across email, SMS, direct mail, and customer portals, and automated service reminders and loyalty incentives. Reported results: 30% increase in vehicle sales, 25% boost in service appointments, and 20% increase in customer retention.",
+        "evidence": [
+          {
+            "claim": "The brand integrated customer purchase and service data to create personalized offers tailored to preferences, ownership history, and service needs.",
+            "quote": "the automotive brand was able to create personalized offers tailored to individual customer preferences, vehicle ownership history, and service needs."
+          },
+          {
+            "claim": "Email, SMS, direct mail, and customer portals were coordinated for consistent messaging across the buyer and ownership journey.",
+            "quote": "Email, SMS, direct mail, and customer portals worked together to provide consistent and relevant messaging throughout the buyer and ownership journey."
+          },
+          {
+            "claim": "The brand implemented automated workflows for service reminders, loyalty incentives, and re-engagement offers.",
+            "quote": "The brand implemented automated workflows for sending service reminders, loyalty incentives, and re-engagement offers"
+          },
+          {
+            "claim": "Before the engagement, fragmented channels and lack of personalization were linked to declining service appointments and repeat business.",
+            "quote": "Fragmented communication channels and lack of personalization resulted in declining service appointments and repeat business."
+          },
+          {
+            "claim": "Reported result: 30% increase in vehicle sales from personalized offers and follow-up campaigns.",
+            "quote": "30% increase in vehicle sales, driven by personalized offers and follow-up campaigns targeting both new prospects and previous buyers."
+          },
+          {
+            "claim": "Reported result: 25% boost in service appointments from automated reminders and incentives.",
+            "quote": "25% boost in service appointments, thanks to timely, automated reminders and incentives for existing customers."
+          },
+          {
+            "claim": "Reported result: 20% increase in customer retention from loyalty programs and re-engagement campaigns.",
+            "quote": "20% increase in customer retention, as loyalty programs and targeted re-engagement campaigns kept customers connected with the brand."
+          }
+        ]
+      }
+    },
+    {
+      "id": "prospect-behavior-email-journeys-automaker",
+      "title": "Behavior-Based Prospect Email Journeys for an Automaker",
+      "oneLiner": "Automaker sends tailored prospect emails and nurture journeys based on interests and actions.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Behavior- and preference-based prospect email journeys",
+      "cdpDataUsed": [
+        "Prospect details migrated from CRM",
+        "Prospect interests and behaviors",
+        "Prospect actions and preferences"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "automotive-manufacturing"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A leading automobile company's prospects receive emails that reflect their interests and behaviors. Automated journeys nurture leads with messaging tied to their actions and preferences, supported by prospect data migrated from the CRM into the marketing platform connected to the sales system.",
+      "exampleBefore": "Prospect emails were time-consuming to prepare and schedule, and tracking customer preferences was difficult, which led to missed opportunities.",
+      "exampleAfter": "Prospect emails are customized to each prospect's interests and behaviors, and automated journeys send tailored messages triggered by their actions and preferences.",
+      "kpis": {
+        "primary": "Sales increase of 20% within the first quarter after implementation (source-reported)",
+        "secondary": [
+          "30% reduction in time spent on marketing and sales system management (source-reported)",
+          "Lead engagement with more relevant, personalized emails (qualitative, source-reported)"
+        ]
+      },
+      "toolsNeeded": [
+        "Salesforce Marketing Cloud",
+        "Salesforce Sales Cloud",
+        "Salesforce Email Studio",
+        "Salesforce Journey Builder"
+      ],
+      "tags": [
+        "automotive",
+        "email personalization",
+        "journey builder",
+        "prospect nurturing",
+        "CRM integration"
+      ],
+      "source": {
+        "title": "The power of personalization: How one auto brand increased sales - Technology Mindz",
+        "url": "https://technologymindz.com/portfolio/the-power-of-personalization-how-one-auto-brand-increased-sales/",
+        "retrievedAt": "2026-11-11T09:31:52Z",
+        "summary": "A leading automobile company with a large customer base wanted to engage prospects with personalized experiences. The company struggled to prepare and manage personalized prospect emails and to track customer preferences. The integration of Sales Cloud with Marketing Cloud was used to migrate prospect data from the CRM, produce customized emails reflecting each prospect's interests and behaviors, and set up automated personalized journeys based on actions and preferences. The source reports a 20% sales increase within the first quarter after implementation and a 30% reduction in time spent on system management.",
+        "evidence": [
+          {
+            "claim": "The client is a leading automobile company with a large customer base.",
+            "quote": "The client is a leading automobile company with a vast customer base and a strong presence in the global market."
+          },
+          {
+            "claim": "The company struggled to track customer preferences, leading to missed opportunities in personalized prospect emails.",
+            "quote": "The process was time-consuming, and it was difficult to track customer preferences, leading to missed opportunities."
+          },
+          {
+            "claim": "Prospect data was migrated from the CRM to support the email campaigns.",
+            "quote": "We performed data migration of prospect details from their CRM, configured Marketing Cloud to optimize customer journeys"
+          },
+          {
+            "claim": "Customized emails were developed to reflect each prospect's interests and behaviors using Email Studio.",
+            "quote": "Using Salesforce’s Email Studio, we developed customized emails that reflected each prospect’s interests and behaviors, making communications more relevant and engaging."
+          },
+          {
+            "claim": "Automated personalized journeys nurtured leads with messaging based on prospect actions and preferences via Journey Builder.",
+            "quote": "We set up automated, personalized journeys through Salesforce’s Journey Builder, allowing the company to nurture leads with tailored messaging based on their actions and preferences."
+          },
+          {
+            "claim": "The company reported a 20% sales boost within the first quarter after implementation of automated personalized email campaigns and journeys.",
+            "quote": "By automating personalized email campaigns and customer journeys, the company saw a 20% boost in sales within the first quarter post-implementation."
+          },
+          {
+            "claim": "Automating email scheduling and CRM integration reduced time spent on manual tasks by 30%.",
+            "quote": "Automating email scheduling and CRM integration saved the marketing and sales teams 30% of the time previously spent on manual tasks"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dealer-landing-pages-with-real-sales-staff",
+      "title": "Dealer Landing Pages Featuring Real Sales Staff",
+      "oneLiner": "Landing pages showing each dealer's real salesperson, built without customer segmentation, to add a human touch.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Landing pages featuring each dealer's real sales representative",
+      "cdpDataUsed": [
+        "Assigned sales representative for each landing page (no prospect segmentation data)"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "poor-new-visitor-conversion"
+      ],
+      "industries": [
+        "automotive-manufacturing"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "A car dealer with two locations and diverse traffic sources, but low landing page experience and no prospect segmentation, created five landing pages, one for each dealer working at the company. Each page used a hero shot of the actual employee and placed the button centrally in front of the photo. Visitors who later spoke with the same person they saw online reported enjoying the experience.",
+      "exampleBefore": "Dealer traffic from diverse sources landed on pages without segmentation or a personal sales contact.",
+      "exampleAfter": "Five landing pages, each with a real photo of the dealer's own salesperson and a centered button. The dealer reported higher sales with the rest of the marketing mix unchanged; no figures were given.",
+      "kpis": {
+        "primary": "Sales increase reported by the dealer",
+        "secondary": [
+          "Landing page conversion rate",
+          "Consumer experience when speaking with the pictured salesperson"
+        ]
+      },
+      "toolsNeeded": [
+        "Landing page builder",
+        "Staff photography"
+      ],
+      "tags": [
+        "landing pages",
+        "sales rep personalization",
+        "automotive dealer",
+        "human touch",
+        "no segmentation"
+      ],
+      "source": {
+        "title": "Landing Page Personalization Case Studies",
+        "url": "https://landingi.com/blog/landing-page-personalization-case-studies/",
+        "retrievedAt": "2026-11-11T09:33:29Z",
+        "summary": "A dual-location automotive dealer with diverse traffic sources, complex marketing, and low landing page experience personalized landing pages by sales representative without segmenting prospects. Five pages featured real staff photos, and the dealer reported higher sales with the rest of the marketing mix unchanged. The page gives no sales figures.",
+        "evidence": [
+          {
+            "claim": "The dealer is an automotive dealer with two locations.",
+            "quote": "an automotive dealer operating in the towns of Lubin and Wroclaw"
+          },
+          {
+            "claim": "The dealer had diverse traffic sources, complex marketing, and low landing page experience.",
+            "quote": "The company’s traffic sources were diverse, their marketing strategy – complex, and their experience with landing pages – low."
+          },
+          {
+            "claim": "The dealer chose personalization without segmenting potential customers.",
+            "quote": "they decided to give personalization a whirl without segmenting potential customers."
+          },
+          {
+            "claim": "Five landing pages were created, each personalized for a dealer working for the company.",
+            "quote": "they created 5 landing pages personalized for the dealers working for the company."
+          },
+          {
+            "claim": "The pages used a real employee and hero shot to add a human touch.",
+            "quote": "the focus was on adding a “human touch” in the form of a hero shot and a real-life employee of the business."
+          },
+          {
+            "claim": "The pages used no stock photos.",
+            "quote": "There aren’t stock photos"
+          },
+          {
+            "claim": "The button was placed centrally in front of the photos.",
+            "quote": "The button is always located center, immediately in front of the shots"
+          },
+          {
+            "claim": "Consumers reported enjoying speaking with the person they had seen on the pages.",
+            "quote": "Consumers reported enjoying the experience of speaking to the same person they saw online in person or on the phone."
+          },
+          {
+            "claim": "The dealer reported higher sales after using the pages, with the rest of the marketing mix unchanged.",
+            "quote": "their sales went up when they started using these pages – even as the rest of the marketing mix stayed the same."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ai-decisioning-real-time-automotive-site-personalization",
+      "title": "AI decisioning for real-time automotive site personalization",
+      "oneLiner": "A global automotive OEM used AI decisioning to tailor web journeys by inferred intent.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Real-time site experiences shift by inferred intent and interest",
+      "cdpDataUsed": [
+        "Cross-visit user behavior",
+        "ML-inferred individual intent and interests",
+        "Unified, enriched customer insights"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "cdp-data-not-activated"
+      ],
+      "industries": [
+        "automotive-manufacturing"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "journey": "A prospective buyer returns across multiple visits while exploring a vehicle range. The platform tracks that behavior, infers intent and interests with machine learning, and adapts the site experience from exploration through to purchase. For example, a user repeatedly exploring electric models is shown EV tax incentives, test drive options and local availability, while a user prioritizing family features is shown safety, spaciousness and service plans.",
+      "exampleBefore": "Off-the-shelf recommendation engines were judged unable to handle long, varied automotive shopping paths with hundreds of model variations.",
+      "exampleAfter": "An EV-focused visitor is served EV tax incentives, test drive options and local availability, while a family-focused visitor sees safety, space and service plans.",
+      "kpis": {
+        "primary": "Return on investment of the personalization platform (reported as over 400%)",
+        "secondary": [
+          "Number of personalization cases and campaigns running concurrently (over 550 reported)",
+          "Number of global markets supported (over 100 reported)",
+          "Visibility of personalization efforts tied to business outcomes"
+        ]
+      },
+      "toolsNeeded": [
+        "AI-powered decisioning personalization platform"
+      ],
+      "tags": [
+        "automotive",
+        "real-time personalization",
+        "AI decisioning",
+        "intent inference",
+        "web journeys",
+        "enterprise scale"
+      ],
+      "source": {
+        "title": "How passion powers personalization in automotive marketing | Credera",
+        "url": "https://credera.com/insights/how-passion-powers-personalization-in-automotive-marketing",
+        "retrievedAt": "2026-11-11T09:35:54Z",
+        "summary": "A leading global automotive OEM with existing digital configurator and dealer-locator tools wanted a deeply personalized experience across a long car-buying journey. Off-the-shelf recommendation engines were judged inadequate. The consultancy partnered with the OEM to build an AI-driven personalization platform that tracks behavior across visits, infers intent with machine learning, and delivers real-time site experiences. Reported results include a return above 400%, more than 550 concurrent personalization cases and campaigns, enriched and centralized customer insights, and support for more than 100 global markets.",
+        "evidence": [
+          {
+            "claim": "The OEM is a leading global automotive manufacturer that wanted a more deeply personalized experience for a long, complex car-buying journey.",
+            "quote": "A leading global automotive OEM recognized the challenge described above firsthand."
+          },
+          {
+            "claim": "Off-the-shelf recommendation engines were judged unable to meet the needs of automotive shopping.",
+            "quote": "Off-the-shelf recommendation engines couldn't cut it."
+          },
+          {
+            "claim": "The platform recognizes and tracks user behavior across multiple visits.",
+            "quote": "Recognize and track user behavior across multiple visits"
+          },
+          {
+            "claim": "The platform infers individual intent and interests using machine learning.",
+            "quote": "Infer individual intent and interests using machine learning"
+          },
+          {
+            "claim": "The platform adapts the experience for a user exploring EVs by surfacing EV tax incentives, test drive options and local availability.",
+            "quote": "if a user kept exploring electric vehicle models, the platform would adapt and surface EV tax incentives, test drive options, and local availability."
+          },
+          {
+            "claim": "For users prioritizing family features, the site shifts to spotlight safety, spaciousness and service plans.",
+            "quote": "If another user prioritized family-friendly features, the site experience shifted to spotlight safety, spaciousness, and service plans."
+          },
+          {
+            "claim": "The platform delivers real-time personalized experiences from exploration through to purchase.",
+            "quote": "Deliver real-time, personalized experiences from exploration through to purchase"
+          },
+          {
+            "claim": "The platform was reported to deliver a return exceeding 400%.",
+            "quote": "The platform delivered a return exceeding 400%."
+          },
+          {
+            "claim": "More than 550 personalization cases and campaigns ran concurrently, and the platform supported more than 100 global markets.",
+            "quote": "More than 550 personalization cases and campaigns ran concurrently."
+          },
+          {
+            "claim": "Customer insights were enriched and centralized.",
+            "quote": "Customer insights were enriched and centralized."
+          }
+        ]
+      }
     }
   ]
 }
