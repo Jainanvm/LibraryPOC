@@ -1,6 +1,6 @@
 {
   "$schemaVersion": "1.0",
-  "lastUpdated": "2026-11-09",
+  "lastUpdated": "2026-11-11",
   "useCases": [
     {
       "id": "browse-abandonment-recall",
@@ -1619,6 +1619,194 @@
         "title": "Personalized Email Marketing: A Healthcare Marketer's Guide",
         "url": "https://www.tophealthcareleads.com/blog/personalized-email-marketing-for-healthcare-marketers/",
         "retrievedAt": "2026-11-09T10:40:06Z"
+      }
+    },
+    {
+      "id": "high-value-action-propensity-retail-media",
+      "title": "Propensity-Gated Retail Media and Onsite Personalization",
+      "oneLiner": "Show sponsored offers only when a CDP propensity score says they match the shopper's needs.",
+      "channels": [
+        "web",
+        "app",
+        "email"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Promote sponsored products only when propensity and relevance thresholds are met",
+      "cdpDataUsed": [
+        "First-party purchase and browse history",
+        "Loyalty program activity",
+        "Declared preferences and zero-party survey answers",
+        "Predictive propensity scores (purchase, churn, click)",
+        "Real-time onsite session behavior",
+        "Customer segment membership"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "wasted-ad-spend",
+        "low-cross-sell",
+        "cdp-data-not-activated",
+        "inconsistent-cross-channel-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A shopper browses the retailer's website or app. The CDP joins real-time session behavior with purchase history, loyalty activity, and predicted propensity scores to assign the shopper to a segment. Before any sponsored product appears in onsite placements, email, or app modules, a decision rule checks whether the product is relevant to the shopper's inferred need and whether the shopper's propensity to buy it clears a set threshold. If it fails, the shopper sees an organic, need-based recommendation instead. Results are reviewed in a test-and-learn loop that tracks both conversion and satisfaction, and the thresholds are adjusted over time.",
+      "exampleBefore": "A shopper who bought a cordless drill sees a broad sponsored banner for unrelated paint brands on every page, and an email promotes a sponsored product from a category they have never browsed.",
+      "exampleAfter": "The same shopper sees a relevant organic bundle of drill bits and a sponsored battery pack only because propensity and relevance scores clear the threshold, and unrelated sponsored placements are suppressed.",
+      "kpis": {
+        "primary": "Revenue per session from sponsored and organic recommendations combined",
+        "secondary": [
+          "Click-through rate on sponsored placements",
+          "Sponsored placement suppression rate",
+          "Post-click conversion rate",
+          "Customer satisfaction or NPS score",
+          "Unsubscribe rate on promotional email"
+        ]
+      },
+      "toolsNeeded": [
+        "Customer Data Platform with identity resolution",
+        "Predictive modeling or ML platform for propensity scores",
+        "Retail media network ad server",
+        "Web and app personalization engine",
+        "Email marketing platform",
+        "Experimentation and A/B testing tool"
+      ],
+      "tags": [
+        "retail media",
+        "propensity scoring",
+        "onsite personalization",
+        "first-party data",
+        "customer experience"
+      ],
+      "source": {
+        "title": "Unlocking Customer Growth: Driving High Value Actions Through Personalization and Retail Media | Deloitte US",
+        "url": "https://www.deloitte.com/us/en/programs/chief-marketing-officer/articles/personalization-strategy-in-retail-media.html",
+        "retrievedAt": "2026-11-11T08:04:52Z"
+      }
+    },
+    {
+      "id": "behavioral-persona-website-personalization",
+      "title": "Behavioral Persona Website and Email Personalization",
+      "oneLiner": "Classify shoppers into live behavioral personas to tailor site experiences and triggered emails.",
+      "channels": [
+        "web",
+        "email"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Behavior-based personas drive on-site content and triggered emails",
+      "cdpDataUsed": [
+        "Granular web behavioral events (clicks, searches, filters, sort order)",
+        "Basket add/remove and abandonment events",
+        "Traffic source and entry method",
+        "Transactional purchase history",
+        "Persistent customer ID stitched across sessions"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "high-cart-abandonment",
+        "low-email-open-rate",
+        "poor-new-visitor-conversion"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A shopper arrives on the site from paid search or a mobile device. The CDP checks their behavioral persona based on recent events, such as frequent sales-page visits or price-based sorting (value hunter), repeated basket abandonment (frequent abandoner), or interest in new arrivals (on-trend). The site then shows matching content, such as price-led banners, a bag-completion incentive, or the latest product edits. If the shopper leaves with items in the bag or after browsing without buying, the CDP triggers a matching email (browse-not-bought, abandoned basket, or new-arrivals aspiration) and suppresses the email if the shopper has already purchased.",
+      "exampleBefore": "All visitors see the same homepage and sale banners. Abandoned-basket emails go to everyone at the same time with a generic discount.",
+      "exampleAfter": "A price-sorting visitor sees value-focused product rails and a price-drop email. A frequent abandoner sees a bag-completion offer on return, and an on-trend shopper gets new-arrival emails.",
+      "kpis": {
+        "primary": "Sales per customer contacted",
+        "secondary": [
+          "Cart abandonment rate",
+          "Email click-to-open rate",
+          "Conversion rate for new visitors",
+          "Average order value"
+        ]
+      },
+      "toolsNeeded": [
+        "Customer data capture tool (e.g., Celebrus)",
+        "CDP",
+        "Data warehouse (e.g., Teradata)",
+        "Web personalization engine",
+        "Email marketing platform"
+      ],
+      "tags": [
+        "behavioral personas",
+        "hyper-personalization",
+        "abandoned basket",
+        "single customer view",
+        "web and email"
+      ],
+      "source": {
+        "title": "Case Study - Online Retail Hyper-Personalization",
+        "url": "https://www.celebrus.com/case-studies/online-retail-hyper-personalization",
+        "retrievedAt": "2026-11-11T08:04:59Z"
+      }
+    },
+    {
+      "id": "abandoned-cart-recovery-dynamic-product-recs",
+      "title": "Abandoned cart recovery with dynamic product recommendations",
+      "oneLiner": "Triggered cart reminders that show live stock, price, and recommended items for each shopper.",
+      "channels": [
+        "web",
+        "email",
+        "app"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Cart reminders with live stock and tailored recommendations",
+      "cdpDataUsed": [
+        "Web and app cart events",
+        "Product catalog and live inventory",
+        "Purchase history",
+        "Browsing behavior",
+        "Loyalty tier"
+      ],
+      "businessProblems": [
+        "high-cart-abandonment",
+        "low-repeat-purchase",
+        "generic-experience",
+        "cdp-data-not-activated"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "A shopper adds items to cart on the website or app and leaves without checking out. The CDP detects the abandonment event and waits a short window, then checks live inventory and price for the cart items. If the items are still available, the shopper receives an email or app push with the cart items, any price or stock change, and two to four recommended products based on past purchases and browsing. If a cart item is out of stock, the message suggests similar in-stock alternatives instead. Loyalty members see their tier perk applied to the cart. Messages stop once the shopper purchases or the cart is emptied.",
+      "exampleBefore": "Generic email: \"You left items in your cart. Complete your order now.\" Same message for every shopper, with an out-of-stock item listed as available.",
+      "exampleAfter": "Push: \"Your linen throw is back in stock in Sand. Gold members get 10% off today. Customers who bought this also liked the matching cushions.\" Only in-stock items are shown and the offer matches the shopper's tier.",
+      "kpis": {
+        "primary": "Cart recovery conversion rate",
+        "secondary": [
+          "Revenue per recovered cart",
+          "Discount cost as % of recovered revenue",
+          "Repeat purchase rate within 90 days",
+          "Unsubscribe rate on cart messages"
+        ]
+      },
+      "toolsNeeded": [
+        "Braze",
+        "CDP with web and app SDK",
+        "Product catalog and inventory feed",
+        "Recommendation engine"
+      ],
+      "tags": [
+        "cart abandonment",
+        "dynamic content",
+        "triggered messaging",
+        "product recommendations",
+        "retail"
+      ],
+      "source": {
+        "title": "Personalization in Retail Guide With Examples | Braze",
+        "url": "https://www.braze.com/resources/articles/personalization-in-retail",
+        "retrievedAt": "2026-11-11T08:05:10Z"
       }
     }
   ]
