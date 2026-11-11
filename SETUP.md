@@ -315,9 +315,12 @@ includes its source title, URL, retrieval time, and search query.
 
 The crawler is a research assistant, not an automatic importer. It writes
 to `data/use-case-crawl-drafts.json` by default, never to the live
-`data/use-cases.json` catalog. Generated descriptions and recommendations
-can go beyond what a source explicitly states, so check the source and
-every field before importing. The crawler may skip pages because of
+`data/use-cases.json` catalog. The crawler requires concrete page facts, asks for exact supporting quotes,
+and skips pages that are too vague or lack relevant evidence. It rejects
+quotes not found in the retrieved text. These checks do not guarantee that
+every claim is accurate: review the source, evidence, and every field before
+importing, and treat recommendations as proposals rather than reported facts.
+The crawler may also skip pages because of
 robots.txt rules, access restrictions, unsupported content, duplicate
 cases, or network/API errors.
 
@@ -365,16 +368,19 @@ subscription, model availability, and pricing.
 ### Run a search
 
 From the repository root, provide a focused query describing the type of
-case study you want. The default examines at most five search results:
+case study you want. The default creates up to five reviewable drafts:
 
 ```powershell
 python scripts/crawl_use_cases.py "retail loyalty personalization case study"
 ```
 
-The default draft bundle is `data/use-case-crawl-drafts.json`. You can
-change how many result pages are inspected (maximum 20), the request
-timeout, the minimum delay between requests to the same site, and the
-output path:
+The default draft bundle is `data/use-case-crawl-drafts.json`. Set `--limit` to the desired number of reviewable drafts (maximum 20).
+Skipped or duplicate results do not count toward this number, so the
+crawler paginates through additional search results as needed. Search is
+limited to ten pages of up to 20 results each; if fewer suitable sources
+are available, the crawler reports how many drafts it created. You can also
+set the request timeout, the minimum delay between requests to the same
+site, and the output path:
 
 ```powershell
 python scripts/crawl_use_cases.py "travel customer lifecycle personalization" `
@@ -386,7 +392,8 @@ python scripts/crawl_use_cases.py "travel customer lifecycle personalization" `
 
 The output JSON contains:
 
-- `drafts`: generated use cases with source details and a review reminder.
+- `drafts`: generated use cases with source details, factual summaries,
+  supporting quotations, and a review reminder.
 - `skipped`: pages the crawler could not use, with a reason.
 - `query` and `createdAt`: information about the run.
 
