@@ -60,7 +60,6 @@
     searchPanel: document.querySelector(".search-panel"),
     activeFilters: document.getElementById("activeFilters"),
     refinePanel: document.getElementById("refinePanel"),
-    refineCount: document.getElementById("refineCount"),
   };
 
   // ---------- Data loading ----------
@@ -863,9 +862,6 @@
     els.activeFilters.innerHTML = active.map((filter) =>
       `<button type="button" class="active-filter" data-filter-key="${escapeHTML(filter.key)}" data-filter-value="${escapeHTML(filter.value)}" aria-label="Remove ${escapeHTML(filter.label)} filter">${escapeHTML(filter.label)} <span aria-hidden="true">×</span></button>`
     ).join("");
-    const removableFilters = els.filterGroups.querySelectorAll(".chip.active").length;
-    els.refineCount.hidden = removableFilters === 0;
-    els.refineCount.textContent = removableFilters ? String(removableFilters) : "";
     els.activeFilters.querySelectorAll(".active-filter").forEach((chip) => {
       chip.addEventListener("click", () => {
         const { filterKey, filterValue } = chip.dataset;
