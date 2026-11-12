@@ -67,7 +67,7 @@ option and needs no third-party sign-up:
 4. Wait ~1 minute for the live URL to appear at the top of that page.
 
 You can switch from Path B to Path A later at any time without changing
-any code — the AI search box simply fails gracefully (with a message
+any code — the AI matching action simply fails gracefully (with a message
 pointing back to this doc) until it's deployed on a platform that runs
 the function and has the API key configured.
 
@@ -88,10 +88,11 @@ already own the domain.
 
 ## 3. AI-powered problem search — setup
 
-This is what powers the "Have a specific problem instead?" box, so a
-consultant or client can type something like *"low open rate on our
-lifecycle emails"* and get back ranked, relevant use cases with a
-one-line rationale — instead of only being able to search by keyword.
+This powers the optional **Match my situation** action beside the library
+search. A consultant or client can type something like *"low open rate on
+our lifecycle emails"* and request ranked, relevant use cases with a
+one-line rationale. Ordinary keyword search and filters continue to work
+without the AI function.
 
 ### How it works
 

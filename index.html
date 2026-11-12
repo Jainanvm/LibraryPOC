@@ -26,49 +26,109 @@
   <main class="wrap">
 
     <section class="intro">
-      <p>Most brands already have the data &mdash; a CDP, a loyalty platform, purchase history, browsing behavior. What's usually missing is a short list of <strong>tangible, ready-to-pitch experiences</strong> that turn that data into something a customer actually sees. Search or filter below, open a case for the full journey, example copy, KPIs, and what it takes to build.</p>
+      <p class="intro-kicker">PERSONALIZATION USE CASE LIBRARY</p>
+      <h1>What are you trying to improve?</h1>
+      <p>Start with the business problem. We’ll find relevant customer experiences you can explore and adapt.</p>
     </section>
 
-    <section class="ai-panel">
-      <div class="ai-panel-head">
-        <span class="ai-badge">AI</span>
-        <div>
-          <h2 class="ai-title">Have a specific problem instead?</h2>
-          <p class="ai-sub">Describe it in your own words — e.g. <em>"low open rate on our lifecycle emails"</em> or <em>"little engagement with our loyalty program"</em> — and this will read the whole library and match cases to it.</p>
+    <section class="intake-panel" id="intakePanel" aria-labelledby="intakeTitle">
+      <h2 id="intakeTitle">Tell us what you’re working on</h2>
+      <p class="intake-intro">Choose a starting point, or set a few details for a more focused shortlist.</p>
+      <div class="mission-shortcuts" aria-label="Popular starting points">
+        <button type="button" class="mission-card" data-mission="quickWin">
+          <strong>Find a quick win</strong>
+          <span>Start with ideas that are simpler to launch</span>
+        </button>
+        <button type="button" class="mission-card" data-mission="low-loyalty-engagement">
+          <strong>Improve loyalty</strong>
+          <span>Give members more reasons to engage</span>
+        </button>
+        <button type="button" class="mission-card" data-mission="poor-win-back-performance">
+          <strong>Bring customers back</strong>
+          <span>Reconnect with customers who have lapsed</span>
+        </button>
+      </div>
+      <p class="intake-divider"><span>Or tailor your starting point</span></p>
+      <form id="intakeForm">
+        <div class="intake-fields">
+          <label class="intake-field">
+            <span>Business problem</span>
+            <select id="intakeProblem">
+              <option value="">I’m exploring / not sure yet</option>
+            </select>
+          </label>
+          <label class="intake-field">
+            <span>Industry</span>
+            <select id="intakeIndustry">
+              <option value="">Any industry</option>
+            </select>
+          </label>
         </div>
-      </div>
-      <div class="ai-input-row">
-        <textarea id="aiProblemInput" rows="2" placeholder="Describe the problem you're seeing…" maxlength="500"></textarea>
-        <button id="aiSubmitBtn" class="ai-submit-btn">Find relevant use cases</button>
-      </div>
-      <div id="aiStatus" class="ai-status" hidden></div>
+        <div class="intake-actions">
+          <button type="submit" class="intake-submit">Build my shortlist</button>
+          <button type="button" id="browseAllBtn" class="intake-browse">Explore everything</button>
+        </div>
+      </form>
+      <p class="intake-note">Your choices are used only to filter this visit and aren’t saved.</p>
     </section>
 
-    <section class="search-panel">
+    <section class="brief-bar" id="briefBar" hidden aria-label="Your current brief">
+      <div>
+        <p class="brief-label">YOUR SHORTLIST</p>
+        <p id="briefSummary" class="brief-summary"></p>
+      </div>
+      <button type="button" id="editBriefBtn" class="brief-edit">Edit brief</button>
+    </section>
+
+    <section class="search-panel" id="searchPanel" hidden>
+      <label class="search-label" for="aiProblemInput">Describe your situation</label>
       <div class="search-row">
         <div class="search-input-wrap">
-          <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <input type="text" id="searchInput" placeholder="Or just search by keyword: “app”, “loyalty”, “quick win”…" autocomplete="off" />
-          <button id="clearSearch" class="clear-btn" title="Clear search" aria-label="Clear search">×</button>
+          <textarea id="aiProblemInput" rows="2" placeholder="For example: customers browse products but rarely come back to buy…" maxlength="500"></textarea>
         </div>
-        <span id="resultCount" class="result-count">10 use cases</span>
+        <button id="aiSubmitBtn" class="ai-submit-btn" type="button">Use AI to find matches</button>
       </div>
-
-      <div class="filter-groups" id="filterGroups">
-        <!-- populated by JS -->
+      <div class="search-hint-row">
+        <span class="search-hint">AI will analyze your description and rank relevant ideas. Your text is sent to an AI service.</span>
+        <span id="aiStatus" class="ai-status" role="status" hidden></span>
       </div>
+      <div id="activeFilters" class="active-filters" hidden></div>
     </section>
 
-    <div id="aiResultsBanner" class="ai-results-banner" hidden>
-      <span id="aiResultsText"></span>
-      <button id="aiClearBtn" class="ai-clear-btn">← Back to browsing</button>
-    </div>
+    <section id="resultsArea" aria-label="Matching use cases" hidden>
+      <div id="aiResultsBanner" class="ai-results-banner" hidden>
+        <span id="aiResultsText"></span>
+        <button id="aiClearBtn" class="ai-clear-btn">Show regular search results</button>
+      </div>
 
-    <section id="cardGrid" class="card-grid" aria-live="polite">
-      <!-- cards injected by JS -->
+      <details class="refine-panel" id="refinePanel">
+        <summary>
+          <span>Refine your shortlist</span>
+          <span id="refineCount" class="refine-count" hidden></span>
+        </summary>
+        <div class="filter-groups" id="filterGroups">
+          <!-- populated by JS -->
+        </div>
+      </details>
+
+      <div class="results-toolbar">
+        <div class="keyword-search">
+          <div class="keyword-search-input-wrap">
+            <label class="visually-hidden" for="keywordSearchInput">Filter results by keyword</label>
+            <svg class="keyword-search-icon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input type="text" id="keywordSearchInput" placeholder="Filter by keyword…" autocomplete="off" />
+            <button id="clearKeywordSearch" class="clear-btn" type="button" title="Clear keyword search" aria-label="Clear keyword search">×</button>
+          </div>
+        </div>
+        <span id="resultCount" class="result-count"></span>
+      </div>
+
+      <section id="cardGrid" class="card-grid" aria-live="polite">
+        <!-- cards injected by JS -->
+      </section>
+
+      <p id="emptyState" class="empty-state" hidden>No use cases match your search or filters yet. Try clearing a filter, or this might be a good gap to add to the library.</p>
     </section>
-
-    <p id="emptyState" class="empty-state" hidden>No use cases match your search or filters yet. Try clearing a filter, or this might be a good gap to add to the library.</p>
 
   </main>
 

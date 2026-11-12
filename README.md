@@ -5,20 +5,22 @@ built for consultants and clients who already have a CDP and good data
 availability, but need a fast way to see (and pitch) what that data can
 actually *do* for the end customer across web, app, and email.
 
+Start by describing the business problem, choosing an industry, and optionally
+prioritizing quick wins. The intake narrows the library, then the familiar
+search and filters remain available for refining the results. Answers are
+handled in the browser and are not saved.
+
 Several ways to find something relevant:
-- **Filter by industry** — Retail & Consumer Goods, Financial Services,
-  Telecom/Media/Technology, Travel & Hospitality, Automotive &
-  Manufacturing, or Healthcare/Public Sector/Utilities — to narrow the
-  library to cases that are actually relevant for that kind of business.
-- **Browse by business problem** — "low email open rate", "low loyalty
-  engagement", "high cart abandonment", etc. — the filter chips at the top.
-- **Keyword search** — fuzzy, typo-tolerant, with synonyms built in
-  ("mobile app" matches things tagged `app`, "newsletter" matches `email`).
-- **Describe your problem in plain language** — "we have low engagement
-  with our loyalty program" — and an AI reads the whole library and
-  returns the most relevant cases with a rationale for each. (Optional;
-  needs a small amount of setup and has a small usage-based cost — see
-  SETUP.md. Everything else on this page works with zero cost or setup.)
+- **Start with a mission or short brief** — choose a common goal or set a
+  business problem and industry before opening results.
+- **Refine one shortlist** — industry, business problem, channel, and effort
+  filters are grouped together and can be removed from the active-filter row.
+- **Filter by keyword** — use the small search control above the results;
+  it’s fuzzy and typo-tolerant, with synonyms ("newsletter" matches `email`).
+- **Match a situation with AI** — enter a plain-language description in the
+  separate AI field to get ranked matches and explanations. This optional
+  feature needs a small amount of setup and has a small usage-based cost —
+  see SETUP.md.
 - **Research new ideas with the crawler** — search the web for public
   personalization case studies and create source-linked drafts for review.
   Drafts are never added to the live library automatically. See
@@ -26,9 +28,9 @@ Several ways to find something relevant:
 
 **Mostly backend-free.** It's a static site: HTML, CSS, and vanilla
 JavaScript, with all content in editable JSON files. The one exception is
-the AI search box, which needs a small serverless function — see
+the optional AI matching action, which needs a small serverless function — see
 **[SETUP.md](SETUP.md)** for both the free-only path (GitHub Pages) and
-the path with AI search enabled (Netlify).
+the path with AI matching enabled (Netlify).
 
 ## What's in here
 
@@ -63,9 +65,9 @@ python3 -m http.server 8000
 ```
 
 This runs the site with keyword search, filters, and business-problem
-browsing fully working. The AI search box will show a graceful "not
-configured" message until it's deployed per SETUP.md — that's expected,
-not a bug.
+browsing fully working. "Match my situation" will explain that AI matching
+isn't configured and keep the text available for ordinary search until the
+site is deployed per SETUP.md.
 
 ## Adding a use case
 

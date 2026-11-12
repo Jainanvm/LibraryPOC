@@ -12,6 +12,8 @@
     all: [],
     problemsById: {},
     industriesById: {},
+    browsingStarted: false,
+    editingBrief: false,
     query: "",
     filters: {
       industries: new Set(),
@@ -31,21 +33,34 @@
 
   const els = {
     grid: document.getElementById("cardGrid"),
-    searchInput: document.getElementById("searchInput"),
-    clearSearch: document.getElementById("clearSearch"),
+    resultsArea: document.getElementById("resultsArea"),
+    intakePanel: document.getElementById("intakePanel"),
+    intakeForm: document.getElementById("intakeForm"),
+    intakeProblem: document.getElementById("intakeProblem"),
+    intakeIndustry: document.getElementById("intakeIndustry"),
+    browseAllBtn: document.getElementById("browseAllBtn"),
+    missionShortcuts: document.querySelectorAll(".mission-card"),
+    briefBar: document.getElementById("briefBar"),
+    briefSummary: document.getElementById("briefSummary"),
+    editBriefBtn: document.getElementById("editBriefBtn"),
+    aiProblemInput: document.getElementById("aiProblemInput"),
     resultCount: document.getElementById("resultCount"),
+    keywordSearchInput: document.getElementById("keywordSearchInput"),
+    clearKeywordSearch: document.getElementById("clearKeywordSearch"),
     filterGroups: document.getElementById("filterGroups"),
     emptyState: document.getElementById("emptyState"),
     overlay: document.getElementById("overlay"),
     detailPanel: document.getElementById("detailPanel"),
     detailContent: document.getElementById("detailContent"),
-    aiProblemInput: document.getElementById("aiProblemInput"),
     aiSubmitBtn: document.getElementById("aiSubmitBtn"),
     aiStatus: document.getElementById("aiStatus"),
     aiResultsBanner: document.getElementById("aiResultsBanner"),
     aiResultsText: document.getElementById("aiResultsText"),
     aiClearBtn: document.getElementById("aiClearBtn"),
     searchPanel: document.querySelector(".search-panel"),
+    activeFilters: document.getElementById("activeFilters"),
+    refinePanel: document.getElementById("refinePanel"),
+    refineCount: document.getElementById("refineCount"),
   };
 
   // ---------- Data loading ----------
@@ -72,10 +87,12 @@
       (industryData.industries || []).forEach((industry) => {
         state.industriesById[industry.id] = industry;
       });
+      populateIntakeOptions();
       buildFilterGroups();
       render();
     })
     .catch((err) => {
+      els.resultsArea.hidden = false;
       els.grid.innerHTML =
         '<p class="empty-state">Could not load the library data (' +
         err.message +
@@ -298,16 +315,9 @@
         chip.type = "button";
         chip.className = "chip";
         chip.textContent = v;
+        chip.dataset.filterKey = def.key;
+        chip.dataset.filterValue = v;
         chip.setAttribute("aria-pressed", "false");
-        chip.addEventListener("click", () => {
-          const set = state.filters[def.key];
-          const active = !set.has(v);
-          if (active) set.add(v);
-          else set.delete(v);
-          chip.classList.toggle("active", active);
-          chip.setAttribute("aria-pressed", String(active));
-          render();
-        });
         chips.appendChild(chip);
       });
 
@@ -328,13 +338,9 @@
     qwChip.type = "button";
     qwChip.className = "chip";
     qwChip.textContent = "⚡ Quick wins only";
+    qwChip.dataset.filterKey = "quickWin";
+    qwChip.dataset.filterValue = "true";
     qwChip.setAttribute("aria-pressed", "false");
-    qwChip.addEventListener("click", () => {
-      state.filters.quickWin = !state.filters.quickWin;
-      qwChip.classList.toggle("active");
-      qwChip.setAttribute("aria-pressed", String(state.filters.quickWin));
-      render();
-    });
     qwChips.appendChild(qwChip);
     qwGroup.appendChild(qwLabel);
     qwGroup.appendChild(qwChips);
@@ -357,16 +363,9 @@
       chip.className = "chip";
       chip.textContent = entry.label;
       chip.title = entry.description || "";
+      chip.dataset.filterKey = filterKey;
+      chip.dataset.filterValue = entry.id;
       chip.setAttribute("aria-pressed", "false");
-      chip.addEventListener("click", () => {
-        const set = state.filters[filterKey];
-        const active = !set.has(entry.id);
-        if (active) set.add(entry.id);
-        else set.delete(entry.id);
-        chip.classList.toggle("active", active);
-        chip.setAttribute("aria-pressed", String(active));
-        render();
-      });
       chips.appendChild(chip);
     });
 
@@ -385,7 +384,7 @@
     const channels = uc.channels.map((c) => `<span class="channel-badge">${channelLabel(c)}</span>`).join("");
     const quickWin = uc.quickWin ? `<span class="quickwin-badge">⚡ Quick win</span>` : "";
     const aiBadge = rationale ? `<span class="ai-match-badge">AI match</span>` : "";
-    const rationaleBlock = rationale ? `<p class="ai-rationale">${rationale}</p>` : "";
+    const rationaleBlock = rationale ? `<p class="ai-rationale">${escapeHTML(rationale)}</p>` : "";
     return `
       <article class="card" tabindex="0" data-id="${uc.id}">
         <div class="card-top">
@@ -405,11 +404,21 @@
   }
 
   function render() {
+    els.intakePanel.hidden = state.browsingStarted && !state.editingBrief;
+    els.briefBar.hidden = !state.browsingStarted || state.editingBrief;
+    els.searchPanel.hidden = !state.browsingStarted;
+    els.resultsArea.hidden = !state.browsingStarted;
+    if (state.browsingStarted) {
+      renderBriefSummary();
+      renderActiveFilters();
+      syncFilterChips();
+    }
+
     if (state.ai.active) {
       renderAIResults();
       return;
     }
-    els.searchPanel.hidden = false;
+    if (!state.browsingStarted) return;
     els.aiResultsBanner.hidden = true;
 
     const results = getFiltered();
@@ -551,22 +560,31 @@
     if (e.key === "Escape") closeDetail();
   });
 
-  // ---------- Search input wiring ----------
+  // ---------- Keyword search wiring ----------
 
   let debounceTimer = null;
-  els.searchInput.addEventListener("input", (e) => {
+  els.keywordSearchInput.addEventListener("input", (e) => {
     state.query = e.target.value;
-    els.clearSearch.classList.toggle("visible", !!state.query);
+    els.clearKeywordSearch.classList.toggle("visible", !!state.query);
+    if (state.ai.active) {
+      state.ai.active = false;
+      state.ai.matches = [];
+    }
+    setAIStatus("", false);
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(render, 80);
   });
 
-  els.clearSearch.addEventListener("click", () => {
-    els.searchInput.value = "";
+  els.clearKeywordSearch.addEventListener("click", () => {
+    els.keywordSearchInput.value = "";
     state.query = "";
-    els.clearSearch.classList.remove("visible");
+    state.ai.active = false;
+    state.ai.matches = [];
+    state.ai.problem = "";
+    els.clearKeywordSearch.classList.remove("visible");
+    setAIStatus("", false);
     render();
-    els.searchInput.focus();
+    els.keywordSearchInput.focus();
   });
 
   // Try to point "View on GitHub" at the actual repo if it's been customized.
@@ -582,13 +600,16 @@
   // gracefully with a message rather than breaking the page.
 
   function renderAIResults() {
-    els.searchPanel.hidden = true;
     els.aiResultsBanner.hidden = false;
-    els.aiResultsText.textContent = state.ai.matches.length
-      ? `${state.ai.matches.length} AI-matched use case${state.ai.matches.length === 1 ? "" : "s"} for: "${state.ai.problem}"`
+    const matches = state.ai.matches.filter((match) => {
+      const useCase = state.all.find((item) => item.id === match.id);
+      return useCase && passesFilters(useCase);
+    });
+    els.aiResultsText.textContent = matches.length
+      ? `AI matched these ideas to “${state.ai.problem}”.`
       : `No strong matches found for: "${state.ai.problem}"`;
 
-    const cards = state.ai.matches
+    const cards = matches
       .map((m) => {
         const uc = state.all.find((u) => u.id === m.id);
         return uc ? cardHTML(uc, m.rationale) : "";
@@ -596,8 +617,8 @@
       .join("");
 
     els.grid.innerHTML = cards;
-    els.emptyState.hidden = state.ai.matches.length !== 0;
-    els.resultCount.textContent = `${state.ai.matches.length} AI match${state.ai.matches.length === 1 ? "" : "es"}`;
+    els.emptyState.hidden = matches.length !== 0;
+    els.resultCount.textContent = `${matches.length} match${matches.length === 1 ? "" : "es"}`;
 
     els.grid.querySelectorAll(".card").forEach((card) => {
       card.addEventListener("click", () => openDetail(card.dataset.id));
@@ -616,13 +637,17 @@
   async function submitAIQuery() {
     const problem = els.aiProblemInput.value.trim();
     if (!problem) {
-      setAIStatus("Type a short description of the problem first.", true);
+      setAIStatus("Describe your situation above first.", true);
       return;
     }
 
     els.aiSubmitBtn.disabled = true;
-    els.aiSubmitBtn.textContent = "Thinking…";
-    setAIStatus("Reading the library against your problem…", false);
+    els.aiSubmitBtn.textContent = "Finding AI matches…";
+    els.aiProblemInput.disabled = true;
+    setAIStatus("Matching your situation against the library…", false);
+    state.ai.active = false;
+    state.ai.matches = [];
+    render();
 
     try {
       const res = await fetch("/.netlify/functions/diagnose", {
@@ -643,30 +668,228 @@
       setAIStatus("", false);
       render();
     } catch (err) {
+      state.ai.active = false;
+      state.ai.matches = [];
       setAIStatus(
-        "Couldn't run AI search (" +
+        "AI matching isn’t available right now (" +
           err.message +
-          "). This feature needs the site deployed to Netlify with an Anthropic API key configured — see SETUP.md. You can still browse and search normally below.",
+          "). Use the keyword search icon above the results to filter locally, or remove filters to broaden results.",
         true
       );
+      render();
     } finally {
       els.aiSubmitBtn.disabled = false;
-      els.aiSubmitBtn.textContent = "Find relevant use cases";
+      els.aiSubmitBtn.textContent = "Use AI to find matches";
+      els.aiProblemInput.disabled = false;
     }
   }
+
+  els.aiProblemInput.addEventListener("input", () => {
+    if (!state.ai.active) return;
+    state.ai.active = false;
+    state.ai.matches = [];
+    state.ai.problem = "";
+    render();
+  });
 
   function clearAIResults() {
     state.ai.active = false;
     state.ai.matches = [];
     state.ai.problem = "";
-    els.aiProblemInput.value = "";
     setAIStatus("", false);
     render();
   }
 
-  els.aiSubmitBtn.addEventListener("click", submitAIQuery);
-  els.aiProblemInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) submitAIQuery();
+  function populateSelect(select, entries) {
+    entries.forEach((entry) => {
+      const option = document.createElement("option");
+      option.value = entry.id;
+      option.textContent = entry.label;
+      select.appendChild(option);
+    });
+  }
+
+  function populateIntakeOptions() {
+    const usedProblemIds = new Set();
+    const usedIndustryIds = new Set();
+    state.all.forEach((uc) => {
+      (uc.businessProblems || []).forEach((id) => usedProblemIds.add(id));
+      (uc.industries || []).forEach((id) => usedIndustryIds.add(id));
+    });
+
+    populateSelect(
+      els.intakeProblem,
+      Object.values(state.problemsById).filter((problem) => usedProblemIds.has(problem.id))
+    );
+    populateSelect(
+      els.intakeIndustry,
+      Object.values(state.industriesById).filter((industry) => usedIndustryIds.has(industry.id))
+    );
+  }
+
+  function syncFilterChips() {
+    els.filterGroups.querySelectorAll(".chip[data-filter-key]").forEach((chip) => {
+      const { filterKey, filterValue } = chip.dataset;
+      const active = filterKey === "quickWin"
+        ? state.filters.quickWin
+        : state.filters[filterKey].has(filterValue);
+      chip.classList.toggle("active", active);
+      chip.setAttribute("aria-pressed", String(active));
+    });
+  }
+
+  function startBrowsing(problemId, industryId, quickWinsOnly) {
+    Object.values(state.filters).forEach((filter) => {
+      if (filter instanceof Set) filter.clear();
+    });
+    state.filters.quickWin = quickWinsOnly;
+    if (problemId) state.filters.businessProblems.add(problemId);
+    if (industryId) state.filters.industries.add(industryId);
+
+    state.query = "";
+    els.keywordSearchInput.value = "";
+    els.aiProblemInput.value = "";
+    els.clearKeywordSearch.classList.remove("visible");
+    state.ai.active = false;
+    state.ai.matches = [];
+    state.ai.problem = "";
+    setAIStatus("", false);
+    state.browsingStarted = true;
+    state.editingBrief = false;
+    syncFilterChips();
+    render();
+    scrollToSection(els.resultsArea);
+  }
+
+  function scrollToSection(element) {
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    element.scrollIntoView({ behavior, block: "start" });
+  }
+
+  els.intakeForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const problemId = els.intakeProblem.value;
+    const industryId = els.intakeIndustry.value;
+    if (state.browsingStarted) updateBrief(problemId, industryId);
+    else startBrowsing(problemId, industryId, false);
   });
+
+  els.browseAllBtn.addEventListener("click", () => {
+    els.intakeProblem.value = "";
+    els.intakeIndustry.value = "";
+    startBrowsing("", "", false);
+  });
+
+  els.missionShortcuts.forEach((shortcut) => {
+    shortcut.addEventListener("click", () => {
+      const mission = shortcut.dataset.mission;
+      const problemId = mission === "quickWin" ? "" : mission;
+      const quickWinsOnly = mission === "quickWin";
+      els.intakeProblem.value = problemId;
+      els.intakeIndustry.value = "";
+      startBrowsing(problemId, "", quickWinsOnly);
+    });
+  });
+
+  els.editBriefBtn.addEventListener("click", () => {
+    els.intakeProblem.value = state.filters.businessProblems.values().next().value || "";
+    els.intakeIndustry.value = state.filters.industries.values().next().value || "";
+    state.editingBrief = true;
+    if (els.refinePanel) els.refinePanel.open = false;
+    render();
+    scrollToSection(els.intakePanel);
+    els.intakeProblem.focus({ preventScroll: true });
+  });
+
+  function updateBrief(problemId, industryId) {
+    const currentProblem = state.filters.businessProblems.values().next().value || "";
+    if (problemId !== currentProblem) {
+      state.filters.businessProblems.clear();
+      if (problemId) state.filters.businessProblems.add(problemId);
+    }
+
+    const currentIndustry = state.filters.industries.values().next().value || "";
+    if (industryId !== currentIndustry) {
+      state.filters.industries.clear();
+      if (industryId) state.filters.industries.add(industryId);
+    }
+
+    state.editingBrief = false;
+    render();
+    scrollToSection(els.resultsArea);
+  }
+
+  function renderBriefSummary() {
+    const parts = [];
+    state.filters.businessProblems.forEach((id) => {
+      if (state.problemsById[id]) parts.push(state.problemsById[id].label);
+    });
+    state.filters.industries.forEach((id) => {
+      if (state.industriesById[id]) parts.push(state.industriesById[id].label);
+    });
+    if (state.filters.quickWin) parts.push("Quick wins");
+    els.briefSummary.textContent = parts.length ? parts.join(" · ") : "Exploring the whole library";
+    els.editBriefBtn.textContent = state.editingBrief ? "Update shortlist" : "Edit brief";
+    document.querySelector(".intake-submit").textContent = state.editingBrief ? "Update shortlist" : "Build my shortlist";
+  }
+
+  function getActiveFilters() {
+    const active = [];
+    const appendSet = (key, labels) => {
+      state.filters[key].forEach((value) => {
+        active.push({ key, value, label: labels[value] || value });
+      });
+    };
+    appendSet("industries", Object.fromEntries(
+      Object.values(state.industriesById).map((industry) => [industry.id, industry.label])
+    ));
+    appendSet("businessProblems", Object.fromEntries(
+      Object.values(state.problemsById).map((problem) => [problem.id, problem.label])
+    ));
+    FILTER_DEFS.forEach((definition) => {
+      if (definition.key === "channels") {
+        appendSet("channels", { web: "Web", app: "App", email: "Email" });
+      } else {
+        appendSet("".concat(definition.key), {});
+      }
+    });
+    if (state.filters.quickWin) active.push({ key: "quickWin", value: "true", label: "Quick wins" });
+    return active;
+  }
+
+  function renderActiveFilters() {
+    const active = getActiveFilters();
+    els.activeFilters.hidden = active.length === 0;
+    els.activeFilters.innerHTML = active.map((filter) =>
+      `<button type="button" class="active-filter" data-filter-key="${escapeHTML(filter.key)}" data-filter-value="${escapeHTML(filter.value)}" aria-label="Remove ${escapeHTML(filter.label)} filter">${escapeHTML(filter.label)} <span aria-hidden="true">×</span></button>`
+    ).join("");
+    const removableFilters = els.filterGroups.querySelectorAll(".chip.active").length;
+    els.refineCount.hidden = removableFilters === 0;
+    els.refineCount.textContent = removableFilters ? String(removableFilters) : "";
+    els.activeFilters.querySelectorAll(".active-filter").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const { filterKey, filterValue } = chip.dataset;
+        if (filterKey === "quickWin") state.filters.quickWin = false;
+        else state.filters[filterKey].delete(filterValue);
+        render();
+      });
+    });
+  }
+
+  els.filterGroups.addEventListener("click", (event) => {
+    const chip = event.target.closest(".chip[data-filter-key]");
+    if (!chip) return;
+    const { filterKey, filterValue } = chip.dataset;
+    if (filterKey === "quickWin") {
+      state.filters.quickWin = !state.filters.quickWin;
+    } else {
+      const selected = state.filters[filterKey];
+      if (selected.has(filterValue)) selected.delete(filterValue);
+      else selected.add(filterValue);
+    }
+    render();
+  });
+
+  els.aiSubmitBtn.addEventListener("click", submitAIQuery);
   els.aiClearBtn.addEventListener("click", clearAIResults);
 })();
