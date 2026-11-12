@@ -1,6 +1,6 @@
 {
   "$schemaVersion": "1.0",
-  "lastUpdated": "2026-11-11",
+  "lastUpdated": "2026-11-12",
   "useCases": [
     {
       "id": "browse-abandonment-recall",
@@ -2306,6 +2306,1011 @@
           {
             "claim": "Customer insights were enriched and centralized.",
             "quote": "Customer insights were enriched and centralized."
+          }
+        ]
+      }
+    },
+    {
+      "id": "wishlist-price-drop-alerts",
+      "title": "Wishlist price-drop alerts via email and push",
+      "oneLiner": "Retailer notifies shoppers by email and push when a wishlisted item's price falls.",
+      "channels": [
+        "email",
+        "app"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Wishlist price-drop alerts via email and push",
+      "cdpDataUsed": [
+        "Wishlist contents",
+        "Product price changes",
+        "Prior product interest signals"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A shopper saves an item to a wishlist. When that item's price drops, an automated email and mobile push notification is triggered to tell the shopper about the price drop, based on the wishlisted item and the shopper's demonstrated interest.",
+      "exampleBefore": "Illustrative only: a shopper's wishlisted item drops in price and the shopper receives no follow-up message.",
+      "exampleAfter": "Illustrative only: the price drop triggers an email and push notification about the wishlisted item.",
+      "kpis": {
+        "primary": "Conversion on wishlisted items after a price drop",
+        "secondary": [
+          "Customer satisfaction",
+          "Customer retention"
+        ]
+      },
+      "toolsNeeded": [
+        "Event-triggered email and push messaging with a price-change trigger (tool not named in source)"
+      ],
+      "tags": [
+        "price-drop",
+        "wishlist",
+        "event-triggered",
+        "retail",
+        "email-push"
+      ],
+      "source": {
+        "title": "21 Marketing Personalization Examples to Learn From",
+        "url": "https://www.moengage.com/learn/examples-of-personalization/",
+        "retrievedAt": "2026-11-12T08:40:56Z",
+        "summary": "The page describes a retail example in which an automated email and mobile push notification is triggered when an item on a customer's wishlist has a price drop. The page states the message is based on the wishlist contents and interest the customer has already shown, and says this is intended to increase conversion and improve satisfaction and retention. The page does not report measured results for this example.",
+        "evidence": [
+          {
+            "claim": "An automated email and mobile push notification is triggered when a wishlisted item has a price drop.",
+            "quote": "automatically triggers an email and mobile push notification to inform the customer when an item on their wishlist has had a price drop"
+          },
+          {
+            "claim": "The message is based on what the customer has already put on their wishlist and shown interest in.",
+            "quote": "The recommendation is based on what the customer already has on their wishlist, and which they’ve already shown an interest in."
+          },
+          {
+            "claim": "The page states that discounts for items with shown buying intent improve experience, satisfaction and retention.",
+            "quote": "providing discounts for items customers have already shown clear buying intent improves the customer experience, increasing satisfaction and retention"
+          }
+        ]
+      }
+    },
+    {
+      "id": "declared-fit-size-recommendation",
+      "title": "Showing a declared-fit size on product pages",
+      "oneLiner": "Shoppers who share height, weight and fit preferences see their size pre-selected above the size chooser.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Shows declared-fit size above size selector on product pages",
+      "cdpDataUsed": [
+        "Shopper-declared height, weight and fit preferences"
+      ],
+      "businessProblems": [
+        "insufficient-zero-party-data",
+        "generic-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A shopper answers a few questions about their height, weight and how they like clothes to fit. On later product pages, their recommended size appears directly above the size selector, so they do not need to check a size chart on each product page.",
+      "exampleBefore": "Every shopper sees the same size chart and must check fit manually on each product page.",
+      "exampleAfter": "A shopper who has shared fit details sees a personal size recommendation right above the size selector on each product page.",
+      "kpis": {
+        "primary": "Share of shoppers who use a personal size recommendation",
+        "secondary": [
+          "Size-chart views per product page",
+          "Conversion rate on product pages with a size recommendation"
+        ]
+      },
+      "toolsNeeded": [
+        "Fit Assistant style size profile"
+      ],
+      "tags": [
+        "zero-party-data",
+        "size-recommendation",
+        "preference-based-personalization",
+        "fashion-ecommerce"
+      ],
+      "source": {
+        "title": "7 Types of Website Personalization + Examples & Ideas",
+        "url": "https://www.optimonk.com/website-personalization-examples",
+        "retrievedAt": "2026-11-12T08:41:10Z",
+        "summary": "A retail shopper who has told a fit tool their height, weight and how they like clothes to fit is shown their size directly above the size selector, so they do not need to check a size chart on every product page.",
+        "evidence": [
+          {
+            "claim": "A shopper's declared height, weight and fit preferences are used to show a size recommendation above the size selector.",
+            "quote": "Once a shopper has told Fit Assistant a few things about themselves, such as height, weight and how they like clothes to fit,"
+          },
+          {
+            "claim": "The size recommendation is displayed right above the size selector with the text 'Your Fit Assistant size is EU 36.'",
+            "quote": "Your Fit Assistant size is EU 36."
+          },
+          {
+            "claim": "Shoppers do not need to check a size chart on every product page.",
+            "quote": "The shopper doesn't have to check a size chart on every product page."
+          },
+          {
+            "claim": "Preference-based personalization uses information the visitor tells the retailer directly, such as size.",
+            "quote": "Preference-based personalization uses what the visitor tells you directly: their skin type, size, budget or taste."
+          }
+        ]
+      }
+    },
+    {
+      "id": "outdoor-retailer-past-purchase-email-recommendations",
+      "title": "Past-Purchase Segmentation for Tailored Recommendation Emails",
+      "oneLiner": "Outdoor retailer segments email audience by past purchases to send tailored product picks.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Past-purchase segmentation driving tailored product recommendation emails",
+      "cdpDataUsed": [
+        "Past purchase history"
+      ],
+      "businessProblems": [
+        "low-email-open-rate",
+        "generic-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "Customers are grouped by their past purchases, and each group receives product recommendations tailored to that history by email.",
+      "exampleBefore": "Proposed illustration: one general promotional email sent to the full subscriber list.",
+      "exampleAfter": "Reported outcome: 25% increase in email open rates and 15% increase in sales after purchase-based segmentation.",
+      "kpis": {
+        "primary": "Email open rate",
+        "secondary": [
+          "Sales",
+          "Click-through on recommended products"
+        ]
+      },
+      "toolsNeeded": [
+        "Email marketing platform with purchase-based segmentation (proposed, not named in source)"
+      ],
+      "tags": [
+        "email personalization",
+        "purchase-based segmentation",
+        "product recommendations",
+        "outdoor retail"
+      ],
+      "source": {
+        "title": "Personalization in Digital Marketing: Case Studies from Niche Markets | SocialTargeter Blog",
+        "url": "https://www.socialtargeter.com/blogs/personalization-in-digital-marketing-case-studies-from-niche-markets",
+        "retrievedAt": "2026-11-12T08:42:06Z",
+        "summary": "An outdoor retailer segmented its audience based on past purchases so it could send tailored product recommendations directly to customers by email. The retailer reported a 25% increase in email open rates and a 15% increase in sales.",
+        "evidence": [
+          {
+            "claim": "The outdoor retailer used personalized email marketing by segmenting its audience on past purchases to send tailored product recommendations.",
+            "quote": "One prominent outdoor retailer successfully utilized personalized email marketing strategies. By segmenting their audience based on past purchases, they could send tailored product recommendations directly to customers."
+          },
+          {
+            "claim": "The retailer reported a 25% increase in email open rates and a 15% increase in sales.",
+            "quote": "As a result, they experienced: 25% increase in email open rates. 15% increase in sales."
+          }
+        ]
+      }
+    },
+    {
+      "id": "unified-messaging-location-aware-crm-campaigns",
+      "title": "Unified messaging with real-time, location-aware CRM campaigns",
+      "oneLiner": "A national coffee chain unified messaging and used real-time data for location-aware CRM campaigns.",
+      "channels": [
+        "email",
+        "app"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Location-aware campaigns using real-time data across email, SMS, push, in-app",
+      "cdpDataUsed": [
+        "real-time customer data",
+        "location"
+      ],
+      "businessProblems": [
+        "inconsistent-cross-channel-experience",
+        "cdp-data-not-activated"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "journey": "Customer receives CRM messages across email, SMS, push, and in-app. The source reports that the chain unified its messaging channels and used real-time customer data so campaigns were personalized and location-aware, with a reported 230% ROI increase from CRM campaigns.",
+      "exampleBefore": "Illustrative proposal: separate channel teams send promotions without shared customer context or location signals.",
+      "exampleAfter": "Illustrative proposal: one orchestrated campaign uses live location and recent behavior across all channels.",
+      "kpis": {
+        "primary": "ROI from CRM campaigns",
+        "secondary": [
+          "Cross-channel campaign consistency",
+          "Campaign engagement across email, SMS, push, and in-app"
+        ]
+      },
+      "toolsNeeded": [
+        "Unified messaging orchestration across channels",
+        "Real-time customer data feed",
+        "Location signal integration"
+      ],
+      "tags": [
+        "omnichannel",
+        "location-aware",
+        "CRM campaigns",
+        "real-time data",
+        "coffee chain"
+      ],
+      "source": {
+        "title": "53 marketing personalization stats: Data to justify investments",
+        "url": "https://martech.org/marketing-personalization-stats/",
+        "retrievedAt": "2026-11-12T08:52:45Z",
+        "summary": "A national coffee chain unified its messaging channels and used real-time customer data to deliver personalized, location-aware campaigns across email, SMS, push, and in-app, reporting a 230% increase in ROI from CRM campaigns.",
+        "evidence": [
+          {
+            "claim": "The coffee chain unified its messaging channels and used real-time customer data for personalized, location-aware campaigns across email, SMS, push, and in-app.",
+            "quote": "After unifying its messaging channels and using real-time customer data to deliver personalized, location-aware campaigns across email, SMS, push, and in-app, a national coffee chain saw a 230% increase in ROI from CRM campaigns"
+          },
+          {
+            "claim": "The reported result was a 230% increase in ROI from CRM campaigns.",
+            "quote": "a national coffee chain saw a 230% increase in ROI from CRM campaigns"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider-email-engagement-plans-opt-out",
+      "title": "Per-provider email plans cut pharma opt-out rate 50%",
+      "oneLiner": "Machine learning sets each provider's email timing, frequency, and content, halving opt-outs.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Per-provider engagement plans set content, timing, frequency, and format",
+      "cdpDataUsed": [
+        "Five years of provider engagement and communication data",
+        "Provider preferences for content, timing, frequency, and format",
+        "Customer data across dozens of brands"
+      ],
+      "businessProblems": [
+        "high-unsubscribe-rate",
+        "generic-experience",
+        "inconsistent-cross-channel-experience"
+      ],
+      "industries": [
+        "healthcare-public-sector-utilities"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "journey": "Health care providers receive email from dozens of brands. The pharmaceutical company analyzed five years of provider data with machine learning to learn each provider's preferred content, times, frequency, and format, then built engagement plans so providers receive only the content they want, when and where they want it.",
+      "exampleBefore": "Providers received hundreds, and in some cases thousands, of emails each year from dozens of brands, some not relevant to their practice.",
+      "exampleAfter": "Each provider receives a one-to-one engagement plan with only wanted content at preferred times, lowering the opt-out rate by 50 percent.",
+      "kpis": {
+        "primary": "Email opt-out rate (reported 50% decrease)",
+        "secondary": [
+          "Customer reach (reported as increased dramatically)",
+          "Email opens, clicks, and opt-ins (named as target outcomes)"
+        ]
+      },
+      "toolsNeeded": [
+        "Machine learning analytics",
+        "Cognitive automation tool for one-to-one engagement plans"
+      ],
+      "tags": [
+        "email personalization",
+        "machine learning",
+        "opt-out reduction",
+        "health care providers",
+        "engagement plans"
+      ],
+      "source": {
+        "title": "Email marketing personalization case study | Deloitte US",
+        "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/cloud-transformation/case-studies/email-marketing-personalization-case-study.html",
+        "retrievedAt": "2026-11-12T08:53:15Z",
+        "summary": "A large pharmaceutical company was sending health care providers hundreds or thousands of emails per year from dozens of brands, driving disengagement and opt-outs. The company analyzed five years of data across 700,000 providers within ten weeks using machine learning, then built a cognitive automation tool to customize one-to-one engagement plans. The reported result is a 50 percent decrease in email opt-out rate and increased customer reach.",
+        "evidence": [
+          {
+            "claim": "The pharmaceutical company sent providers hundreds to thousands of emails per year from dozens of brands, some irrelevant to their practice.",
+            "quote": "A pharmaceutical company was sending health care providers hundreds, and in some cases, thousands of e-mails each year from dozens of brands, some that weren't relevant to their practice."
+          },
+          {
+            "claim": "The promotions were driving disengagement and opt-outs.",
+            "quote": "These digital promotions were driving disengagement, opt out, and negatively affecting customer experience."
+          },
+          {
+            "claim": "Five years of data across 700,000 providers and dozens of brands was analyzed within ten weeks.",
+            "quote": "The client engaged Deloitte to help them analyze five years' worth of data with 700,000 health care providers across dozens of brands all within ten weeks."
+          },
+          {
+            "claim": "The analysis identified each provider's preferred content, timing, frequency, and format.",
+            "quote": "This led to a deeper understanding of the unique content that individual health care providers are looking for and will engage with as well as the ideal times, frequency, preferred content, and format to reach them."
+          },
+          {
+            "claim": "A cognitive automation tool customized one-to-one engagement plans so providers receive only wanted content when and where they want it.",
+            "quote": "The client built a cognitive automation tool to customize one-to-one engagement plans unique to each health care provider so they would only receive the content they want when and where they want it."
+          },
+          {
+            "claim": "The approach increased customer reach and lowered the opt-out rate by 50 percent.",
+            "quote": "This helped the client increase customer reach dramatically and lower their opt-out rate by 50 percent."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mood-preference-quiz-book-discovery",
+      "title": "Mood and Preference Quiz for Book Discovery",
+      "oneLiner": "A publisher's interactive quiz helps visitors find books from a large catalog based on taste.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Preference and mood quiz to surface tailored book recommendations",
+      "cdpDataUsed": [
+        "Declared preferences volunteered through an interactive quiz",
+        "Mood and reading history used to guide recommendations"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "insufficient-zero-party-data"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "A visitor arrives at a book publisher's site, which has thousands of titles, and is offered a quiz during a Valentine's Day campaign. The quiz asks about preferences, mood, and reading history so the visitor can discover what to read next instead of browsing the full catalog.",
+      "exampleBefore": "Illustrative only: a visitor faces a large catalog with no way to narrow choices by mood or taste.",
+      "exampleAfter": "Illustrative only: the visitor answers a short mood and preference quiz and is shown a shortlist of matching titles.",
+      "kpis": {
+        "primary": "Quiz completion rate",
+        "secondary": [
+          "Share of quiz takers who view or purchase a recommended title",
+          "Volume of declared preference data captured per visitor"
+        ]
+      },
+      "toolsNeeded": [
+        "Interactive quiz tool",
+        "Product catalog"
+      ],
+      "tags": [
+        "quiz",
+        "zero-party-data",
+        "product-discovery",
+        "book-publishing",
+        "seasonal-campaign"
+      ],
+      "source": {
+        "title": "Personalized marketing done right: 11 brand examples buyers love",
+        "url": "https://blog.hubspot.com/marketing/marketing-personalization-examples",
+        "retrievedAt": "2026-11-12T08:53:28Z",
+        "summary": "A book publisher ran a Valentine's Day campaign that used an interactive quiz to help visitors choose books from a large catalog. The quiz was based on preferences, mood, and reading history, and the page describes it as a way to replace overwhelming browsing with personal discovery.",
+        "evidence": [
+          {
+            "claim": "The publisher ran a Valentine's Day campaign that used a quiz to make choosing easier.",
+            "quote": "In a clever Valentine’s Day campaign, the marketing team made the process a little easier using a quiz."
+          },
+          {
+            "claim": "The quiz helped visitors discover books based on preferences, mood, and reading history instead of showing thousands of titles.",
+            "quote": "Instead of bombarding visitors with thousands of titles, the publisher used an interactive quiz (or “self-selection tool) to help people discover what to read next based on their preferences, mood, and reading history."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ai-styling-recommendations-repeat-purchase",
+      "title": "AI Styling Recommendations Using Preferences, Purchase History and Returns",
+      "oneLiner": "An online fashion retailer's AI engine tailors clothing picks from preferences, history and returns.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "AI styling recommendations from preferences, purchase history, returns",
+      "cdpDataUsed": [
+        "Style preferences",
+        "Purchase history",
+        "Customer feedback",
+        "Style quiz responses",
+        "Customer reviews",
+        "Return patterns"
+      ],
+      "businessProblems": [
+        "low-repeat-purchase",
+        "generic-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A shopper's style preferences, purchase history, feedback, quiz answers, reviews and return patterns feed an AI engine that curates clothing selections and keeps refining its suggestions over time.",
+      "exampleBefore": "Illustrative proposal only, not from the source: shoppers receive the same general clothing selections regardless of past purchases or returns.",
+      "exampleAfter": "Illustrative proposal only, not from the source: each shopper's selections are curated from their own preferences, purchases and return history.",
+      "kpis": {
+        "primary": "Repeat purchase rate",
+        "secondary": [
+          "Customer satisfaction with AI-driven recommendations",
+          "Customer loyalty"
+        ]
+      },
+      "toolsNeeded": [
+        "AI recommendation engine",
+        "Style quiz",
+        "Customer review and feedback data",
+        "Return pattern data"
+      ],
+      "tags": [
+        "fashion-retail",
+        "ai-recommendations",
+        "repeat-purchase",
+        "style-quiz",
+        "returns-data"
+      ],
+      "source": {
+        "title": "AI-Powered Personalization: Success Stories from Startups",
+        "url": "https://maccelerator.la/en/blog/entrepreneurship/ai-powered-customer-personalization-case-studies-from-successful-startups/",
+        "retrievedAt": "2026-11-12T08:54:14Z",
+        "summary": "An online fashion retailer uses an AI engine that evaluates style preferences, purchase history and feedback, and also processes style quiz data, customer reviews and return patterns to refine suggestions. The page reports 75% of customers report higher satisfaction with the AI-driven recommendations and repeat purchases jumped by 40%.",
+        "evidence": [
+          {
+            "claim": "The AI engine uses style preferences, purchase history and feedback to curate tailored clothing selections.",
+            "quote": "Their AI engine evaluates style preferences, purchase history, and feedback to curate tailored clothing selections."
+          },
+          {
+            "claim": "The system processes data from style quizzes, customer reviews and return patterns to continuously refine suggestions.",
+            "quote": "It also processes data from style quizzes, customer reviews, and return patterns, enabling constant refinement of its suggestions."
+          },
+          {
+            "claim": "The reported results were 75% of customers reporting higher satisfaction with AI-driven recommendations and repeat purchases rising 40%.",
+            "quote": "This approach has paid off: 75% of customers report higher satisfaction with AI-driven recommendations, and repeat purchases have jumped by 40%, fostering stronger customer loyalty."
+          }
+        ]
+      }
+    },
+    {
+      "id": "visitor-status-website-personalization-cdp",
+      "title": "Visitor-Status Website Personalization Powered by CDP History",
+      "oneLiner": "A software company tailored its website to existing, new, and returning visitors using centralized CDP data.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Website content by visitor status using CDP history",
+      "cdpDataUsed": [
+        "Centralized customer data",
+        "Visitor history (existing customer, new visitor, previous visitor status)"
+      ],
+      "businessProblems": [
+        "poor-new-visitor-conversion",
+        "cdp-data-not-activated",
+        "low-cross-sell"
+      ],
+      "industries": [
+        "telecom-media-technology"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A website visitor is recognized as an existing customer, a new visitor, or a previous visitor, and the website draws on the visitor's history from the centralized customer data platform to shape what they see.",
+      "exampleBefore": "Illustrative proposal only, not from the source: every visitor sees the same homepage regardless of whether they are a customer or a prospect.",
+      "exampleAfter": "Illustrative proposal only, not from the source: a current customer sees renewal and upgrade content, while a first-time visitor sees an introductory offer.",
+      "kpis": {
+        "primary": "Conversion rate for new visitors",
+        "secondary": [
+          "Renewal rate",
+          "Upsell rate"
+        ]
+      },
+      "toolsNeeded": [
+        "Customer data platform (CDP)",
+        "Website personalization capability"
+      ],
+      "tags": [
+        "website personalization",
+        "customer data platform",
+        "visitor status",
+        "new visitor conversion",
+        "renewals and upsells"
+      ],
+      "source": {
+        "title": "10 Great Examples Of Personalized Marketing Strategies",
+        "url": "https://www.forbes.com/councils/forbescommunicationscouncil/2021/02/12/10-great-examples-of-personalized-marketing-strategies/",
+        "retrievedAt": "2026-11-12T08:54:56Z",
+        "summary": "A software company personalized its website based on whether visitors were existing customers, new visitors, or previous visitors. It centralized its customer data into a customer data platform so the website could access visitor history. The approach increased conversions for new visitors and had a significant impact on renewals and upsells.",
+        "evidence": [
+          {
+            "claim": "A software company personalized its website based on visitor status (existing customer, new visitor, or previous visitor).",
+            "quote": "A software company personalized their website based on whether visitors were existing customers, new visitors, or previous visitors."
+          },
+          {
+            "claim": "Customer data was centralized into a CDP so the website could access visitor history.",
+            "quote": "They did this by centralizing their customer data into a customer data platform (CDP), so the website could access the history of visitors."
+          },
+          {
+            "claim": "The approach increased conversions for new visitors and had a significant impact on renewals and upsells.",
+            "quote": "This approach increased conversions for new visitors, but also had a significant impact on renewals and upsells."
+          }
+        ]
+      }
+    },
+    {
+      "id": "stylist-curated-preference-box",
+      "title": "Stylist-curated clothing selections built from declared style preferences",
+      "oneLiner": "An online clothing retailer pairs customer-declared sizes and styles with human stylist review.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Stylist-curated recommendations from declared sizes and style preferences",
+      "cdpDataUsed": [
+        "Declared sizes",
+        "Declared style preferences",
+        "Favourite colours",
+        "Customer feedback on prior recommendations"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "insufficient-zero-party-data"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "journey": "A customer shares sizes, style preferences and favourite colours. The retailer compares this data with clothing patterns of consumers with similar tastes, and more than a thousand personal stylists assess the profile and add expert recommendations. Customers receive the selected items to try and keep only what they like, and the service improves as it learns more about each customer.",
+      "exampleBefore": "Illustrative only, not from the source: every shopper sees the same clothing catalogue regardless of size or style.",
+      "exampleAfter": "Illustrative only, not from the source: a shopper's declared sizes and colours shape a curated selection that a stylist reviews before it is shipped.",
+      "kpis": {
+        "primary": "Share of curated selections that customers keep (proposed KPI)",
+        "secondary": [
+          "Repeat orders from curated selections (proposed)",
+          "Feedback responses per customer profile (proposed)"
+        ]
+      },
+      "toolsNeeded": [
+        "Customer style preference profile",
+        "Recommendation analysis against similar customers",
+        "Stylist review workflow"
+      ],
+      "tags": [
+        "stylist-curation",
+        "zero-party-data",
+        "fashion-retail",
+        "preference-profile",
+        "human-plus-machine"
+      ],
+      "source": {
+        "title": "30 Personalized Customer Experience Examples (2026)",
+        "url": "https://ventureharbour.com/personalised-experiences-examples/",
+        "retrievedAt": "2026-11-12T08:55:10Z",
+        "summary": "An online clothing retailer collects customer-provided data such as sizes, style preferences and favourite colours. It analyses this data against clothing patterns of consumers with similar tastes, and a team of more than a thousand personal stylists reviews profiles and makes recommendations. Customers receive items to try and buy only what they like, and the page reports the experience is personalised from the first interaction and improves as the service learns more.",
+        "evidence": [
+          {
+            "claim": "The retailer collects customer-provided sizes, style preferences and favourite colours.",
+            "quote": "Users provide relevant data about themselves – sizes, style preferences, favourite colours, etc. – and StitchFix analyses this data against the clothing patterns of consumers with similar tastes."
+          },
+          {
+            "claim": "More than a thousand human stylists assess user profiles and provide expert recommendations.",
+            "quote": "StitchFix also has a team of more than a thousand human personal stylists who assess user profiles and provide expert stylist recommendations."
+          },
+          {
+            "claim": "Customers receive recommended items to try and buy only what they like.",
+            "quote": "Users then receive their recommendations in the post to try for themselves and they only buy what they like."
+          },
+          {
+            "claim": "The reported experience is personalised from the first interaction and improves with more learning about individuals.",
+            "quote": "As a result, StitchFix delivers a truly personalised customer experience from the very first interaction – and the service only improves as it learns more about individual users."
+          }
+        ]
+      }
+    },
+    {
+      "id": "travel-history-story-emails",
+      "title": "Travel-History Story Emails Built from Past Customer Trips",
+      "oneLiner": "Email campaign turns two decades of customer travel data into individual travel stories.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Personal travel-history stories in email campaigns from past data",
+      "cdpDataUsed": [
+        "Two decades of customer travel history",
+        "Past trips, travel milestones, and destinations visited"
+      ],
+      "businessProblems": [
+        "low-email-open-rate",
+        "generic-experience",
+        "low-repeat-purchase"
+      ],
+      "industries": [
+        "travel-hospitality"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A travel company marking its 20th anniversary used years of customer booking data to build a separate email for each customer. Each email told that person's own travel story, using imagery and copy to highlight their past trips, milestones, and destinations, and aimed to bring past customers back to book future flights.",
+      "exampleBefore": "Illustrative proposal only: a single anniversary newsletter with the same generic brand content sent to all subscribers.",
+      "exampleAfter": "Illustrative proposal only: each recipient receives an email recapping their own past trips and destinations, with a prompt to plan the next one.",
+      "kpis": {
+        "primary": "Email open rate",
+        "secondary": [
+          "Email click-through rate",
+          "Share of recipients who booked a flight within 30 days",
+          "Conversion rate in some markets"
+        ]
+      },
+      "toolsNeeded": [
+        "Email marketing platform",
+        "Customer travel booking history data"
+      ],
+      "tags": [
+        "email personalization",
+        "travel history",
+        "customer storytelling",
+        "anniversary campaign"
+      ],
+      "source": {
+        "title": "7 Hyper-Personalization Examples That Changed the Game",
+        "url": "https://www.plainlyvideos.com/blog/hyper-personalization-examples",
+        "retrievedAt": "2026-11-12T08:55:30Z",
+        "summary": "An airline celebrating its 20th anniversary analyzed 20 years of customer data to create an email campaign in which each recipient received an individual \"travel story\" highlighting their past trips, travel milestones, and destinations visited. The campaign reportedly produced over double the usual open rates and a 25% boost in click-throughs compared with regular newsletters, generated 1.1 million impressions, and led 7.5% of recipients who received the personalized emails to book a flight within 30 days. Conversion rates reportedly rose 30% in some markets.",
+        "evidence": [
+          {
+            "claim": "The campaign used 20 years of customer data to create individual emails.",
+            "quote": "This brand dug into 20 years of customer data for an email marketing campaign that featured emails that told each individual their own ''travel story'' with the airline."
+          },
+          {
+            "claim": "Data was converted into stories using imagery and copy highlighting past trips, milestones, and destinations.",
+            "quote": "They turned cold data into heartfelt stories by using imagery and clever copy to highlight past trips, travel milestones, and destinations visited."
+          },
+          {
+            "claim": "Open rates and click-throughs were reported above the regular newsletters.",
+            "quote": "over double the usual open rates and a 25% boost in click-throughs compared to their regular newsletters"
+          },
+          {
+            "claim": "The campaign generated a reported 1.1 million impressions.",
+            "quote": "The campaign generated 1.1 million impressions."
+          },
+          {
+            "claim": "A share of recipients of the personalized emails booked a flight within 30 days.",
+            "quote": "7.5% of customers who received personalized emails in their inbox booked a flight within 30 days."
+          },
+          {
+            "claim": "Conversion rates reportedly rose in some markets.",
+            "quote": "conversion rates jumped by 30% in some markets."
+          }
+        ]
+      }
+    },
+    {
+      "id": "purchase-history-loyalty-emails",
+      "title": "Purchase-History Personalized Loyalty Emails",
+      "oneLiner": "A beauty loyalty program sends emails with recommendations and offers based on purchase history.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Loyalty",
+      "personalizationTactic": "Email product recommendations and offers based on purchase history",
+      "cdpDataUsed": [
+        "Purchase history",
+        "Customer preferences and needs"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "low-loyalty-engagement"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "journey": "Loyalty members who have bought products receive emails featuring recommendations and offers that match their past purchases, preferences and needs, instead of one generic promotion sent to all members.",
+      "exampleBefore": "Illustrative only: every loyalty member receives the same monthly promotional email regardless of what they previously bought.",
+      "exampleAfter": "Illustrative only: members receive emails recommending replenishment or complementary products tied to their recorded purchase history, with offers matched to those categories.",
+      "kpis": {
+        "primary": "Email-driven purchase conversion rate among loyalty members",
+        "secondary": [
+          "Loyalty program engagement rate",
+          "Repeat purchase rate",
+          "Email click-through rate"
+        ]
+      },
+      "toolsNeeded": [
+        "Email marketing platform",
+        "Purchase history data from loyalty program"
+      ],
+      "tags": [
+        "email personalization",
+        "purchase history",
+        "loyalty program",
+        "product recommendations",
+        "beauty retail"
+      ],
+      "source": {
+        "title": "How to Stand Out : 15 Personalized Marketing Examples from Top Brands",
+        "url": "https://www.eventible.com/learning/personalized-marketing-examples/",
+        "retrievedAt": "2026-11-12T08:56:06Z",
+        "summary": "A beauty retailer's loyalty program uses a customer's purchase history to send personalized emails containing product recommendations and offers aligned with the customer's preferences and needs.",
+        "evidence": [
+          {
+            "claim": "The loyalty program uses purchase history to send personalized emails with product recommendations and offers.",
+            "quote": "They use a customer’s purchase history to send personalized emails with product recommendations and offers that align with the customer’s preferences and needs."
+          }
+        ]
+      }
+    },
+    {
+      "id": "triggered-email-sequence-last-action",
+      "title": "Triggered email sequence based on last customer action",
+      "oneLiner": "Sends the next email in a sequence based on the customer's most recent action.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Next email triggered by customer's last action",
+      "cdpDataUsed": [
+        "Customer's last action (behavioral event)",
+        "Email sequence engagement and revenue data"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "Customers move through email sequences from welcome messages to post-purchase messages. Rather than sending a fixed next message, the next email in the sequence is triggered by the last action the customer took, so each message responds to recent behavior.",
+      "exampleBefore": "Illustrative proposal only: every subscriber receives the same fixed next email in a sequence, regardless of what they just did.",
+      "exampleAfter": "Illustrative proposal only: the next email in the sequence is chosen by the subscriber's most recent action, with click-through and revenue tracked against the fixed-sequence baseline.",
+      "kpis": {
+        "primary": "Email click-through rate",
+        "secondary": [
+          "Email-attributed revenue",
+          "Revenue per email recipient"
+        ]
+      },
+      "toolsNeeded": [
+        "Email marketing platform with event-triggered sequences"
+      ],
+      "tags": [
+        "email",
+        "triggered-messaging",
+        "behavioral-trigger",
+        "cosmetics",
+        "retention"
+      ],
+      "source": {
+        "title": "AI Personalization Examples and Challenges",
+        "url": "https://www.bloomreach.com/en/blog/ai-personalization-5-examples-business-challenges",
+        "retrievedAt": "2026-11-12T08:56:27Z",
+        "summary": "A UK cosmetics brand used AI personalization in its email marketing by triggering the next message in a sequence based on the last customer action taken. The source reports this increased click-through rates by 50% and revenue by 40%.",
+        "evidence": [
+          {
+            "claim": "The company used AI personalization in email marketing by triggering the next sequence message based on the last customer action.",
+            "quote": "By triggering the next message in a sequence based on the last customer action taken, it increased click-through rates by 50% and revenue by 40%."
+          },
+          {
+            "claim": "Email sequences run from welcome emails through post-purchase sequences, with contextual messages sent to the right person at the right time.",
+            "quote": "From the first welcome email to post-purchase sequences, contextual communications ensure the right message is sent to the right person at the right time."
+          }
+        ]
+      }
+    },
+    {
+      "id": "real-time-in-app-nudge-offer-redemption",
+      "title": "Real-time in-app nudge lifts loyalty offer redemption",
+      "oneLiner": "A real-time in-app nudge reminded members to redeem activated personal offers, lifting redemption 4.3 PP.",
+      "channels": [
+        "app"
+      ],
+      "funnelStage": "Loyalty",
+      "personalizationTactic": "Real-time in-app nudge for activated loyalty offers",
+      "cdpDataUsed": [
+        "Personal offer activation status in the app"
+      ],
+      "businessProblems": [
+        "low-loyalty-engagement"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "Members activate personal offers in the app before shopping, but many forget to use them during the shopping trip. A real-time in-app nudge is used at the point of the last 30 seconds of the trip to prompt redemption of activated offers.",
+      "exampleBefore": "Members activated personal offers in the app before shopping but often did not redeem them during the shopping trip.",
+      "exampleAfter": "A single real-time in-app nudge was used, and offer redemption increased by 4.3 PP.",
+      "kpis": {
+        "primary": "Offer redemption rate (reported +4.3 PP increase)",
+        "secondary": [
+          "Loyalty offer activation",
+          "Offer activation-to-redemption gap"
+        ]
+      },
+      "toolsNeeded": [
+        "In-app messaging",
+        "Real-time offer activation data"
+      ],
+      "tags": [
+        "loyalty",
+        "in-app nudge",
+        "offer redemption",
+        "real-time personalization",
+        "food and beverage"
+      ],
+      "source": {
+        "title": "Transformative Success Stories | Bloomreach Case Studies",
+        "url": "https://www.bloomreach.com/en/case-studies",
+        "retrievedAt": "2026-11-12T08:56:50Z",
+        "summary": "A Food and Beverage customer's personalized offers program was working: members activated offers, showed intent, and valued discounts. The challenge was that a large segment of members activated personal offers in the app before shopping but did not use them during the trip. A single real-time in-app nudge was used, and the reported result was a 4.3 PP increase in offer redemption.",
+        "evidence": [
+          {
+            "claim": "The customer's personalized offers program was working, with members activating offers, showing intent, and valuing discounts.",
+            "quote": "Coop’s personalized offers program was working — members activated offers, showed intent, and valued the discounts."
+          },
+          {
+            "claim": "The challenge was the last part of the shopping trip, where activation did not translate into redemption.",
+            "quote": "The challenge was the last 30 seconds of the shopping trip."
+          },
+          {
+            "claim": "A large segment of members regularly activated personal offers in the app before shopping.",
+            "quote": "A large segment of members regularly activated personal offers in the app before shopping"
+          },
+          {
+            "claim": "Offer activation was not the same as offer redemption.",
+            "quote": "Offer activation ≠ offer redemption."
+          },
+          {
+            "claim": "The reported outcome of the single real-time in-app nudge was a 4.3 PP increase in offer redemption.",
+            "quote": "Coop Boosts Loyalty Offer Redemption by 4.3 PP With a Single Real-Time In-App Nudge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "personalized-trial-onboarding-conversion",
+      "title": "Personalized Free-Trial Onboarding to Lift Trial Conversion",
+      "oneLiner": "Replacing automated trial emails with interviews, chats and tutorials raised total sales 367%.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Onboarding",
+      "personalizationTactic": "Replace automated onboarding emails with interviews, chats, and tutorials",
+      "cdpDataUsed": [
+        "Free-trial conversion outcomes",
+        "Total sales results"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "poor-new-visitor-conversion"
+      ],
+      "industries": [
+        "telecom-media-technology"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "New users start a 30-day free trial of a low-cost SaaS product. Initial signups are strong, but few convert at the end of the trial. The original onboarding was primarily automated emails; the revised process adds personal interviews, chats, videos, and tutorials.",
+      "exampleBefore": "New trial users receive mainly automated onboarding emails and few convert when the 30-day trial ends.",
+      "exampleAfter": "New trial users receive a more personalized onboarding with interviews, chats, videos, and tutorials, and total sales rise sharply.",
+      "kpis": {
+        "primary": "Free-trial to paid conversion rate",
+        "secondary": [
+          "Total sales",
+          "Trial signup volume",
+          "Onboarding completion"
+        ]
+      },
+      "toolsNeeded": [
+        "Skype chats",
+        "Video tutorials",
+        "Interview calls"
+      ],
+      "tags": [
+        "onboarding",
+        "free-trial",
+        "saas",
+        "1-to-1 onboarding",
+        "trial conversion"
+      ],
+      "source": {
+        "title": "5 Extreme Personalization Examples That Actually Worked",
+        "url": "https://conversionsciences.com/personalization-examples/",
+        "retrievedAt": "2026-11-12T08:57:27Z",
+        "summary": "A SaaS company offering a low-cost product with a 30-day free trial saw strong signups but few trial users converting. Its original onboarding relied mainly on automated emails. It overhauled onboarding to add interviews, Skype chats, videos, and tutorials, and reports total sales increased 367% in 12 weeks. The source does not specify what user data drove the personalization.",
+        "evidence": [
+          {
+            "claim": "The company offered a low-cost product with a 30-day free trial and saw strong signups but few trial users converting.",
+            "quote": "When Popcorn Metrics launched, it offered a low-cost product with a 30-day free trial to drive new users. And while initial signups were strong, very few users were converting at the end of the free trial."
+          },
+          {
+            "claim": "The original onboarding was automated and run primarily via email; the new process was more personalized.",
+            "quote": "While the original process was focused on automation and run primarily via automated emails, the new process offered a more personalized experience that included interviews, Skype chats, videos, and tutorials."
+          },
+          {
+            "claim": "The revised onboarding increased total sales by 367% in 12 weeks.",
+            "quote": "The new onboarding process was an incredibly strong success for the business, increasing total sales by 367% in just 12 weeks time."
+          }
+        ]
+      }
+    },
+    {
+      "id": "facebook-interest-video-ad-variants",
+      "title": "Interest-matched video ad variants on Facebook",
+      "oneLiner": "Assembling 100,000 video ad variants from clips matched to Facebook user interests.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Awareness",
+      "personalizationTactic": "Assemble video ads from clips matched to user interests",
+      "cdpDataUsed": [
+        "Facebook user interests",
+        "Facebook insight data"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "automotive-manufacturing"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": false,
+      "journey": "A car maker's paid Facebook video campaign for a new hybrid model used 100 interchangeable clips. Each viewer saw an ad built from three clips chosen by their Facebook interests, with mobile-first delivery.",
+      "exampleBefore": "One standard video ad shown to every Facebook viewer.",
+      "exampleAfter": "A video built from three clips matched to the viewer's interests, delivered mobile-first.",
+      "kpis": {
+        "primary": "Video views",
+        "secondary": [
+          "Brand awareness",
+          "Customer engagement"
+        ]
+      },
+      "toolsNeeded": [
+        "Facebook insight"
+      ],
+      "tags": [
+        "video personalisation",
+        "social advertising",
+        "automotive",
+        "dynamic creative",
+        "interest targeting"
+      ],
+      "source": {
+        "title": "Digital marketing case study - Marketing personalisation case study: Toyota USA makes 100,000 versions of same Facebook ad - Digital Training Academy",
+        "url": "http://www.digitaltrainingacademy.com/casestudies/2016/01/marketing_personalisation_case_study_toyota_usa_makes_100000_versions_of_same_facebook_ad.php",
+        "retrievedAt": "2026-11-12T08:57:43Z",
+        "summary": "A car maker worked with an agency to create 100,000 possible video ads for a new hybrid campaign, each personalised to the Facebook viewer's taste. The ads were assembled from 100 interchangeable video clips, with three clips chosen based on a Facebook user's interests. Delivery was mobile first because most Facebook usage is on mobile. The initial video reached 3.5 million views on YouTube over three months. The page's list of retention, awareness, engagement and spend increases is general claims about personalised marketing, not reported results for this campaign.",
+        "evidence": [
+          {
+            "claim": "The campaign created 100,000 possible video ads personalised to each viewer's taste on Facebook.",
+            "quote": "each personalised to the Facebook viewers taste"
+          },
+          {
+            "claim": "Each ad was assembled from 100 interchangeable clips, three of them chosen by the user's Facebook interests.",
+            "quote": "each advert was constructed from three video clips based on a Facebook user’s particular interests"
+          },
+          {
+            "claim": "Facebook insight was used to customise the adverts for each individual.",
+            "quote": "used Facebook insight to customise the adverts for each individual"
+          },
+          {
+            "claim": "Delivery was mobile first because most Facebook usage happens on mobile devices.",
+            "quote": "most of Facebook usage takes place on a mobile device, so ensured that the campaign delivery was mobile first"
+          },
+          {
+            "claim": "The initial video reached 3.5 million views on YouTube over a three month period.",
+            "quote": "This initial video amassed 3.5 million views on YouTube over a three month period."
           }
         ]
       }
