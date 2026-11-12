@@ -6,7 +6,7 @@
   "required": [
     "id", "title", "oneLiner", "channels", "funnelStage",
     "personalizationTactic", "cdpDataUsed", "businessProblems", "industries", "dataMaturity",
-    "complexity", "quickWin", "journey", "exampleBefore",
+    "complexity", "quickWin", "customerTrigger", "journey", "exampleBefore",
     "exampleAfter", "kpis", "toolsNeeded", "tags"
   ],
   "properties": {
@@ -67,6 +67,12 @@
     },
     "complexity": { "type": "string", "enum": ["Low", "Medium", "High"] },
     "quickWin": { "type": "boolean" },
+    "customerTrigger": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 120,
+      "description": "Concise customer action or event that starts the journey, not the full narrative."
+    },
     "journey": { "type": "string", "minLength": 20 },
     "exampleBefore": { "type": "string", "minLength": 5 },
     "exampleAfter": { "type": "string", "minLength": 5 },

@@ -13,7 +13,8 @@ Usage:
 
 CSV columns (see scripts/import_template.csv for a filled-in example):
     id, title, oneLiner, channels, funnelStage, personalizationTactic,
-    cdpDataUsed, businessProblems, industries, dataMaturity, complexity, quickWin, journey,
+    cdpDataUsed, businessProblems, industries, dataMaturity, complexity, quickWin,
+    customerTrigger, journey,
     exampleBefore, exampleAfter, kpiPrimary, kpiSecondary, toolsNeeded, tags
 
 List-type columns (channels, cdpDataUsed, businessProblems, industries,
@@ -40,7 +41,7 @@ LIST_FIELDS = {"channels", "cdpDataUsed", "businessProblems", "industries", "kpi
 BOOL_FIELDS = {"quickWin"}
 REQUIRED_COLUMNS = [
     "id", "title", "oneLiner", "channels", "funnelStage", "personalizationTactic",
-    "cdpDataUsed", "businessProblems", "industries", "dataMaturity", "complexity", "quickWin", "journey",
+    "cdpDataUsed", "businessProblems", "industries", "dataMaturity", "complexity", "quickWin", "customerTrigger", "journey",
     "exampleBefore", "exampleAfter", "kpiPrimary", "kpiSecondary", "toolsNeeded", "tags",
 ]
 
@@ -53,6 +54,8 @@ def row_to_use_case(row):
     missing = [c for c in REQUIRED_COLUMNS if c not in row]
     if missing:
         raise ValueError(f"CSV is missing required columns: {missing}")
+    if not (row.get("customerTrigger") or "").strip():
+        raise ValueError("CSV customerTrigger must describe the concise customer action or event that starts the journey.")
 
     uc = {}
     for key, value in row.items():

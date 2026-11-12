@@ -38,7 +38,7 @@ the path with AI matching enabled (Netlify).
 index.html                       the single page the whole app renders into
 assets/css/style.css             all styling
 assets/js/app.js                 search, filtering, synonyms, AI search wiring, detail panel
-data/use-cases.json              the 26 use cases — this is what you'll edit/extend
+data/use-cases.json              the use cases — this is what you'll edit/extend
 data/business-problems.json      the canonical "business problem" taxonomy used for filtering + AI matching
 data/industries.json             the six industries used for the industry filter + AI matching
 data/schema.json                 the validation schema for every use case entry
@@ -70,6 +70,11 @@ isn't configured and keep the text available for ordinary search until the
 site is deployed per SETUP.md.
 
 ## Adding a use case
+
+Include a concise `customerTrigger` (5–120 characters) describing the
+customer action or event that starts the journey. The detail view uses it in
+the first step of the customer-journey overview; keep the full story in
+`journey`.
 
 Two ways, both validated automatically:
 

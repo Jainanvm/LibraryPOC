@@ -445,6 +445,21 @@
     })[character]);
   }
 
+  function journeyOverviewHTML(uc) {
+    const story = [
+      ["Customer trigger", "Starts when", uc.customerTrigger],
+      ["CDP", "Uses signal", uc.cdpDataUsed[0]],
+      [uc.channels.map(channelLabel).join(" / "), "Personalizes", uc.oneLiner],
+    ];
+    return `
+      <ol class="journey-story" aria-label="Customer journey overview">
+        ${story.map(([role, title, copy]) => `<li><span class="journey-story-role">${escapeHTML(role)}</span><strong>${escapeHTML(title)}</strong><span>${escapeHTML(copy)}</span></li>`).join("")}
+      </ol>
+      <p class="journey-story-kpi">Measured by <strong>${escapeHTML(uc.kpis.primary)}</strong></p>
+      <p class="journey-story-narrative">${escapeHTML(uc.journey)}</p>
+    `;
+  }
+
   function detailHTML(uc) {
     const channels = uc.channels.map((c) => `<span class="meta-pill">${channelLabel(c)}</span>`).join("");
     const cdpList = uc.cdpDataUsed.map((d) => `<li>${d}</li>`).join("");
@@ -504,8 +519,8 @@
       ${industryPills ? `<div class="detail-section"><h3>Relevant industries</h3><div class="detail-badges">${industryPills}</div></div>` : ""}
 
       <div class="detail-section">
-        <h3>Customer journey</h3>
-        <p>${uc.journey}</p>
+        <h3>Customer journey at a glance</h3>
+        ${journeyOverviewHTML(uc)}
       </div>
 
       <div class="detail-section">
