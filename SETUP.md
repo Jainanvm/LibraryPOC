@@ -203,7 +203,8 @@ against `data/schema.json`. Required fields:
 | `dataMaturity` | Foundational / Intermediate / Advanced — how much CDP capability a client needs first |
 | `complexity` | Low / Medium / High implementation effort |
 | `quickWin` | `true`/`false` — powers the "Quick wins only" filter |
-| `journey`, `exampleBefore`, `exampleAfter` | The tangible story and copy example |
+| `customerTrigger` | A concise (5–120 character) customer action or event that starts the journey |
+| `journey`, `exampleBefore`, `exampleAfter` | The full tangible story and copy example |
 | `kpis.primary`, `kpis.secondary` | Impact metrics |
 | `toolsNeeded` | What has to exist to build it |
 | `tags` | Free-form keywords for keyword search (see tagging convention below) |
@@ -271,7 +272,8 @@ JSON:
 
 1. Open `scripts/import_template.csv` in Excel/Google Sheets — it has the
    exact columns needed, with one filled-in example row.
-2. Add rows. For list-type columns (`channels`, `cdpDataUsed`,
+2. Provide `customerTrigger` as a short customer action or event that starts
+   the journey; keep the longer story in `journey`. Add rows. For list-type columns (`channels`, `cdpDataUsed`,
    `businessProblems`, `kpiSecondary`, `toolsNeeded`, `tags`), separate
    multiple values with `|` in the same cell, e.g. `web|app`.
 3. Export as CSV.
