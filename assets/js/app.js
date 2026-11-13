@@ -380,23 +380,28 @@
   }
 
   function cardHTML(uc, rationale) {
-    const channels = uc.channels.map((c) => `<span class="channel-badge">${channelLabel(c)}</span>`).join("");
-    const quickWin = uc.quickWin ? `<span class="quickwin-badge">⚡ Quick win</span>` : "";
-    const aiBadge = rationale ? `<span class="ai-match-badge">AI match</span>` : "";
-    const rationaleBlock = rationale ? `<p class="ai-rationale">${escapeHTML(rationale)}</p>` : "";
+    const channels = uc.channels.map((channel) => `<span class="meta-pill">${escapeHTML(channelLabel(channel))}</span>`).join("");
+    const rationaleBlock = rationale
+      ? `<p class="ai-rationale">${escapeHTML(rationale)}</p>`
+      : "";
     return `
       <article class="card" tabindex="0" data-id="${uc.id}">
-        <div class="card-top">
-          <div class="channel-icons">${channels}</div>
-          ${aiBadge}${quickWin}
+        <h3 class="card-title">${escapeHTML(uc.title)}</h3>
+        <p class="card-oneliner">${escapeHTML(uc.oneLiner)}</p>
+        <div class="card-customer-moment">
+          <span class="card-detail-label">Customer moment</span>
+          <p>${escapeHTML(uc.customerTrigger)}</p>
         </div>
-        <h3 class="card-title">${uc.title}</h3>
-        <p class="card-oneliner">${uc.oneLiner}</p>
+        <div class="card-primary-measure">
+          <span class="card-detail-label">Primary measure</span>
+          <strong>${escapeHTML(uc.kpis.primary)}</strong>
+        </div>
         ${rationaleBlock}
-        <div class="card-meta">
-          <span class="meta-pill complexity-${uc.complexity}">${uc.complexity} complexity</span>
-          <span class="meta-pill">${uc.funnelStage}</span>
-          <span class="meta-pill">${uc.dataMaturity} data</span>
+        <div class="case-footer">
+          <div class="card-meta">
+            ${channels}
+            <span class="meta-pill complexity-${escapeHTML(uc.complexity)}">${escapeHTML(uc.complexity)} complexity</span>
+          </div>
         </div>
       </article>
     `;
@@ -448,7 +453,7 @@
   function journeyOverviewHTML(uc) {
     const story = [
       ["Customer trigger", "Starts when", uc.customerTrigger],
-      ["CDP", "Uses signal", uc.cdpDataUsed[0]],
+      ["CDP signal", "Uses", uc.cdpDataUsed[0]],
       [uc.channels.map(channelLabel).join(" / "), "Personalizes", uc.oneLiner],
     ];
     return `
@@ -461,10 +466,10 @@
   }
 
   function detailHTML(uc) {
-    const channels = uc.channels.map((c) => `<span class="meta-pill">${channelLabel(c)}</span>`).join("");
-    const cdpList = uc.cdpDataUsed.map((d) => `<li>${d}</li>`).join("");
-    const toolsList = uc.toolsNeeded.map((t) => `<li>${t}</li>`).join("");
-    const secondaryKpis = uc.kpis.secondary.map((k) => `<span class="kpi-secondary">${k}</span>`).join("");
+    const channels = uc.channels.map((c) => `<span class="meta-pill">${escapeHTML(channelLabel(c))}</span>`).join("");
+    const cdpList = uc.cdpDataUsed.map((d) => `<li>${escapeHTML(d)}</li>`).join("");
+    const toolsList = uc.toolsNeeded.map((t) => `<li>${escapeHTML(t)}</li>`).join("");
+    const secondaryKpis = uc.kpis.secondary.map((k) => `<span class="kpi-secondary">${escapeHTML(k)}</span>`).join("");
     const source = uc.source && typeof uc.source === "object" ? uc.source : null;
     let sourceSection = "";
     if (source && typeof source.url === "string" && source.url.trim()) {
@@ -491,40 +496,39 @@
     const problemPills = (uc.businessProblems || [])
       .map((id) => state.problemsById[id])
       .filter(Boolean)
-      .map((p) => `<span class="problem-pill" title="${p.description || ""}">${p.label}</span>`)
+      .map((p) => `<span class="problem-pill" title="${escapeHTML(p.description || "")}">${escapeHTML(p.label)}</span>`)
       .join("");
     const industryPills = (uc.industries || [])
       .map((id) => state.industriesById[id])
       .filter(Boolean)
-      .map((industry) => `<span class="industry-pill" title="${industry.description || ""}">${industry.label}</span>`)
+      .map((industry) => `<span class="industry-pill" title="${escapeHTML(industry.description || "")}">${escapeHTML(industry.label)}</span>`)
       .join("");
 
     return `
       <button class="detail-close" id="detailCloseBtn" aria-label="Close">×</button>
-      <p class="detail-eyebrow">${uc.personalizationTactic}</p>
-      <h2 class="detail-title">${uc.title}</h2>
-      <p class="detail-oneliner">${uc.oneLiner}</p>
+      <div class="detail-header">
+        <p class="detail-eyebrow">${escapeHTML(uc.personalizationTactic)}</p>
+        <h2 class="detail-title">${escapeHTML(uc.title)}</h2>
+        <p class="detail-oneliner">${escapeHTML(uc.oneLiner)}</p>
+
+        <div class="detail-badges">
+          ${channels}
+          <span class="meta-pill">${escapeHTML(uc.funnelStage)}</span>
+          <span class="meta-pill complexity-${escapeHTML(uc.complexity)}">${escapeHTML(uc.complexity)} complexity</span>
+          <span class="meta-pill">${escapeHTML(uc.dataMaturity)} data</span>
+          ${uc.quickWin ? '<span class="quickwin-badge">Quick win</span>' : ""}
+        </div>
+      </div>
 
       ${sourceSection}
 
-      <div class="detail-badges">
-        ${channels}
-        <span class="meta-pill complexity-${uc.complexity}">${uc.complexity} complexity</span>
-        <span class="meta-pill">${uc.funnelStage}</span>
-        <span class="meta-pill">${uc.dataMaturity} CDP data</span>
-        ${uc.quickWin ? '<span class="quickwin-badge">⚡ Quick win</span>' : ""}
-      </div>
-
-      ${problemPills ? `<div class="detail-section"><h3>Solves for</h3><div class="detail-badges">${problemPills}</div></div>` : ""}
-      ${industryPills ? `<div class="detail-section"><h3>Relevant industries</h3><div class="detail-badges">${industryPills}</div></div>` : ""}
-
       <div class="detail-section">
-        <h3>Customer journey at a glance</h3>
+        <h3>Customer journey</h3>
         ${journeyOverviewHTML(uc)}
       </div>
 
       <div class="detail-section">
-        <h3>Before → after</h3>
+        <h3>Example experience</h3>
         <div class="before-after">
           <div class="ba-box before"><span class="ba-label">Before</span>${uc.exampleBefore}</div>
           <div class="ba-box after"><span class="ba-label">After</span>${uc.exampleAfter}</div>
@@ -537,7 +541,7 @@
       </div>
 
       <div class="detail-section">
-        <h3>Impact</h3>
+        <h3>Success measures</h3>
         <div class="kpi-row">
           <span class="kpi-primary">${uc.kpis.primary}</span>
           ${secondaryKpis}
@@ -545,15 +549,22 @@
       </div>
 
       <div class="detail-section">
-        <h3>What you need to build it</h3>
+        <h3>Build requirements</h3>
         <ul>${toolsList}</ul>
       </div>
+
+      ${problemPills ? `<div class="detail-section"><h3>Solves for</h3><div class="detail-badges">${problemPills}</div></div>` : ""}
+      ${industryPills ? `<div class="detail-section"><h3>Relevant industries</h3><div class="detail-badges">${industryPills}</div></div>` : ""}
     `;
   }
 
-  function openDetail(id) {
+  function openDetail(id, fromHistory = false) {
     const uc = state.all.find((u) => u.id === id);
     if (!uc) return;
+    if (!fromHistory && history.state?.useCaseDetail !== id) {
+      const currentState = history.state && typeof history.state === "object" ? history.state : {};
+      history.pushState({ ...currentState, useCaseDetail: id }, "", window.location.href);
+    }
     els.detailContent.innerHTML = detailHTML(uc);
     els.overlay.hidden = false;
     els.detailPanel.hidden = false;
@@ -563,11 +574,28 @@
   }
 
   function closeDetail() {
+    if (history.state?.useCaseDetail) {
+      history.back();
+      return;
+    }
+    hideDetail();
+  }
+
+  function hideDetail() {
     els.overlay.hidden = true;
     els.detailPanel.hidden = true;
     els.detailPanel.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
   }
+
+  window.addEventListener("popstate", () => {
+    const detailId = history.state?.useCaseDetail;
+    if (detailId) {
+      openDetail(detailId, true);
+    } else {
+      hideDetail();
+    }
+  });
 
   els.overlay.addEventListener("click", closeDetail);
   document.addEventListener("keydown", (e) => {
