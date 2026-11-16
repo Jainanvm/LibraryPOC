@@ -13,6 +13,9 @@ handled in the browser and are not saved.
 Several ways to find something relevant:
 - **Start with a mission or short brief** — choose a common goal or set a
   business problem and industry before opening results.
+- **Find journey coverage gaps** — choose a funnel stage alongside the
+  business problem and industry in the shortlist builder; stage counts make
+  underrepresented parts of the journey easy to spot.
 - **Refine one shortlist** — industry, business problem, channel, and effort
   filters are grouped together and can be removed from the active-filter row.
 - **Filter by keyword** — use the small search control above the results;

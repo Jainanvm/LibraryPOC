@@ -31,6 +31,16 @@
     },
   };
 
+  const JOURNEY_STAGES = [
+    "Awareness",
+    "Consideration",
+    "Onboarding",
+    "Conversion",
+    "Retention",
+    "Loyalty",
+    "Reactivation",
+  ];
+
   const els = {
     grid: document.getElementById("cardGrid"),
     resultsArea: document.getElementById("resultsArea"),
@@ -38,6 +48,7 @@
     intakeForm: document.getElementById("intakeForm"),
     intakeProblem: document.getElementById("intakeProblem"),
     intakeIndustry: document.getElementById("intakeIndustry"),
+    intakeFunnelStage: document.getElementById("intakeFunnelStage"),
     browseAllBtn: document.getElementById("browseAllBtn"),
     missionShortcuts: document.querySelectorAll(".mission-card"),
     briefBar: document.getElementById("briefBar"),
@@ -767,6 +778,10 @@
       els.intakeIndustry,
       Object.values(state.industriesById).filter((industry) => usedIndustryIds.has(industry.id))
     );
+    populateSelect(
+      els.intakeFunnelStage,
+      JOURNEY_STAGES.map((stage) => ({ id: stage, label: stage }))
+    );
   }
 
   function syncFilterChips() {
@@ -780,13 +795,14 @@
     });
   }
 
-  function startBrowsing(problemId, industryId, quickWinsOnly) {
+  function startBrowsing(problemId, industryId, quickWinsOnly, funnelStage) {
     Object.values(state.filters).forEach((filter) => {
       if (filter instanceof Set) filter.clear();
     });
     state.filters.quickWin = quickWinsOnly;
     if (problemId) state.filters.businessProblems.add(problemId);
     if (industryId) state.filters.industries.add(industryId);
+    if (funnelStage) state.filters.funnelStage.add(funnelStage);
 
     state.query = "";
     els.keywordSearchInput.value = "";
@@ -812,14 +828,16 @@
     event.preventDefault();
     const problemId = els.intakeProblem.value;
     const industryId = els.intakeIndustry.value;
-    if (state.browsingStarted) updateBrief(problemId, industryId);
-    else startBrowsing(problemId, industryId, false);
+    const funnelStage = els.intakeFunnelStage.value;
+    if (state.browsingStarted) updateBrief(problemId, industryId, funnelStage);
+    else startBrowsing(problemId, industryId, false, funnelStage);
   });
 
   els.browseAllBtn.addEventListener("click", () => {
     els.intakeProblem.value = "";
     els.intakeIndustry.value = "";
-    startBrowsing("", "", false);
+    els.intakeFunnelStage.value = "";
+    startBrowsing("", "", false, "");
   });
 
   els.missionShortcuts.forEach((shortcut) => {
@@ -829,13 +847,15 @@
       const quickWinsOnly = mission === "quickWin";
       els.intakeProblem.value = problemId;
       els.intakeIndustry.value = "";
-      startBrowsing(problemId, "", quickWinsOnly);
+      els.intakeFunnelStage.value = "";
+      startBrowsing(problemId, "", quickWinsOnly, "");
     });
   });
 
   els.editBriefBtn.addEventListener("click", () => {
     els.intakeProblem.value = state.filters.businessProblems.values().next().value || "";
     els.intakeIndustry.value = state.filters.industries.values().next().value || "";
+    els.intakeFunnelStage.value = state.filters.funnelStage.values().next().value || "";
     state.editingBrief = true;
     if (els.refinePanel) els.refinePanel.open = false;
     render();
@@ -843,7 +863,7 @@
     els.intakeProblem.focus({ preventScroll: true });
   });
 
-  function updateBrief(problemId, industryId) {
+  function updateBrief(problemId, industryId, funnelStage) {
     const currentProblem = state.filters.businessProblems.values().next().value || "";
     if (problemId !== currentProblem) {
       state.filters.businessProblems.clear();
@@ -854,6 +874,12 @@
     if (industryId !== currentIndustry) {
       state.filters.industries.clear();
       if (industryId) state.filters.industries.add(industryId);
+    }
+
+    const currentStage = state.filters.funnelStage.values().next().value || "";
+    if (funnelStage !== currentStage) {
+      state.filters.funnelStage.clear();
+      if (funnelStage) state.filters.funnelStage.add(funnelStage);
     }
 
     state.editingBrief = false;
@@ -869,6 +895,7 @@
     state.filters.industries.forEach((id) => {
       if (state.industriesById[id]) parts.push(state.industriesById[id].label);
     });
+    state.filters.funnelStage.forEach((stage) => parts.push(stage));
     if (state.filters.quickWin) parts.push("Quick wins");
     els.briefSummary.textContent = parts.length ? parts.join(" · ") : "Exploring the whole library";
     els.editBriefBtn.textContent = state.editingBrief ? "Update shortlist" : "Edit brief";
