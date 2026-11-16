@@ -312,8 +312,9 @@ ever going live, with no extra tooling.
 ## 6. Research crawler — find and draft new use cases
 
 The optional crawler searches public web pages for personalization case
-studies, extracts readable page text, and asks an Anthropic model to turn
-each suitable page into one or more drafts matching `data/schema.json`. If
+studies, extracts readable page text, and asks the selected generation
+provider to turn each suitable page into one or more drafts matching
+`data/schema.json`. If
 a page describes several distinct, independently supported customer cases or
 personalization activities, each is saved as a separate draft with its own
 source-grounded summary. The crawler requests up to eight cases from one page.
@@ -335,9 +336,15 @@ You need:
 
 1. A Brave Search API subscription and API key. The crawler uses Brave's
    web search API to find candidate URLs.
-2. An Anthropic API key and a model id enabled for your account. The
-   crawler sends extracted page text and the library's schema and
-   taxonomies to Anthropic to generate structured drafts.
+2. A draft-generation provider and its API key/model:
+   - Anthropic (the default): `ANTHROPIC_API_KEY` and `ANTHROPIC_MODEL`.
+   - Capgemini Generative Engine: `GENERATIVE_ENGINE_API_KEY` and
+     `GENERATIVE_ENGINE_MODEL`. The crawler uses its OpenAI-compatible
+     Chat Completions endpoint at
+     `https://openai.generative.engine.capgemini.com/v1/chat/completions`.
+     Ask your Generative Engine administrator/platform team how to obtain an
+     API key and the exact model/deployment id available to you. The
+     integration sends the key as a Bearer token.
 3. Python 3 and the existing `jsonschema` dependency used by the
    validation and import scripts.
 
@@ -347,8 +354,8 @@ Install the dependency if it is not already available:
 python -m pip install jsonschema
 ```
 
-Set the three credentials/configuration values in your terminal before
-running the script. In PowerShell:
+Set the Brave key and the credentials for the selected provider in your
+terminal before running the script. In PowerShell, Anthropic (the default):
 
 ```powershell
 $env:BRAVE_SEARCH_API_KEY = "your-brave-search-api-key"
@@ -356,19 +363,29 @@ $env:ANTHROPIC_API_KEY = "your-anthropic-api-key"
 $env:ANTHROPIC_MODEL = "your-enabled-model-id"
 ```
 
-In Bash or zsh:
+For Capgemini Generative Engine:
+
+```powershell
+$env:BRAVE_SEARCH_API_KEY = "your-brave-search-api-key"
+$env:GENERATIVE_ENGINE_API_KEY = "your-generative-engine-api-key"
+$env:GENERATIVE_ENGINE_MODEL = "your-enabled-model-or-deployment-id"
+```
+
+In Bash or zsh, export the variables for the provider you selected. For
+Generative Engine:
 
 ```bash
 export BRAVE_SEARCH_API_KEY="your-brave-search-api-key"
-export ANTHROPIC_API_KEY="your-anthropic-api-key"
-export ANTHROPIC_MODEL="your-enabled-model-id"
+export GENERATIVE_ENGINE_API_KEY="your-generative-engine-api-key"
+export GENERATIVE_ENGINE_MODEL="your-enabled-model-or-deployment-id"
 ```
+
+For Anthropic, use `ANTHROPIC_API_KEY` and `ANTHROPIC_MODEL` instead.
 
 These are environment variables for the current terminal session. Set
 them again in a new terminal as needed. Do not put keys in the repository,
 source files, draft output, or command-line arguments; do not commit them.
-Check the current Brave and Anthropic account documentation for
-subscription, model availability, and pricing.
+Check your provider's access and pricing documentation.
 
 ### Run a search
 
@@ -377,6 +394,13 @@ case study you want. The default creates up to 20 reviewable drafts:
 
 ```powershell
 python scripts/crawl_use_cases.py "retail loyalty personalization case study"
+```
+
+To use Capgemini Generative Engine instead of Anthropic:
+
+```powershell
+python scripts/crawl_use_cases.py "retail loyalty personalization case study" `
+  --provider generative-engine
 ```
 
 The default draft bundle is `data/use-case-crawl-drafts.json`. Set `--limit`
@@ -473,6 +497,6 @@ without losing earlier draft bundles.
 | Custom domain | Free to configure (you only pay if you buy a new domain) |
 | Keyword search + filters | Free (runs entirely in the visitor's browser) |
 | **AI problem search** | **Usage-based**, billed by Anthropic directly. Each query sends a short catalog (~26 short entries, a few hundred tokens) plus the problem text, and gets back a short structured response — on a small/fast model this is a fraction of a cent per query. Even at a few hundred searches a month, this is a few dollars, not a recurring subscription. |
-| **Research crawler** | **Usage-based**, subject to your Brave Search and Anthropic account plans. Each run uses a Brave search request and may make page requests and an Anthropic draft-generation request for each usable result up to `--limit`. Costs depend on the providers' current pricing and how many results you process. |
+| **Research crawler** | **Usage-based**, subject to your Brave Search and selected generation provider's account plan. Each usable result up to `--limit` may trigger a draft-generation request. Costs depend on provider pricing and how many results you process. |
 
 **Total recurring cost: €0 for the core library. AI search and the crawler are optional, usage-based features billed by their respective providers.**
