@@ -1,6 +1,6 @@
 {
   "$schemaVersion": "1.0",
-  "lastUpdated": "2026-11-12",
+  "lastUpdated": "2026-11-16",
   "useCases": [
     {
       "id": "browse-abandonment-recall",
@@ -3367,6 +3367,754 @@
             "quote": "This initial video amassed 3.5 million views on YouTube over a three month period."
           }
         ]
+      }
+    },
+    {
+      "id": "company-name-personalized-product-email",
+      "title": "Personalize Bulk-Order Product Emails with Company Names",
+      "oneLiner": "A client tested product images imprinted with each recipient’s company name and saw nearly double revenue per thousand emails.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Replace generic imprint with recipient company name",
+      "cdpDataUsed": [
+        "Recipient company name"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": true,
+      "customerTrigger": "Holiday product email campaign sent",
+      "journey": "The client split its email list between a control email showing a generic company name and a personalized version showing the recipient’s company name on the product image. Other elements were kept the same. The personalized version generated nearly twice the RPME, nearly 85% more orders, and nearly 7% higher average order value.",
+      "exampleBefore": "The product image showed a generic company name and a “your company name here” starburst.",
+      "exampleAfter": "The product image showed the recipient’s company name, without the starburst.",
+      "kpis": {
+        "primary": "Revenue per thousand emails sent (RPME)",
+        "secondary": [
+          "Orders",
+          "Average order value (AOV)"
+        ]
+      },
+      "toolsNeeded": [
+        "Email campaign platform",
+        "Email list segmentation",
+        "Dynamic image personalization",
+        "A/B testing"
+      ],
+      "tags": [
+        "email-personalization",
+        "company-name",
+        "product-image",
+        "a-b-test"
+      ],
+      "source": {
+        "title": "Personalization and Email Performance (A Case Study) - Email Optimization Shop by Jeanne Jennings",
+        "url": "https://emailopshop.com/4119-2/",
+        "retrievedAt": "2026-11-16T11:10:58Z",
+        "summary": "An anonymized client tested an email featuring a bulk-purchasable product personalized with the recipient’s company name against its usual generic version. The personalized test nearly doubled revenue per thousand emails sent, drove nearly 85% more orders, and increased average order value by nearly 7%."
+      }
+    },
+    {
+      "id": "domain-matched-logo-email-test",
+      "title": "Test domain-matched company logos in email",
+      "oneLiner": "A client tested company logos matched from email domains; the generic-logo control generated nearly 22% higher RPME.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Replace generic logo with domain-matched company logo",
+      "cdpDataUsed": [
+        "Recipient email domain",
+        "Company logo associated with the domain"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "Email campaign send",
+      "journey": "The client randomly split recipients with an available logo between a generic-logo control and an email creative displaying the company logo matched to the recipient’s email domain. The generic-logo control generated nearly 22% higher RPME; the personalized version had higher open and click-through rates but lower average order value.",
+      "exampleBefore": "Product image used a generic logo with “Your Logo Here” copy.",
+      "exampleAfter": "Product image used the recipient company’s logo matched from their email domain; this test version had nearly 22% lower RPME than control.",
+      "kpis": {
+        "primary": "Revenue per thousand emails sent (RPME)",
+        "secondary": [
+          "Average order value",
+          "Conversion rate from emails sent",
+          "Open rate",
+          "Click-through rate"
+        ]
+      },
+      "toolsNeeded": [
+        "Email campaign system supporting dynamic creative",
+        "Email-domain-to-company-logo matching"
+      ],
+      "tags": [
+        "email-personalization",
+        "dynamic-content",
+        "experimentation",
+        "revenue-optimization"
+      ],
+      "source": {
+        "title": "Testing Personalization, Take 4 (A Case Study) - Email Optimization Shop by Jeanne Jennings",
+        "url": "https://emailopshop.com/testing-personalization-take-4-a-case-study/",
+        "retrievedAt": "2026-11-16T11:11:14Z",
+        "summary": "A client tested tote-bag email creative with a company logo dynamically selected using the recipient’s email domain, comparing it with generic-logo creative. The generic control produced nearly 22% higher RPME. The personalized version had a slightly higher conversion rate, open rate, and click-through rate, but its average order value was 28% lower. The article attributes the result in part to logo visibility and sizing issues in the creative."
+      }
+    },
+    {
+      "id": "manufacturing-account-research-email",
+      "title": "Research-led manufacturing prospect emails",
+      "oneLiner": "A manufacturing company tailored emails to prospects’ operational challenges and generated qualified leads.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Research account-specific operational challenges",
+      "cdpDataUsed": [
+        "Account research",
+        "Company-specific operational challenges"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "automotive-manufacturing"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "Prospect included in a 5,735-person email campaign",
+      "journey": "The company researched each prospect’s account before first contact, tailored emails to company-specific operational challenges, and used reply-focused sequences. The campaign generated 48 qualified leads and a 0.84% positive reply rate.",
+      "exampleBefore": "Generic template email",
+      "exampleAfter": "Email addressing the prospect company’s operational challenges",
+      "kpis": {
+        "primary": "Qualified leads",
+        "secondary": [
+          "Positive reply rate"
+        ]
+      },
+      "toolsNeeded": [
+        "Account research",
+        "Email campaign"
+      ],
+      "tags": [
+        "manufacturing",
+        "account-research",
+        "email-personalization"
+      ],
+      "source": {
+        "title": "Case studies in personalized outreach: What actually works across industries | Sera",
+        "url": "https://blog.seraleads.com/kb/personalized-outreach-strategies/case-studies-in-personalized-outreach/",
+        "retrievedAt": "2026-11-16T11:12:29Z",
+        "summary": "A manufacturing company researched accounts and tailored campaign emails to company-specific operational challenges. It reported 48 qualified leads and a 0.84% positive reply rate."
+      }
+    },
+    {
+      "id": "multilingual-software-prospect-outreach",
+      "title": "Multilingual software prospect outreach",
+      "oneLiner": "A UK software company adapted outreach language and tone for international prospects.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Translate and culturally adapt outreach",
+      "cdpDataUsed": [
+        "Email signatures and domains for language detection",
+        "Industry terminology",
+        "Regional language and tone"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "telecom-media-technology"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "High",
+      "quickWin": false,
+      "customerTrigger": "A prospect receives an outreach email in a detected language",
+      "journey": "The company used email signatures and domains for automated language detection, AI translation that preserved brand voice and industry terminology, and regional tone adjustments. It reported that 35% of qualified leads came from Asia-Pacific markets and engagement rates rose 35% in German and French markets; multilingual chatbots reduced response times by 80%.",
+      "exampleBefore": "English-only campaign",
+      "exampleAfter": "Translated and regionally adapted email",
+      "kpis": {
+        "primary": "Engagement rate",
+        "secondary": [
+          "Qualified leads from Asia-Pacific",
+          "Chatbot response time"
+        ]
+      },
+      "toolsNeeded": [
+        "Automated language detection",
+        "AI translation",
+        "Multilingual chatbots"
+      ],
+      "tags": [
+        "software",
+        "multilingual",
+        "cultural-adaptation"
+      ],
+      "source": {
+        "title": "Case studies in personalized outreach: What actually works across industries | Sera",
+        "url": "https://blog.seraleads.com/kb/personalized-outreach-strategies/case-studies-in-personalized-outreach/",
+        "retrievedAt": "2026-11-16T11:12:29Z",
+        "summary": "A UK software company moved beyond English-only campaigns using language detection, AI translation, regional tone adjustments, and multilingual chatbots. It reported 35% of qualified leads from Asia-Pacific, a 35% engagement increase in German and French markets, and an 80% reduction in chatbot response times."
+      }
+    },
+    {
+      "id": "provider-email-personalization",
+      "title": "Personalized email engagement for healthcare providers",
+      "oneLiner": "Provider-level communication plans tailored to preferred content, timing, frequency, and format reduced email opt-outs.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Machine-learning-based provider email plans",
+      "cdpDataUsed": [
+        "Five years of data across 700,000 healthcare providers",
+        "Provider-specific content interests and engagement",
+        "Preferred email timing, frequency, content, and format"
+      ],
+      "businessProblems": [
+        "high-unsubscribe-rate",
+        "generic-experience"
+      ],
+      "industries": [
+        "healthcare-public-sector-utilities"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "customerTrigger": "Five years of provider data were analyzed",
+      "journey": "The company analyzed historical data across healthcare providers and dozens of brands, then used a cognitive automation tool to create a one-to-one engagement plan for each provider. Plans customized content, timing, frequency, and format; the reported result was a 50 percent decrease in email opt-outs and dramatically increased customer reach.",
+      "exampleBefore": "Providers received hundreds or, in some cases, thousands of emails yearly, including promotions irrelevant to their practice.",
+      "exampleAfter": "Providers received content tailored to their preferences, at their preferred times and frequency, in their preferred format.",
+      "kpis": {
+        "primary": "Email opt-out rate (reported 50% decrease)",
+        "secondary": [
+          "Customer reach (reported increase)"
+        ]
+      },
+      "toolsNeeded": [
+        "Machine learning",
+        "Cognitive automation tool"
+      ],
+      "tags": [
+        "healthcare-providers",
+        "email-personalization",
+        "opt-out-reduction",
+        "machine-learning"
+      ],
+      "source": {
+        "title": "Email marketing personalization case study | Deloitte US",
+        "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/cloud-transformation/case-studies/email-marketing-personalization-case-study.html",
+        "retrievedAt": "2026-11-16T11:12:38Z",
+        "summary": "A pharmaceutical company analyzed five years of data on 700,000 healthcare providers across dozens of brands. It used machine learning to identify provider-specific digital communication preferences and built a cognitive automation tool for individualized engagement plans. The company reported a 50 percent decrease in email opt-outs and dramatically increased customer reach."
+      }
+    },
+    {
+      "id": "visitor-intent-product-recommendations",
+      "title": "Recommendations based on visitor intent",
+      "oneLiner": "Personalized recommendations used visitor browsing and product-category interactions across retail site pages.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Automated intent-based product recommendations",
+      "cdpDataUsed": [
+        "Visitor intent and preferences",
+        "Page types browsed",
+        "Product categories interacted with"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "low-cross-sell"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "Visitor browses a category, product, or basket page",
+      "journey": "Recommendations were automatically presented on category, product, and basket pages based on each visitor’s intent, preferences, browsing, and product-category interactions. The reported results covered recommendation selections across the two retailer sites; the page also reports a 10% conversion-rate increase in a test against the prior default recommendations.",
+      "exampleBefore": "Default recommendations were already used on some pages.",
+      "exampleAfter": "Visitors saw recommendations matched to their browsing and product-category interactions.",
+      "kpis": {
+        "primary": "Conversion rate after selecting a recommendation",
+        "secondary": [
+          "Product-page views",
+          "Average time on site",
+          "Revenue share from recommendations"
+        ]
+      },
+      "toolsNeeded": [
+        "Product recommendation engine",
+        "Retail ecommerce site"
+      ],
+      "tags": [
+        "product-recommendations",
+        "web-personalization",
+        "conversion"
+      ],
+      "source": {
+        "title": "A case study showing the impact of Personalised Product recommendations on retail merchandising | Smart Insights",
+        "url": "https://www.smartinsights.com/ecommerce/web-personalisation/case-study-personalised-product-recommendations/",
+        "retrievedAt": "2026-11-16T11:13:16Z",
+        "summary": "Two outdoor retail sites used automated product recommendations based on visitor intent, preferences, browsed page types, and product-category interactions. Recommendations appeared on category, product, and basket pages. The source reports conversion rates 332% and 277% above each site's average when visitors selected a personalized recommendation, and recommendation revenue shares of 19.0% and 16.9%. A test against prior default recommendations reported a 10% conversion-rate increase."
+      }
+    },
+    {
+      "id": "rainy-day-footwear-cross-sell",
+      "title": "Rainy-day footwear basket cross-sell",
+      "oneLiner": "A retailer’s marketer-created rule showed waterproof essentials to rainy-day shoppers with footwear in their basket.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Weather- and basket-rule cross-sell",
+      "cdpDataUsed": [
+        "Weather condition",
+        "Shopping basket product type"
+      ],
+      "businessProblems": [
+        "low-cross-sell"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "Rainy day while a footwear item is in the basket",
+      "journey": "When it was rainy and a visitor was about to purchase with a shoe, boot, or wellington in the basket, a marketer-created rule automatically presented recommendations for waterproof essentials. The source does not report a separate outcome for this rule.",
+      "exampleBefore": "The rule was not yet applied to the qualifying basket and weather context.",
+      "exampleAfter": "Waterproof essentials were recommended to qualifying shoppers.",
+      "kpis": {
+        "primary": "Cross-sell attach rate",
+        "secondary": [
+          "Recommendation selection rate",
+          "Conversion rate"
+        ]
+      },
+      "toolsNeeded": [
+        "Rules-based merchandising",
+        "Retail ecommerce site"
+      ],
+      "tags": [
+        "cross-sell",
+        "weather-context",
+        "basket-personalization"
+      ],
+      "source": {
+        "title": "A case study showing the impact of Personalised Product recommendations on retail merchandising | Smart Insights",
+        "url": "https://www.smartinsights.com/ecommerce/web-personalisation/case-study-personalised-product-recommendations/",
+        "retrievedAt": "2026-11-16T11:13:16Z",
+        "summary": "A retailer's marketers created a rule on its website to recommend waterproof essentials on rainy days to visitors about to purchase with shoes, boots, or wellingtons in their basket. The source describes the rule and customer experience but gives no result specific to this rule."
+      }
+    },
+    {
+      "id": "purchase-based-email-recommendations",
+      "title": "Purchase-based email recommendations",
+      "oneLiner": "An outdoor retailer segmented customers by past purchases and emailed tailored product recommendations.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Segment by purchase history for tailored recommendations",
+      "cdpDataUsed": [
+        "Past purchase history"
+      ],
+      "businessProblems": [
+        "low-email-open-rate"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "A customer makes a purchase",
+      "journey": "The retailer segments its audience based on past purchases and sends tailored product recommendations by email.",
+      "exampleBefore": "The source gives no before-state.",
+      "exampleAfter": "The retailer reported a 25% increase in email open rates and a 15% increase in sales.",
+      "kpis": {
+        "primary": "Email open rate",
+        "secondary": [
+          "Sales"
+        ]
+      },
+      "toolsNeeded": [
+        "Email marketing",
+        "Customer segmentation"
+      ],
+      "tags": [
+        "email",
+        "purchase-history",
+        "product-recommendations"
+      ],
+      "source": {
+        "title": "Personalization in Digital Marketing: Case Studies from Niche Markets | SocialTargeter Blog",
+        "url": "https://www.socialtargeter.com/blogs/personalization-in-digital-marketing-case-studies-from-niche-markets",
+        "retrievedAt": "2026-11-16T11:14:11Z",
+        "summary": "The case describes an outdoor retailer using past-purchase segments to send tailored email product recommendations; it reports a 25% increase in email open rates and a 15% increase in sales."
+      }
+    },
+    {
+      "id": "browsing-based-product-recommendations",
+      "title": "Browsing-based product recommendations",
+      "oneLiner": "An e-commerce brand recommended niche fashion products based on individual browsing habits.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Recommend products using individual browsing behavior",
+      "cdpDataUsed": [
+        "Individual browsing habits",
+        "User behavior"
+      ],
+      "businessProblems": [
+        "low-cross-sell"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "A customer browses products",
+      "journey": "A recommendation engine analyzes user behavior and suggests products based on each customer's browsing habits.",
+      "exampleBefore": "The source gives no before-state.",
+      "exampleAfter": "The brand reported a 30% increase in average order value.",
+      "kpis": {
+        "primary": "Average order value",
+        "secondary": []
+      },
+      "toolsNeeded": [
+        "Recommendation engine"
+      ],
+      "tags": [
+        "e-commerce",
+        "browsing-behavior",
+        "product-recommendations"
+      ],
+      "source": {
+        "title": "Personalization in Digital Marketing: Case Studies from Niche Markets | SocialTargeter Blog",
+        "url": "https://www.socialtargeter.com/blogs/personalization-in-digital-marketing-case-studies-from-niche-markets",
+        "retrievedAt": "2026-11-16T11:14:11Z",
+        "summary": "The case says an e-commerce brand specializing in niche fashion items used a recommendation engine to suggest products based on individual browsing habits, reporting a 30% increase in average order value."
+      }
+    },
+    {
+      "id": "behavior-based-product-recommendations",
+      "title": "Behavior-based product recommendations",
+      "oneLiner": "Show shoppers product recommendations informed by their shopping history and activity.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Recommend products from shopping behavior",
+      "cdpDataUsed": [
+        "Browsing history",
+        "Past purchases",
+        "Product ratings",
+        "Search behavior",
+        "Time spent on product pages"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "poor-search-conversion",
+        "low-cross-sell"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "customerTrigger": "Customer views or searches for products",
+      "journey": "The recommendation engine analyzes browsing history, purchases, ratings, search behavior, and time on product pages to present suggestions such as items related to shopping history or products bought by other customers.",
+      "exampleBefore": "A shopper sees products without regard to their activity.",
+      "exampleAfter": "The shopper sees recommendations matched to recorded shopping behavior.",
+      "kpis": {
+        "primary": "Conversion rate",
+        "secondary": [
+          "Purchases attributed to personalized recommendations",
+          "Revenue from recommended products"
+        ]
+      },
+      "toolsNeeded": [
+        "Machine-learning recommendation engine",
+        "Product recommendation placements"
+      ],
+      "tags": [
+        "recommendations",
+        "browsing-history",
+        "machine-learning",
+        "ecommerce"
+      ],
+      "source": {
+        "title": "Case Study: How Amazon’s Personalization Strategy Boosted Sales in 2026 | Jobaaj Learning Casestudies",
+        "url": "https://www.jobaajlearnings.com/casestudies/Case-Study-How-Amazons-Personalization-Strategy-Boosted-Sales-in-2026",
+        "retrievedAt": "2026-11-16T11:15:29Z",
+        "summary": "The text reports that the retailer used machine-learning recommendations informed by browsing history, purchases, ratings, search behavior, and time spent on product pages. It reports nearly 30% higher conversion from personalized recommendations and estimates that recommended products accounted for 35% of sales."
+      }
+    },
+    {
+      "id": "purchase-history-app-personalization",
+      "title": "Purchase-History Personalization in a Beauty App",
+      "oneLiner": "An app uses purchase history for tailored recommendations and virtual try-ons.",
+      "channels": [
+        "app"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Tailor recommendations using purchase history",
+      "cdpDataUsed": [
+        "Purchase history"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "low-app-retention"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "Customer has a recorded purchase",
+      "journey": "Use purchase history to tailor in-app recommendations and provide virtual try-ons. The source reports high user retention and increased in-app purchases, without quantified results.",
+      "exampleBefore": "Generic app experience",
+      "exampleAfter": "Recommendations informed by purchase history, alongside virtual try-ons",
+      "kpis": {
+        "primary": "In-app purchases",
+        "secondary": [
+          "User retention"
+        ]
+      },
+      "toolsNeeded": [
+        "Mobile app",
+        "Virtual try-on"
+      ],
+      "tags": [
+        "mobile-app",
+        "purchase-history",
+        "recommendations",
+        "virtual-try-on"
+      ],
+      "source": {
+        "title": "The Power of Personalization: Case Studies of Brands that Achieved Success Through Tailored Marketing | SocialTargeter Blog",
+        "url": "https://www.socialtargeter.com/blogs/the-power-of-personalization-case-studies-of-brands-that-achieved-success-through-tailored-marketing",
+        "retrievedAt": "2026-11-16T11:16:07Z",
+        "summary": "The source reports that a beauty retailer used its app for virtual try-ons and recommendations tailored by purchase history. It attributes high user retention and significant increases in in-app purchases to this approach, but gives no figures."
+      }
+    },
+    {
+      "id": "aggregate-data-onsite-recommendations",
+      "title": "Aggregate-data product recommendations",
+      "oneLiner": "Onsite recommendation modules used aggregate customer data to surface relevant products and produced reported engagement and commercial gains.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Conversion",
+      "personalizationTactic": "Recommend products using aggregate customer data",
+      "cdpDataUsed": [
+        "Aggregate customer data"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "Customer shops on the website",
+      "journey": "The team tested and implemented onsite product-recommendation tactics, including Frequently Bought Together, More Looks to Love, Get the Deal, and You May Also Like. The five combined site features reported for 2018 had a 6% interaction rate and were associated with other reported KPIs.",
+      "exampleBefore": "Customers shared the same digital shopping experience despite having unique needs and intentions.",
+      "exampleAfter": "Onsite modules surfaced recommendations such as Frequently Bought Together and You May Also Like.",
+      "kpis": {
+        "primary": "6% interaction rate for five combined personalization site features (reported for 2018)",
+        "secondary": [
+          "4x more likely to convert",
+          "+26% in units per transaction",
+          "+21% in average dollar sales",
+          " +22% acquisition value"
+        ]
+      },
+      "toolsNeeded": [
+        "Onsite product-recommendation modules",
+        "A/B testing"
+      ],
+      "tags": [
+        "product-recommendations",
+        "aggregate-data",
+        "onsite-personalization"
+      ],
+      "source": {
+        "title": "Lauren Kolber | Personalization Case Study",
+        "url": "http://www.artomnivore.com/personalization_cs.html",
+        "retrievedAt": "2026-11-16T11:16:40Z",
+        "summary": "The retailer reported testing and implementing more than 18 site tactics over two years, with early features mainly consisting of product-recommendation modules fueled by aggregate customer data. For five combined site features, it reported a 6% interaction rate, customers four times more likely to convert, +26% in units per transaction, +21% in average dollar sales, and +22% acquisition value."
+      }
+    },
+    {
+      "id": "one-to-one-site-personalization-design",
+      "title": "One-to-one shopping features for known customers",
+      "oneLiner": "After a site replatform, the team designed individualized site features including size recommendations and customer-specific product flags.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Tailor site recommendations to individual customer needs",
+      "cdpDataUsed": [
+        "Individual customer needs and preferences",
+        "Known-customer status"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "customerTrigger": "A known customer visits the site",
+      "journey": "After the end-of-2019 site replatform, the designer was tasked with creating one-to-one personalized features. The described tactics included size recommendations, Get the Deal recommendations, and Picked For You flags; the text does not report outcomes for these features.",
+      "exampleBefore": "The project identified a shared digital shopping experience despite customers having unique needs and intentions.",
+      "exampleAfter": "The described one-to-one feature set included size recommendations and Picked For You flags for known customers.",
+      "kpis": {
+        "primary": "No outcome reported for these one-to-one features",
+        "secondary": []
+      },
+      "toolsNeeded": [
+        "Size recommendation feature",
+        "Get the Deal recommendations",
+        "Picked For You flags"
+      ],
+      "tags": [
+        "one-to-one-personalization",
+        "known-customers",
+        "product-recommendations"
+      ],
+      "source": {
+        "title": "Lauren Kolber | Personalization Case Study",
+        "url": "http://www.artomnivore.com/personalization_cs.html",
+        "retrievedAt": "2026-11-16T11:16:40Z",
+        "summary": "Following a site replatform at the end of 2019, the designer was tasked with designing true one-to-one personalized features. The text lists size recommendations, Get the Deal recommendations, and Picked For You flags, but does not establish results for them."
+      }
+    },
+    {
+      "id": "behavior-triggered-win-back-email",
+      "title": "Behavior-triggered win-back follow-up",
+      "oneLiner": "A retailer followed a lapsed customer's product click with an automated email, but its no-reply address blocked the customer's question.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Reactivation",
+      "personalizationTactic": "Trigger follow-up from a product-link click",
+      "cdpDataUsed": [
+        "Prior purchase history",
+        "No recent purchase",
+        "Product-link click in reactivation email"
+      ],
+      "businessProblems": [
+        "poor-win-back-performance"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": true,
+      "customerTrigger": "Past customer clicks a product link in a reactivation email",
+      "journey": "After a previous customer had not purchased for a while, the retailer sent a reactivation email. A product click led to a next-day follow-up asking whether the customer was still interested. The customer replied with a question, but the no-reply address prevented the exchange; no resulting sale is reported.",
+      "exampleBefore": "The customer had previously purchased teak treatment and had not purchased recently.",
+      "exampleAfter": "A clicked product prompted a follow-up, but the customer's reply could not be delivered.",
+      "kpis": {
+        "primary": "Product-click-to-purchase conversion",
+        "secondary": [
+          "Follow-up reply rate",
+          "Repeat purchase rate"
+        ]
+      },
+      "toolsNeeded": [
+        "Email marketing automation",
+        "Email click tracking"
+      ],
+      "tags": [
+        "email",
+        "behavioral-personalization",
+        "win-back",
+        "product-click"
+      ],
+      "source": {
+        "title": "Engagement & Personalization FAIL - Case Study",
+        "url": "https://genoo.com/engagement-personalization-fail-case-study/",
+        "retrievedAt": "2026-11-16T11:17:05Z",
+        "summary": "Reported facts: A retailer sent a reactivation email to a past customer who had not purchased recently. The customer clicked a product link and received an automated follow-up the next day. The customer replied with a product question, but the follow-up used a no-reply address; the customer reported feeling ignored, and no additional purchase is reported."
+      }
+    },
+    {
+      "id": "travel-history-property-email-recommendations",
+      "title": "Travel-history-based property recommendation emails",
+      "oneLiner": "Property suggestions and destination content are personalized using customers’ prior searches, bookings, and destination interest.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Personalize property recommendations using travel history",
+      "cdpDataUsed": [
+        "Previous property search history",
+        "Previous booking history",
+        "Interest in specific destinations"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "travel-hospitality"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "Prior property searches, bookings, or destination interest",
+      "journey": "Use prior searches and bookings to recommend relevant properties; send destination-interest emails with local events, attractions, and property suggestions.",
+      "exampleBefore": "A general email with no reference to a traveler’s interests.",
+      "exampleAfter": "An email recommends properties matching prior searches or bookings, or features a destination the customer has shown interest in.",
+      "kpis": {
+        "primary": "Bookings",
+        "secondary": [
+          "Email opens",
+          "Email engagement"
+        ]
+      },
+      "toolsNeeded": [
+        "Email campaign capability",
+        "Customer search and booking history"
+      ],
+      "tags": [
+        "email-personalization",
+        "travel-recommendations",
+        "behavioral-data"
+      ],
+      "source": {
+        "title": "Personalization in email marketing: 2026 examples",
+        "url": "https://abmatic.ai/blog/power-of-personalization-in-email-marketing-case-studies-and-examples",
+        "retrievedAt": "2026-11-16T11:17:33Z",
+        "summary": "The page describes a vacation-rental platform using prior search and booking history to recommend properties, and destination interest to send emails featuring local events, attractions, and property suggestions. It says these emails are intended to encourage bookings and engagement, but gives no quantified results."
       }
     }
   ]
