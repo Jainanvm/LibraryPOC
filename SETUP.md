@@ -313,19 +313,21 @@ ever going live, with no extra tooling.
 
 The optional crawler searches public web pages for personalization case
 studies, extracts readable page text, and asks an Anthropic model to turn
-each suitable page into a draft matching `data/schema.json`. Each draft
-includes its source title, URL, retrieval time, and search query.
+each suitable page into one or more drafts matching `data/schema.json`. If
+a page describes several distinct, independently supported customer cases or
+personalization activities, each is saved as a separate draft with its own
+source-grounded summary. The crawler requests up to eight cases from one page.
+Each draft includes its source title, URL, retrieval time, and search query.
 
 The crawler is a research assistant, not an automatic importer. It writes
 to `data/use-case-crawl-drafts.json` by default, never to the live
-`data/use-cases.json` catalog. The crawler requires concrete page facts, asks for exact supporting quotes,
-and skips pages that are too vague or lack relevant evidence. It rejects
-quotes not found in the retrieved text. These checks do not guarantee that
-every claim is accurate: review the source, evidence, and every field before
-importing, and treat recommendations as proposals rather than reported facts.
-The crawler may also skip pages because of
-robots.txt rules, access restrictions, unsupported content, duplicate
-cases, or network/API errors.
+`data/use-cases.json` catalog. The crawler uses concrete page facts as its
+grounding guardrail, skips pages that are too vague or lack relevant
+personalization, and does not request or store supporting quotations. These
+checks do not guarantee that every claim is accurate: review the source and
+every field before importing, and treat recommendations as proposals rather
+than reported facts. The crawler may skip pages because of access
+restrictions, unsupported content, duplicate cases, or network/API errors.
 
 ### Configure credentials
 
@@ -371,18 +373,18 @@ subscription, model availability, and pricing.
 ### Run a search
 
 From the repository root, provide a focused query describing the type of
-case study you want. The default creates up to five reviewable drafts:
+case study you want. The default creates up to 20 reviewable drafts:
 
 ```powershell
 python scripts/crawl_use_cases.py "retail loyalty personalization case study"
 ```
 
-The default draft bundle is `data/use-case-crawl-drafts.json`. Set `--limit` to the desired number of reviewable drafts (maximum 20).
-Skipped or duplicate results do not count toward this number, so the
-crawler paginates through additional search results as needed. Search is
-limited to ten pages of up to 20 results each; if fewer suitable sources
-are available, the crawler reports how many drafts it created. You can also
-set the request timeout, the minimum delay between requests to the same
+The default draft bundle is `data/use-case-crawl-drafts.json`. Set `--limit`
+to the desired number of reviewable drafts (maximum 200); this counts cases,
+not source pages. Skipped or duplicate cases do not count toward this number,
+so the crawler paginates through additional search results as needed. Search
+is limited to ten pages of up to 20 results each (200 results total). You can
+also set the request timeout, the minimum delay between requests to the same
 site, and the output path:
 
 ```powershell
@@ -396,24 +398,32 @@ python scripts/crawl_use_cases.py "travel customer lifecycle personalization" `
 The output JSON contains:
 
 - `drafts`: generated use cases with source details, factual summaries,
-  supporting quotations, and a review reminder.
-- `skipped`: pages the crawler could not use, with a reason.
+  and a review reminder. Multiple drafts can share the same source URL when
+  one page supports multiple distinct cases.
+- `skipped`: pages or search requests the crawler could not use, with a reason.
 - `query` and `createdAt`: information about the run.
 
-The crawler checks that target pages use public HTTP(S) hosts, honors
-robots.txt and crawl-delay instructions, limits page size and extracted
-text, and does not execute page scripts. Search results can still be
-irrelevant, blocked, or unsuitable; inspect the source URL for every
-draft. Treat page content as untrusted reference material and do not rely
-on generated claims without verifying them against the source.
+The crawler does not consult `robots.txt`. It checks that target pages and
+redirects use public HTTP(S) hosts, applies the configured minimum delay
+between requests to the same host, limits page size and extracted text, and
+does not execute page scripts. Search and API redirects remain restricted to
+their original host to prevent API credentials from being sent to a different
+host. If a corporate proxy redirects an API request to a block page, the
+crawler stops and saves its partial bundle; the network policy must allow the
+API endpoint before drafting can continue. The draft bundle is checkpointed
+as sources are processed, so a later search error does not discard earlier
+drafts. Search results can still be irrelevant, blocked, or unsuitable;
+inspect the source URL for every draft. Treat page content as untrusted
+reference material and verify generated claims against the source.
 
 ### Review and selectively import drafts
 
-Open the output JSON and review each draft's `useCase` and `source`. Keep
+Open the output JSON and review each draft's `useCase`, `sourceSummary`,
+and `source`. Keep
 only cases that add something useful, have a credible source, and fit
-the library's scope and taxonomy. Copy the `useCase.id` values you want
-to import. First run a dry run, replacing the sample ids and file path
-with values from your draft bundle:
+the library's scope and taxonomy. To import selected cases, copy the
+`useCase.id` values you want to import. First run a dry run, replacing the
+sample ids and file path with values from your draft bundle:
 
 ```powershell
 python scripts/import_crawl_drafts.py data/use-case-crawl-drafts.json `
@@ -429,6 +439,19 @@ python scripts/import_crawl_drafts.py data/use-case-crawl-drafts.json `
   --ids personalized-loyalty-reward reminder-after-purchase
 python scripts/validate.py
 ```
+
+To validate and import every draft in a bundle without listing ids, use
+`--all`. Review the whole bundle first, then run:
+
+```powershell
+python scripts/import_crawl_drafts.py data/use-case-crawl-drafts.json --all --dry-run
+python scripts/import_crawl_drafts.py data/use-case-crawl-drafts.json --all
+python scripts/validate.py
+```
+
+`--all` and `--ids` are mutually exclusive. The importer validates every
+draft before writing; if any selected draft has a duplicate id or title,
+invalid source URL, or schema error, the bundle is not imported.
 
 The importer rejects duplicate ids or titles, missing/invalid source
 URLs, and entries that fail the use-case schema. It adds source title,

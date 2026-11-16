@@ -20,18 +20,37 @@ def load_json(path):
         raise ValueError(f"Could not read {path}: {exc}") from exc
 
 
-def import_drafts(drafts_file, requested_ids):
-    if not requested_ids:
-        raise ValueError("Select at least one draft with --ids.")
-    if len(set(requested_ids)) != len(requested_ids):
+def import_drafts(drafts_file, requested_ids=None, import_all=False):
+    if import_all and requested_ids:
+        raise ValueError("Use either --all or --ids, not both.")
+    if not import_all and not requested_ids:
+        raise ValueError("Select drafts with --ids or use --all.")
+    if requested_ids and len(set(requested_ids)) != len(requested_ids):
         raise ValueError("--ids contains duplicate values.")
 
     draft_data = load_json(drafts_file)
-    selected = {
-        draft.get("useCase", {}).get("id"): draft
-        for draft in draft_data.get("drafts", [])
-        if isinstance(draft, dict) and isinstance(draft.get("useCase"), dict)
-    }
+    if not isinstance(draft_data, dict):
+        raise ValueError("Draft bundle must be a JSON object.")
+    draft_list = draft_data.get("drafts")
+    if not isinstance(draft_list, list):
+        raise ValueError("Draft bundle must contain a drafts list.")
+    selected = {}
+    for draft in draft_list:
+        use_case = draft.get("useCase") if isinstance(draft, dict) else None
+        use_case_id = use_case.get("id") if isinstance(use_case, dict) else None
+        if not isinstance(use_case_id, str) or not use_case_id:
+            if import_all:
+                raise ValueError("Every draft must contain a use-case id when using --all.")
+            continue
+        if use_case_id in selected:
+            raise ValueError(f"Draft bundle contains duplicate use-case id: {use_case_id}")
+        selected[use_case_id] = draft
+
+    if import_all:
+        if not selected:
+            raise ValueError("Draft bundle contains no use cases to import.")
+        requested_ids = list(selected)
+
     missing = sorted(set(requested_ids) - selected.keys())
     if missing:
         raise ValueError("Draft id(s) not found: " + ", ".join(missing))
@@ -67,12 +86,13 @@ def import_drafts(drafts_file, requested_ids):
         }
         source_summary = draft.get("sourceSummary")
         source_evidence = draft.get("sourceEvidence")
-        if source_summary is not None or source_evidence is not None:
+        if source_summary is not None:
             if not isinstance(source_summary, str) or not source_summary.strip():
-                raise ValueError(f"{use_case_id} is missing its source-grounded summary.")
-            if not isinstance(source_evidence, list) or not source_evidence:
-                raise ValueError(f"{use_case_id} is missing source evidence.")
+                raise ValueError(f"{use_case_id} has an invalid source-grounded summary.")
             source_data["summary"] = source_summary
+        if source_evidence is not None:
+            if not isinstance(source_evidence, list) or not source_evidence:
+                raise ValueError(f"{use_case_id} has invalid source evidence.")
             source_data["evidence"] = source_evidence
         use_case["source"] = source_data
         errors = list(validator.iter_errors(use_case))
@@ -94,11 +114,13 @@ def import_drafts(drafts_file, requested_ids):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("drafts", type=Path, help="Draft bundle created by crawl_use_cases.py")
-    parser.add_argument("--ids", nargs="+", required=True, help="Draft use-case ids to import")
+    selection = parser.add_mutually_exclusive_group(required=True)
+    selection.add_argument("--ids", nargs="+", help="Draft use-case ids to import")
+    selection.add_argument("--all", action="store_true", help="Import every draft in the bundle")
     parser.add_argument("--dry-run", action="store_true", help="Validate and report without changing the catalog")
     args = parser.parse_args()
 
-    catalog, additions = import_drafts(args.drafts, args.ids)
+    catalog, additions = import_drafts(args.drafts, args.ids, import_all=args.all)
     print("Validated use case(s): " + ", ".join(item["id"] for item in additions))
     if args.dry_run:
         print("Dry run — the live catalog was not changed.")
