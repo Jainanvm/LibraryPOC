@@ -118,6 +118,7 @@
     [/\bmobile app(s)?\b/g, "app"],
     [/\bweb ?site(s)?\b/g, "web"],
     [/\bwin[- ]?back\b/g, "winback"],
+    [/\bcome[- ]?back\b/g, "return"],
     [/\bopt[- ]?out(s)?\b/g, "unsubscribe"],
     [/\bsign[- ]?up(s)?\b/g, "signup"],
     [/\bpush notification(s)?\b/g, "push"],
@@ -142,7 +143,26 @@
     ads: "ad", advertising: "ad", advert: "ad",
     survey: "quiz", surveys: "quiz",
     signup: "signup", signups: "signup",
+    buy: "purchase", buys: "purchase", bought: "purchase", buying: "purchase", purchases: "purchase",
+    rates: "rate",
   };
+
+  const QUERY_STOP_WORDS = new Set([
+    "a", "about", "after", "again", "all", "also", "am", "an", "and", "any", "are", "as", "at",
+    "be", "because", "been", "before", "being", "between", "both", "but", "by", "can", "could",
+    "did", "do", "does", "doing", "down", "during", "each", "few", "for", "from", "further",
+    "had", "has", "have", "having", "he", "her", "here", "hers", "herself", "him", "himself",
+    "his", "how", "i", "if", "in", "into", "is", "it", "its", "itself", "just", "me", "more",
+    "most", "my", "myself", "no", "nor", "not", "of", "off", "on", "once", "only", "or", "other",
+    "our", "ours", "ourselves", "out", "over", "own", "same", "she", "should", "so", "some",
+    "such", "than", "that", "the", "their", "theirs", "them", "themselves", "then", "there",
+    "these", "they", "this", "those", "through", "to", "too", "under", "until", "up", "us",
+    "very", "was", "we", "were", "what", "when", "where", "which", "while", "who", "whom",
+    "why", "will", "with", "would", "you", "your", "yours", "yourself", "yourselves",
+    "don", "doesn", "didn", "isn", "aren", "wasn", "weren", "won", "wouldn", "couldn", "shouldn",
+    "s", "t", "better", "decrease", "find", "get", "help", "improve", "increase", "looking",
+    "make", "many", "need", "often", "please", "rarely", "reduce", "trying", "want",
+  ]);
 
   function expandSynonyms(query) {
     let q = " " + query.toLowerCase() + " ";
@@ -195,10 +215,18 @@
       tactic: uc.personalizationTactic.toLowerCase(),
       cdp: (uc.cdpDataUsed || []).join(" | ").toLowerCase(),
       journey: uc.journey.toLowerCase(),
+      trigger: (uc.customerTrigger || "").toLowerCase(),
+      funnelStage: (uc.funnelStage || "").toLowerCase(),
+      kpis: [uc.kpis.primary].concat(uc.kpis.secondary || []).join(" | ").toLowerCase(),
       channels: uc.channels.join(" ").toLowerCase(),
       problems: problemLabels,
       industries: industryLabels,
     };
+    uc.__tokens.allText = Object.keys(uc.__tokens)
+      .filter((key) => key !== "allText")
+      .map((key) => Array.isArray(uc.__tokens[key]) ? uc.__tokens[key].join(" ") : uc.__tokens[key])
+      .join(" ")
+      .replace(/[^a-z0-9]+/g, " ");
     return uc.__tokens;
   }
 
@@ -215,6 +243,9 @@
     if (f.tactic.includes(token)) score = Math.max(score, 6);
     if (f.oneLiner.includes(token)) score = Math.max(score, 5);
     if (f.cdp.includes(token)) score = Math.max(score, 5);
+    if (f.trigger.includes(token)) score = Math.max(score, 5);
+    if (f.funnelStage.includes(token)) score = Math.max(score, 6);
+    if (f.kpis.includes(token)) score = Math.max(score, 4);
     if (f.problems.includes(token)) score = Math.max(score, 7);
     if (f.industries.includes(token)) score = Math.max(score, 7);
     if (f.journey.includes(token)) score = Math.max(score, 2);
@@ -237,18 +268,38 @@
   function matchesQuery(uc, query) {
     if (!query) return { match: true, score: 0 };
     const expanded = expandSynonyms(query);
-    const tokens = expanded
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean)
-      .map(canonicalize);
+    const tokens = Array.from(new Set(
+      expanded
+        .split(/[^a-z0-9]+/)
+        .filter((token) => token && !QUERY_STOP_WORDS.has(token))
+        .map(canonicalize)
+    ));
+    if (!tokens.length) return { match: true, score: 0 };
+
+    let matched = 0;
     let total = 0;
+    const fields = fieldTokens(uc);
     for (const tok of tokens) {
       const s = scoreToken(tok, uc);
-      if (s === 0) return { match: false, score: 0 }; // AND logic: every token must hit something
-      total += s;
+      if (s > 0) {
+        matched += 1;
+        total += s;
+      }
     }
-    return { match: true, score: total };
+
+    const minimumMatches = tokens.length <= 4
+      ? tokens.length
+      : Math.max(2, Math.ceil(tokens.length * 0.5));
+    if (matched < minimumMatches) return { match: false, score: 0 };
+
+    let phraseBonus = 0;
+    for (let i = 0; i < tokens.length - 1; i++) {
+      if (fields.allText.includes(tokens[i] + " " + tokens[i + 1])) phraseBonus += 6;
+    }
+
+    const coverage = matched / tokens.length;
+    const averageMatchStrength = (total + phraseBonus) / tokens.length;
+    return { match: true, score: coverage * 100 + averageMatchStrength };
   }
 
   // ---------- Filtering ----------
