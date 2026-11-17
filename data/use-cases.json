@@ -4566,6 +4566,215 @@
         "retrievedAt": "2026-11-17T08:36:07Z",
         "summary": "The source describes a service-business revival campaign using data-driven insights to personalize communications and promotions delivered through a mobile app and rewards program. It reports re-engaging a significant portion of inactive customers and gaining new customers within a short timeframe."
       }
+    },
+    {
+      "id": "role-based-saas-onboarding-workspaces",
+      "title": "Role-based onboarding workspaces",
+      "oneLiner": "Signup choices route users to personal or team workspaces populated with relevant templates.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Onboarding",
+      "personalizationTactic": "Route by personal or team use and selected team",
+      "cdpDataUsed": [
+        "Signup choice: personal use or team use",
+        "For team users: company size and selected team"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "telecom-media-technology"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "User selects personal use or team use during signup",
+      "journey": "The onboarding flow asks whether the user will use the product personally or with a team. Personal users receive a workspace with personal-use pages; team users provide company details and select a team, then receive a workspace with pages suited to that team. Personal users can remove the added templates.",
+      "exampleBefore": "A new user reaches a blank workspace without relevant starting pages.",
+      "exampleAfter": "A personal-use selection leads to a workspace with reading, movie, recipe, and travel pages; a product-management team selection leads to OKRs, user research, and roadmap pages.",
+      "kpis": {
+        "primary": "Onboarding completion rate by selected use type",
+        "secondary": [
+          "Time to first meaningful workspace action",
+          "Template removal rate"
+        ]
+      },
+      "toolsNeeded": [
+        "Signup flow",
+        "Personalized workspace templates"
+      ],
+      "tags": [
+        "saas",
+        "onboarding",
+        "workspace-personalization"
+      ],
+      "source": {
+        "title": "The Best Way To Personalize SaaS Onboarding [w/ Notion And Airtable Case Studies]",
+        "url": "https://www.customerfitted.com/personalization-onboarding-case-study",
+        "retrievedAt": "2026-11-17T08:40:23Z",
+        "summary": "A SaaS onboarding flow branches on personal versus team use. Team users also provide company size and team; the resulting workspace contains pages tailored to the selected context, and personal users can remove supplied templates."
+      }
+    },
+    {
+      "id": "job-based-saas-onboarding-template",
+      "title": "Job-based onboarding template selection",
+      "oneLiner": "A declared intended task determines which starter database users receive during onboarding.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Onboarding",
+      "personalizationTactic": "Match the starter database to the selected task",
+      "cdpDataUsed": [
+        "Signup answer about database familiarity",
+        "Number of people who will use the product",
+        "Selected intended task"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "telecom-media-technology"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "User selects an intended task during signup",
+      "journey": "During signup, users answer questions about database familiarity and how many people will use the product, then select what they want to do. The product provides a database template corresponding to the selected task; the described example is a research collection and categorization template.",
+      "exampleBefore": "A user arrives at a generic product starting point without a task-specific database.",
+      "exampleAfter": "Selecting research collection and categorization provides the corresponding research template.",
+      "kpis": {
+        "primary": "Onboarding completion rate by selected task",
+        "secondary": [
+          "Time to first task-related action",
+          "Starter-template adoption rate"
+        ]
+      },
+      "toolsNeeded": [
+        "Signup questionnaire",
+        "Task-matched database templates"
+      ],
+      "tags": [
+        "saas",
+        "onboarding",
+        "jobs-to-be-done"
+      ],
+      "source": {
+        "title": "The Best Way To Personalize SaaS Onboarding [w/ Notion And Airtable Case Studies]",
+        "url": "https://www.customerfitted.com/personalization-onboarding-case-study",
+        "retrievedAt": "2026-11-17T08:40:23Z",
+        "summary": "A SaaS onboarding flow collects database familiarity, intended user count, and intended task. The selected task determines the starter database, including a described template for collecting and categorizing research."
+      }
+    },
+    {
+      "id": "personalized-streaming-homepage",
+      "title": "Personalized Streaming Content Curation",
+      "oneLiner": "Viewing signals shape a personalized content homepage and recommendations.",
+      "channels": [
+        "web",
+        "app"
+      ],
+      "funnelStage": "Retention",
+      "personalizationTactic": "Rank and arrange content from viewing signals",
+      "cdpDataUsed": [
+        "Viewing habits",
+        "Ratings",
+        "Time of day",
+        "Devices used",
+        "Watch history",
+        "Completion rates"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "low-app-retention",
+        "poor-search-conversion"
+      ],
+      "industries": [
+        "telecom-media-technology"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "customerTrigger": "User watches or rates content",
+      "journey": "The page says streaming services use viewing habits, ratings, time of day, and device data to personalize homepages, arrange content rows, highlight genres, and tailor thumbnails. It also describes watch history and completion rates as recommendation signals.",
+      "exampleBefore": "The platform presents a general content discovery experience.",
+      "exampleAfter": "The homepage and content recommendations are tailored to viewing signals.",
+      "kpis": {
+        "primary": "User retention",
+        "secondary": [
+          "Session duration",
+          "User satisfaction"
+        ]
+      },
+      "toolsNeeded": [
+        "Machine-learning infrastructure",
+        "Recommendation and ranking algorithms"
+      ],
+      "tags": [
+        "streaming",
+        "content-curation",
+        "behavioral-personalization"
+      ],
+      "source": {
+        "title": "9 Real-World Example of Personalisation Strategies for 2025",
+        "url": "https://www.context.dev/blog/example-of-personalisation",
+        "retrievedAt": "2026-11-17T08:41:04Z",
+        "summary": "The page describes streaming services, naming Netflix and YouTube, using viewing-related signals to personalize homepages, content rows, genres, and thumbnail artwork. It states that this curation can improve engagement and retention."
+      }
+    },
+    {
+      "id": "personalized-platform-feed-and-search",
+      "title": "Personalized Platform Feeds and Search Results",
+      "oneLiner": "Platform content or search results vary for individual users.",
+      "channels": [
+        "web",
+        "app"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Adapt feeds and search results to user context",
+      "cdpDataUsed": [
+        "User behavior",
+        "Location",
+        "Known preferences"
+      ],
+      "businessProblems": [
+        "generic-experience",
+        "poor-search-conversion"
+      ],
+      "industries": [
+        "telecom-media-technology",
+        "travel-hospitality"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "High",
+      "quickWin": false,
+      "customerTrigger": "User accesses a platform feed or search",
+      "journey": "The page names LinkedIn and Airbnb as platforms that present a unique feed or set of search results to each user, and describes adapting digital experiences based on behavior, location, or known preferences.",
+      "exampleBefore": "Users see a uniform feed or set of search results.",
+      "exampleAfter": "The feed or search results differ by user.",
+      "kpis": {
+        "primary": "User engagement",
+        "secondary": [
+          "Feature adoption",
+          "User retention"
+        ]
+      },
+      "toolsNeeded": [
+        "User segmentation",
+        "Behavioral data",
+        "Dynamic content delivery"
+      ],
+      "tags": [
+        "feed-personalization",
+        "search-personalization",
+        "contextual-experience"
+      ],
+      "source": {
+        "title": "9 Real-World Example of Personalisation Strategies for 2025",
+        "url": "https://www.context.dev/blog/example-of-personalisation",
+        "retrievedAt": "2026-11-17T08:41:04Z",
+        "summary": "The page names LinkedIn and Airbnb as examples of platforms presenting individualized feeds or search results. It describes adapting digital experiences using user behavior, location, or known preferences, and states that personalization can support engagement, feature adoption, and retention."
+      }
     }
   ]
 }
