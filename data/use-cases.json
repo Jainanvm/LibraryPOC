@@ -2282,7 +2282,7 @@
       "exampleBefore": "Off-the-shelf recommendation engines were judged unable to handle long, varied automotive shopping paths with hundreds of model variations.",
       "exampleAfter": "An EV-focused visitor is served EV tax incentives, test drive options and local availability, while a family-focused visitor sees safety, space and service plans.",
       "kpis": {
-        "primary": "Return on investment of the personalization platform (reported as over 400%)",
+        "primary": "Return on investment of the personalization platform",
         "secondary": [
           "Number of personalization cases and campaigns running concurrently (over 550 reported)",
           "Number of global markets supported (over 100 reported)",
@@ -2635,7 +2635,7 @@
       "exampleBefore": "Providers received hundreds, and in some cases thousands, of emails each year from dozens of brands, some not relevant to their practice.",
       "exampleAfter": "Each provider receives a one-to-one engagement plan with only wanted content at preferred times, lowering the opt-out rate by 50 percent.",
       "kpis": {
-        "primary": "Email opt-out rate (reported 50% decrease)",
+        "primary": "Email opt-out rate",
         "secondary": [
           "Customer reach (reported as increased dramatically)",
           "Email opens, clicks, and opt-ins (named as target outcomes)"
@@ -3183,7 +3183,7 @@
       "exampleBefore": "Members activated personal offers in the app before shopping but often did not redeem them during the shopping trip.",
       "exampleAfter": "A single real-time in-app nudge was used, and offer redemption increased by 4.3 PP.",
       "kpis": {
-        "primary": "Offer redemption rate (reported +4.3 PP increase)",
+        "primary": "Offer redemption rate",
         "secondary": [
           "Loyalty offer activation",
           "Offer activation-to-redemption gap"
@@ -3894,7 +3894,7 @@
       "exampleBefore": "Customers shared the same digital shopping experience despite having unique needs and intentions.",
       "exampleAfter": "Onsite modules surfaced recommendations such as Frequently Bought Together and You May Also Like.",
       "kpis": {
-        "primary": "6% interaction rate for five combined personalization site features (reported for 2018)",
+        "primary": "interaction rate for five combined personalization site features ",
         "secondary": [
           "4x more likely to convert",
           "+26% in units per transaction",
@@ -3945,7 +3945,7 @@
       "exampleBefore": "The project identified a shared digital shopping experience despite customers having unique needs and intentions.",
       "exampleAfter": "The described one-to-one feature set included size recommendations and Picked For You flags for known customers.",
       "kpis": {
-        "primary": "No outcome reported for these one-to-one features",
+        "primary": "No outcome",
         "secondary": []
       },
       "toolsNeeded": [
@@ -4095,7 +4095,7 @@
       "exampleBefore": "A customer has lapsed for more than 90 days.",
       "exampleAfter": "The customer receives an ad tailored with a specific product and message for re-engagement.",
       "kpis": {
-        "primary": "Return on ad spend (reported initiative-wide increase: 297%)",
+        "primary": "Return on ad spend",
         "secondary": []
       },
       "toolsNeeded": [
@@ -4343,7 +4343,7 @@
       "exampleBefore": "Recommendations relied on general event or performer popularity, and alerts were limited to artists subscribers had specifically favorited or requested.",
       "exampleAfter": "Emails included a personalized list of recommended performers or events based on subscriber interests and related data.",
       "kpis": {
-        "primary": "Reactivation rate increased 400% among inactive subscribers",
+        "primary": "Reactivation rate",
         "secondary": [
           "Weekly Events Guide clickthrough rate increased 97%",
           "Weekly Events Guide open rate increased 26%"
