@@ -169,9 +169,11 @@ AI box is for, just via clicking instead of typing a sentence.
   `app.js`, with a synonym dictionary (so "mobile app" matches things
   tagged `app`, "newsletter" matches `email`, "rewards" matches `loyalty`,
   etc. — extend `SYNONYM_WORDS`/`SYNONYM_PHRASES` at the top of `app.js`
-  as you notice more gaps) and typo tolerance on longer words.
+  as you notice more gaps), common filler-word removal, partial term
+  matching, relevance ranking, and typo tolerance on longer words.
 - **AI problem search** (optional, see section 3) handles genuinely
-  freeform sentences the keyword search isn't meant to parse.
+  open-ended situations where semantic matching is more useful than keyword
+  overlap.
 - **Filters** (industry, business problem, channel, funnel stage,
   complexity, CDP maturity needed, quick win) are generated automatically
   from whatever values exist in the data files — you don't need to touch

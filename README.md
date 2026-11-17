@@ -19,7 +19,9 @@ Several ways to find something relevant:
 - **Refine one shortlist** — industry, business problem, channel, and effort
   filters are grouped together and can be removed from the active-filter row.
 - **Filter by keyword** — use the small search control above the results;
-  it’s fuzzy and typo-tolerant, with synonyms ("newsletter" matches `email`).
+  it’s fuzzy and typo-tolerant, ignores common filler words, and ranks cases
+  by how many topic terms match. Synonyms help too ("newsletter" matches
+  `email`, "bought" matches `purchase`).
 - **Match a situation with AI** — enter a plain-language description in the
   separate AI field to get ranked matches and explanations. This optional
   feature needs a small amount of setup and has a small usage-based cost —
