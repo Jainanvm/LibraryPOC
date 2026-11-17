@@ -1,6 +1,6 @@
 {
   "$schemaVersion": "1.0",
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-17",
   "useCases": [
     {
       "id": "browse-abandonment-recall",
@@ -4115,6 +4115,198 @@
         "url": "https://abmatic.ai/blog/power-of-personalization-in-email-marketing-case-studies-and-examples",
         "retrievedAt": "2026-11-16T11:17:33Z",
         "summary": "The page describes a vacation-rental platform using prior search and booking history to recommend properties, and destination interest to send emails featuring local events, attractions, and property suggestions. It says these emails are intended to encourage bookings and engagement, but gives no quantified results."
+      }
+    },
+    {
+      "id": "lapsed-customer-ad-reengagement",
+      "title": "Re-engage customers after 90 days without purchase",
+      "oneLiner": "Tailor ads by product and message for customers who have not purchased in more than 90 days.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Reactivation",
+      "personalizationTactic": "Tailor re-engagement ads using customer profiles",
+      "cdpDataUsed": [
+        "First-party customer data",
+        "Purchase recency",
+        "Customer profile and journey-stage data"
+      ],
+      "businessProblems": [
+        "poor-win-back-performance",
+        "low-repeat-purchase"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "Customer has not purchased in more than 90 days",
+      "journey": "Customer profiles identified people who had lapsed for more than 90 days. Ads were tailored with a specific message and product to drive re-engagement.",
+      "exampleBefore": "A customer has lapsed for more than 90 days.",
+      "exampleAfter": "The customer receives an ad tailored with a specific product and message for re-engagement.",
+      "kpis": {
+        "primary": "Return on ad spend (reported initiative-wide increase: 297%)",
+        "secondary": []
+      },
+      "toolsNeeded": [
+        "Customer Data Platform",
+        "Enterprise Customer Data Infrastructure",
+        "Ad activation platforms"
+      ],
+      "tags": [
+        "reactivation",
+        "lapsed-customer",
+        "paid-media",
+        "personalized-ads"
+      ],
+      "source": {
+        "title": "The Beauty of Personalization at Scale",
+        "url": "https://www.leveragelab.com/case-studies/the-beauty-of-personalization-at-scale",
+        "retrievedAt": "2026-11-17T08:26:15Z",
+        "summary": "First-party CDP data was used to identify customers who had not purchased in more than 90 days and tailor re-engagement ads with a specific product and message. The reported 297% return-on-ad-spend increase applies to the overall initiative."
+      }
+    },
+    {
+      "id": "category-based-return-visit-routing",
+      "title": "Remembered category for return visits",
+      "oneLiner": "A clothing retailer remembers a visitor’s selected category and redirects the next visit to it.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Awareness",
+      "personalizationTactic": "Redirect using remembered category preference",
+      "cdpDataUsed": [
+        "Visitor’s selected main clothing category"
+      ],
+      "businessProblems": [
+        "generic-experience"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "customerTrigger": "Visitor selects a main clothing category",
+      "journey": "The site remembers the visitor’s selected category and automatically redirects them to that page on their next visit.",
+      "exampleBefore": "A returning visitor lands on the general site entry page.",
+      "exampleAfter": "The visitor is redirected to the previously selected clothing category.",
+      "kpis": {
+        "primary": "Return-visit category-page engagement",
+        "secondary": [
+          "Category-page visits",
+          "Progression to product pages"
+        ]
+      },
+      "toolsNeeded": [
+        "Website personalization"
+      ],
+      "tags": [
+        "awareness",
+        "category-preference",
+        "return-visit"
+      ],
+      "source": {
+        "title": "How to Personalize Each Stage of the Customer Lifecycle | AtData",
+        "url": "https://atdata.com/blog/personalize-each-stage-customer-lifecycle/",
+        "retrievedAt": "2026-11-17T08:26:41Z",
+        "summary": "The page describes a clothing retailer remembering a visitor’s main category selection and automatically redirecting the visitor to that category on a subsequent visit."
+      }
+    },
+    {
+      "id": "video-consideration-reengagement",
+      "title": "Video message to re-engage prospects",
+      "oneLiner": "A company uses a video re-engagement message for prospects who show interest but disengage.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Send a video re-engagement message",
+      "cdpDataUsed": [
+        "Prospect’s prior interest or engagement"
+      ],
+      "businessProblems": [
+        "poor-win-back-performance"
+      ],
+      "industries": [
+        "telecom-media-technology"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "customerTrigger": "An interested prospect begins to disengage",
+      "journey": "After a prospect shows interest and then falls off, the company sends a video re-engagement message to encourage renewed consideration.",
+      "exampleBefore": "An interested prospect stops engaging during consideration.",
+      "exampleAfter": "The prospect receives a video re-engagement message.",
+      "kpis": {
+        "primary": "Re-engagement rate",
+        "secondary": [
+          "Email click-through rate",
+          "Progression to decision"
+        ]
+      },
+      "toolsNeeded": [
+        "Email marketing platform",
+        "Video messaging"
+      ],
+      "tags": [
+        "consideration",
+        "re-engagement",
+        "video"
+      ],
+      "source": {
+        "title": "How to Personalize Each Stage of the Customer Lifecycle | AtData",
+        "url": "https://atdata.com/blog/personalize-each-stage-customer-lifecycle/",
+        "retrievedAt": "2026-11-17T08:26:41Z",
+        "summary": "The page identifies a company’s video re-engagement message as an example for prospects who show interest and then fall off."
+      }
+    },
+    {
+      "id": "consideration-reminder-special-offer",
+      "title": "Reminder email with a special offer",
+      "oneLiner": "A cycling retailer sends a reminder about its offering and includes a special offer.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Consideration",
+      "personalizationTactic": "Pair a reminder with a special offer",
+      "cdpDataUsed": [
+        "Prospect’s prior interest"
+      ],
+      "businessProblems": [
+        "poor-win-back-performance"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "customerTrigger": "A prospect shows interest but falls off",
+      "journey": "The retailer sends a reminder of what it offers and sweetens the message with a special offer to re-engage the prospect.",
+      "exampleBefore": "A prospect has shown interest but is no longer engaged.",
+      "exampleAfter": "The prospect receives a reminder email with a special offer.",
+      "kpis": {
+        "primary": "Re-engagement rate",
+        "secondary": [
+          "Email click-through rate",
+          "Offer conversion rate"
+        ]
+      },
+      "toolsNeeded": [
+        "Email marketing platform"
+      ],
+      "tags": [
+        "consideration",
+        "reminder",
+        "special-offer"
+      ],
+      "source": {
+        "title": "How to Personalize Each Stage of the Customer Lifecycle | AtData",
+        "url": "https://atdata.com/blog/personalize-each-stage-customer-lifecycle/",
+        "retrievedAt": "2026-11-17T08:26:41Z",
+        "summary": "The page describes a cycling retailer sending a reminder message about its offering and adding a special offer."
       }
     }
   ]
