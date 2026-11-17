@@ -4308,6 +4308,264 @@
         "retrievedAt": "2026-11-17T08:26:41Z",
         "summary": "The page describes a cycling retailer sending a reminder message about its offering and adding a special offer."
       }
+    },
+    {
+      "id": "purchase-aware-win-back-emails",
+      "title": "Purchase-Aware Win-Back Emails",
+      "oneLiner": "Proposed reactivation emails tailor offers and product messages to purchase recency, preferences, loyalty balance, and availability.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Reactivation",
+      "personalizationTactic": "Tailor win-back emails to purchase and loyalty signals",
+      "cdpDataUsed": [
+        "BigQuery order data and purchase recency",
+        "Customer product and brand purchase history",
+        "Loyalty balance and expiry information",
+        "Product availability"
+      ],
+      "businessProblems": [
+        "poor-win-back-performance",
+        "generic-experience",
+        "low-repeat-purchase"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "customerTrigger": "Customer has not purchased for 30–90 days",
+      "journey": "The proposed sequence begins with an email tailored to the customer's purchase pattern and likely reason for inactivity. Examples include a reorder prompt with expiring loyalty credit, a taste-matched new-flavor offer, or a restock message. A later email changes the offer or message using the same customer context.",
+      "exampleBefore": "A win-back email with a 20% discount and an article grid, not tied to purchase history.",
+      "exampleAfter": "A proposed email uses the customer's usual product and expiring loyalty credit to prompt a reorder.",
+      "kpis": {
+        "primary": "Reactivation rate",
+        "secondary": [
+          "Recovered revenue"
+        ]
+      },
+      "toolsNeeded": [
+        "BigQuery order data",
+        "Email channel",
+        "Loyalty and product-availability data"
+      ],
+      "tags": [
+        "reactivation",
+        "email-personalization",
+        "purchase-history",
+        "loyalty"
+      ],
+      "source": {
+        "title": "$1.4M in Revenue with Email Marketing Accelerator - scandiweb",
+        "url": "https://scandiweb.com/blog/email-marketing-accelerator-case-study-personalized-reengagement/",
+        "retrievedAt": "2026-11-17T08:35:43Z",
+        "summary": "The source reports that a retailer analyzed BigQuery orders by purchase recency and described its existing win-back email as a generic discount and article grid. It proposes a customer-level re-engagement sequence using purchase history, loyalty information, and product availability, including tailored emails. The sequence is a proposal, not a reported deployed campaign; the stated revenue figure is a conditional opportunity estimate, not a realized result."
+      }
+    },
+    {
+      "id": "eventful-inactive-subscriber-reactivation",
+      "title": "Reactivate inactive subscribers with event recommendations",
+      "oneLiner": "Eventful used interest-based performer recommendations in email to re-engage subscribers who had been inactive for five months.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Reactivation",
+      "personalizationTactic": "Recommend performers from subscriber interests and behavior",
+      "cdpDataUsed": [
+        "Subscriber-provided information about events of interest",
+        "Favorited or demanded artists and events",
+        "Subscriber actions and clicks across Eventful's website, newsletter, and alerts",
+        "Event, venue, time, location, and performer records",
+        "Third-party data and normative data"
+      ],
+      "businessProblems": [
+        "poor-win-back-performance",
+        "generic-experience"
+      ],
+      "industries": [
+        "telecom-media-technology"
+      ],
+      "dataMaturity": "Advanced",
+      "complexity": "High",
+      "quickWin": false,
+      "customerTrigger": "Subscriber has not engaged with an Eventful email for five months",
+      "journey": "Eventful used its recommendation engine to select performers and events based on subscriber interests and behavioral data, then included personalized recommendations in its newsletter and Recommended Performer Alerts. It sent the recommendation technology to inactive subscribers as a reactivation campaign.",
+      "exampleBefore": "Recommendations relied on general event or performer popularity, and alerts were limited to artists subscribers had specifically favorited or requested.",
+      "exampleAfter": "Emails included a personalized list of recommended performers or events based on subscriber interests and related data.",
+      "kpis": {
+        "primary": "Reactivation rate increased 400% among inactive subscribers",
+        "secondary": [
+          "Weekly Events Guide clickthrough rate increased 97%",
+          "Weekly Events Guide open rate increased 26%"
+        ]
+      },
+      "toolsNeeded": [
+        "Recommendation algorithm",
+        "Subscriber, event, and performer databases",
+        "Email newsletter and alert system"
+      ],
+      "tags": [
+        "email-personalization",
+        "reactivation",
+        "event-recommendations",
+        "behavioral-data"
+      ],
+      "source": {
+        "title": "Email Marketing: Weekly newsletter sees 400% lift in reactivation of inactive subscribers with personalization | MarketingSherpa",
+        "url": "https://www.marketingsherpa.com/article/case-study/newsletter-reactivation-lift-personalization",
+        "retrievedAt": "2026-11-17T08:35:53Z",
+        "summary": "Eventful combined subscriber interest and behavioral information with event and performer data to personalize email recommendations, including in a campaign for subscribers who had not engaged with email for five months. The source reports a 400% increase in reactivation rates; it also reports a 97% clickthrough increase and 26% open-rate increase for the Weekly Events Guide."
+      }
+    },
+    {
+      "id": "keeper-tax-inactive-customer-reactivation",
+      "title": "Personalized Reactivation for Inactive E-Commerce Customers",
+      "oneLiner": "Customer-journey insights guided personalized outreach to inactive customers, with 20% purchasing within a month.",
+      "channels": [
+        "web"
+      ],
+      "funnelStage": "Reactivation",
+      "personalizationTactic": "Journey-map-guided tailored messaging and timely offers",
+      "cdpDataUsed": [
+        "Customer journey maps",
+        "Engagement gaps",
+        "Inactive customer status"
+      ],
+      "businessProblems": [
+        "poor-win-back-performance",
+        "low-repeat-purchase"
+      ],
+      "industries": [
+        "financial-services"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "Customer became inactive after repeat-purchase attrition",
+      "journey": "After high attrition of repeat customers following six months, customer journey maps were used to pinpoint engagement gaps and guide a personalized re-engagement campaign. The source reports that 20% of inactive customers purchased within the first month.",
+      "exampleBefore": "Inactive customer after six months amid high repeat-customer attrition.",
+      "exampleAfter": "Personalized re-engagement; 20% of inactive customers purchased within one month.",
+      "kpis": {
+        "primary": "Inactive-customer purchase rate",
+        "secondary": [
+          "Time to purchase after reactivation campaign",
+          "Previously inactive users retained"
+        ]
+      },
+      "toolsNeeded": [
+        "Customer journey maps"
+      ],
+      "tags": [
+        "reactivation",
+        "customer-journey",
+        "personalized-outreach"
+      ],
+      "source": {
+        "title": "Customer Reactivation Campaigns: Real Business Cases | TIMIFY",
+        "url": "https://www.timify.com/en/blog/customer-reactivation-campaigns/",
+        "retrievedAt": "2026-11-17T08:36:07Z",
+        "summary": "A company experiencing high repeat-customer attrition after six months used customer journey maps to identify engagement gaps and launched personalized re-engagement. The source reports 20% of inactive customers purchased in the first month and says tailored messaging and timely offers helped retain over 30% of previously inactive users."
+      }
+    },
+    {
+      "id": "subbly-churned-subscriber-reactivation",
+      "title": "Personalized Emails to Renew Churned Subscriptions",
+      "oneLiner": "Personalized reactivation emails highlighted subscription features and benefits; 15% of churned customers resubscribed within three months.",
+      "channels": [
+        "email"
+      ],
+      "funnelStage": "Reactivation",
+      "personalizationTactic": "Personalized emails highlighting exclusive subscription benefits",
+      "cdpDataUsed": [
+        "Subscription churn status"
+      ],
+      "businessProblems": [
+        "poor-win-back-performance",
+        "low-repeat-purchase"
+      ],
+      "industries": [
+        "telecom-media-technology"
+      ],
+      "dataMaturity": "Foundational",
+      "complexity": "Low",
+      "quickWin": true,
+      "customerTrigger": "Customer churned from a subscription within the first 12 months",
+      "journey": "Facing increasing churn during the first 12 months of subscriptions, the company sent personalized reactivation emails emphasizing exclusive features and benefits. The source reports that 15% of churned customers resubscribed within three months.",
+      "exampleBefore": "Churned subscriber amid increasing first-year churn.",
+      "exampleAfter": "Personalized emails presented exclusive features and benefits; 15% resubscribed within three months.",
+      "kpis": {
+        "primary": "Churned-customer resubscription rate",
+        "secondary": [
+          "Time to resubscription",
+          "Subscription churn within first 12 months"
+        ]
+      },
+      "toolsNeeded": [
+        "Reactivation email"
+      ],
+      "tags": [
+        "subscription",
+        "email",
+        "reactivation"
+      ],
+      "source": {
+        "title": "Customer Reactivation Campaigns: Real Business Cases | TIMIFY",
+        "url": "https://www.timify.com/en/blog/customer-reactivation-campaigns/",
+        "retrievedAt": "2026-11-17T08:36:07Z",
+        "summary": "A subscription business facing increased churn in the first 12 months used personalized reactivation emails focused on exclusive features and benefits. The source reports 15% of churned customers resubscribed within three months."
+      }
+    },
+    {
+      "id": "starbucks-dormant-customer-reactivation",
+      "title": "Targeted Digital Campaigns for Dormant Customers",
+      "oneLiner": "Personalized communications and tailored promotions through a mobile app and rewards program re-engaged dormant customers.",
+      "channels": [
+        "app"
+      ],
+      "funnelStage": "Reactivation",
+      "personalizationTactic": "Data-informed personalized communications and tailored promotions",
+      "cdpDataUsed": [
+        "Data-driven insights",
+        "Dormant customer status"
+      ],
+      "businessProblems": [
+        "poor-win-back-performance",
+        "low-app-retention",
+        "low-loyalty-engagement"
+      ],
+      "industries": [
+        "retail-consumer-goods"
+      ],
+      "dataMaturity": "Intermediate",
+      "complexity": "Medium",
+      "quickWin": false,
+      "customerTrigger": "Customer remained inactive for a period of time",
+      "journey": "The company used data-driven insights to craft personalized communications and tailored promotions delivered via its mobile app and rewards program, highlighting new products and an enhanced customer experience. The source says this re-engaged a significant portion of its inactive customer base and gained new customers within a short timeframe.",
+      "exampleBefore": "Dormant customer after a period of inactivity.",
+      "exampleAfter": "Targeted digital marketing, personalized communications, and tailored app and rewards promotions highlighted new products and an enhanced experience.",
+      "kpis": {
+        "primary": "Re-engaged inactive-customer share",
+        "secondary": [
+          "New customers gained",
+          "Time to re-engagement"
+        ]
+      },
+      "toolsNeeded": [
+        "Mobile app",
+        "Rewards program"
+      ],
+      "tags": [
+        "reactivation",
+        "mobile-app",
+        "loyalty"
+      ],
+      "source": {
+        "title": "Customer Reactivation Campaigns: Real Business Cases | TIMIFY",
+        "url": "https://www.timify.com/en/blog/customer-reactivation-campaigns/",
+        "retrievedAt": "2026-11-17T08:36:07Z",
+        "summary": "The source describes a service-business revival campaign using data-driven insights to personalize communications and promotions delivered through a mobile app and rewards program. It reports re-engaging a significant portion of inactive customers and gaining new customers within a short timeframe."
+      }
     }
   ]
 }
