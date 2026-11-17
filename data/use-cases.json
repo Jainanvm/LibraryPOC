@@ -3572,57 +3572,6 @@
       }
     },
     {
-      "id": "provider-email-personalization",
-      "title": "Personalized email engagement for healthcare providers",
-      "oneLiner": "Provider-level communication plans tailored to preferred content, timing, frequency, and format reduced email opt-outs.",
-      "channels": [
-        "email"
-      ],
-      "funnelStage": "Retention",
-      "personalizationTactic": "Machine-learning-based provider email plans",
-      "cdpDataUsed": [
-        "Five years of data across 700,000 healthcare providers",
-        "Provider-specific content interests and engagement",
-        "Preferred email timing, frequency, content, and format"
-      ],
-      "businessProblems": [
-        "high-unsubscribe-rate",
-        "generic-experience"
-      ],
-      "industries": [
-        "healthcare-public-sector-utilities"
-      ],
-      "dataMaturity": "Advanced",
-      "complexity": "High",
-      "quickWin": false,
-      "customerTrigger": "Five years of provider data were analyzed",
-      "journey": "The company analyzed historical data across healthcare providers and dozens of brands, then used a cognitive automation tool to create a one-to-one engagement plan for each provider. Plans customized content, timing, frequency, and format; the reported result was a 50 percent decrease in email opt-outs and dramatically increased customer reach.",
-      "exampleBefore": "Providers received hundreds or, in some cases, thousands of emails yearly, including promotions irrelevant to their practice.",
-      "exampleAfter": "Providers received content tailored to their preferences, at their preferred times and frequency, in their preferred format.",
-      "kpis": {
-        "primary": "Email opt-out rate (reported 50% decrease)",
-        "secondary": [
-          "Customer reach (reported increase)"
-        ]
-      },
-      "toolsNeeded": [
-        "Machine learning",
-        "Cognitive automation tool"
-      ],
-      "tags": [
-        "healthcare-providers",
-        "email-personalization",
-        "opt-out-reduction",
-        "machine-learning"
-      ],
-      "source": {
-        "title": "Email marketing personalization case study | Deloitte US",
-        "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/cloud-transformation/case-studies/email-marketing-personalization-case-study.html",
-        "retrievedAt": "2026-11-16T11:12:38Z",
-        "summary": "A pharmaceutical company analyzed five years of data on 700,000 healthcare providers across dozens of brands. It used machine learning to identify provider-specific digital communication preferences and built a cognitive automation tool for individualized engagement plans. The company reported a 50 percent decrease in email opt-outs and dramatically increased customer reach."
-      }
-    },
-    {
       "id": "visitor-intent-product-recommendations",
       "title": "Recommendations based on visitor intent",
       "oneLiner": "Personalized recommendations used visitor browsing and product-category interactions across retail site pages.",
