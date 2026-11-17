@@ -49,6 +49,7 @@
     intakeProblem: document.getElementById("intakeProblem"),
     intakeIndustry: document.getElementById("intakeIndustry"),
     intakeFunnelStage: document.getElementById("intakeFunnelStage"),
+    industryCards: document.getElementById("industryCards"),
     browseAllBtn: document.getElementById("browseAllBtn"),
     missionShortcuts: document.querySelectorAll(".mission-card"),
     briefBar: document.getElementById("briefBar"),
@@ -98,8 +99,22 @@
         state.industriesById[industry.id] = industry;
       });
       populateIntakeOptions();
+      buildIndustryCards();
       buildFilterGroups();
-      render();
+      const selectedIndustry = new URLSearchParams(window.location.search).get("industry");
+      if (selectedIndustry && state.industriesById[selectedIndustry]) {
+        els.intakeIndustry.value = selectedIndustry;
+        startBrowsing("", selectedIndustry, false, "");
+        window.history.replaceState(null, "", window.location.pathname);
+      } else {
+        render();
+        const navigationEntries = window.performance && window.performance.getEntriesByType
+          ? window.performance.getEntriesByType("navigation")
+          : [];
+        if (navigationEntries.length && navigationEntries[0].type === "reload") {
+          window.scrollTo(0, 0);
+        }
+      }
     })
     .catch((err) => {
       els.resultsArea.hidden = false;
@@ -833,6 +848,44 @@
       els.intakeFunnelStage,
       JOURNEY_STAGES.map((stage) => ({ id: stage, label: stage }))
     );
+  }
+
+  const INDUSTRY_ICONS = {
+    "retail-consumer-goods": '<path d="M5 9h14l-1 11H6L5 9Z"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/><path d="M9 13h6"/>',
+    "financial-services": '<path d="m3 9 9-5 9 5"/><path d="M5 10v8m4-8v8m6-8v8m4-8v8M3 20h18M4 9h16"/>',
+    "telecom-media-technology": '<path d="M12 19h.01"/><path d="M8.5 15.5a5 5 0 0 1 7 0"/><path d="M5.5 12.5a9 9 0 0 1 13 0"/><path d="M2.5 9.5a13 13 0 0 1 19 0"/>',
+    "travel-hospitality": '<path d="m3 11 18-7-7 18-3-8-8-3Z"/><path d="m11 14 5-5"/>',
+    "automotive-manufacturing": '<path d="M4 16h16l-1-5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2l-1 5Z"/><path d="M4 16v3h3v-3m10 0v3h3v-3M7 12h10M7 16h.01M17 16h.01"/>',
+    "healthcare-public-sector-utilities": '<path d="M12 21s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6.5-8 11-8 11Z"/><path d="M9 12h6m-3-3v6"/>',
+  };
+
+  function buildIndustryCards() {
+    const counts = new Map();
+    state.all.forEach((useCase) => {
+      (useCase.industries || []).forEach((id) => counts.set(id, (counts.get(id) || 0) + 1));
+    });
+
+    const industries = Object.values(state.industriesById).filter((industry) => counts.has(industry.id));
+    els.industryCards.innerHTML = industries.map((industry) => {
+      const count = counts.get(industry.id);
+      const icon = INDUSTRY_ICONS[industry.id] || '<circle cx="12" cy="12" r="8"/><path d="M12 8v8m-4-4h8"/>';
+      return `
+        <a class="industry-card" href="?industry=${encodeURIComponent(industry.id)}#resultsArea"
+          aria-label="Explore ${escapeHTML(industry.label)}: ${count} use case${count === 1 ? "" : "s"}">
+          <span class="industry-art" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round">${icon}</svg>
+          </span>
+          <span class="industry-card-copy">
+            <strong>${escapeHTML(industry.label)}</strong>
+            <span>${escapeHTML(industry.description || "")}</span>
+          </span>
+          <span class="industry-card-footer">
+            <span>${count} use case${count === 1 ? "" : "s"}</span><span class="industry-arrow" aria-hidden="true">↗</span>
+          </span>
+        </a>
+      `;
+    }).join("");
   }
 
   function syncFilterChips() {
