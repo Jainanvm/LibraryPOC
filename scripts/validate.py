@@ -27,18 +27,22 @@ SCHEMA_FILE = ROOT / "data" / "schema.json"
 def main():
     errors_found = False
 
-    schema = json.loads(SCHEMA_FILE.read_text())
+    try:
+        schema = json.loads(SCHEMA_FILE.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        print(f"ERROR: data/schema.json is not valid UTF-8 JSON: {e}")
+        sys.exit(1)
     validator = Draft7Validator(schema)
 
     try:
-        data = json.loads(DATA_FILE.read_text())
-    except json.JSONDecodeError as e:
-        print(f"❌ data/use-cases.json is not valid JSON: {e}")
+        data = json.loads(DATA_FILE.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        print(f"ERROR: data/use-cases.json is not valid JSON: {e}")
         sys.exit(1)
 
     use_cases = data.get("useCases", [])
     if not use_cases:
-        print("❌ No use cases found under the 'useCases' key.")
+        print("ERROR: No use cases found under the 'useCases' key.")
         sys.exit(1)
 
     seen_ids = {}
@@ -48,13 +52,13 @@ def main():
         for err in errs:
             errors_found = True
             path = ".".join(str(p) for p in err.path) or "(root)"
-            print(f"❌ {label}: {path} — {err.message}")
+            print(f"ERROR: {label}: {path} - {err.message}")
 
         uc_id = uc.get("id")
         if uc_id:
             if uc_id in seen_ids:
                 errors_found = True
-                print(f"❌ Duplicate id '{uc_id}' (entries {seen_ids[uc_id]} and {i})")
+                print(f"ERROR: Duplicate id '{uc_id}' (entries {seen_ids[uc_id]} and {i})")
             else:
                 seen_ids[uc_id] = i
 
@@ -62,7 +66,7 @@ def main():
         print(f"\nValidation failed for one or more of {len(use_cases)} use cases.")
         sys.exit(1)
 
-    print(f"✅ All {len(use_cases)} use cases are valid. No duplicate ids.")
+    print(f"OK: All {len(use_cases)} use cases are valid. No duplicate ids.")
 
 
 if __name__ == "__main__":
