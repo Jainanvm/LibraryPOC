@@ -899,7 +899,7 @@
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
-      "customerTrigger": "A user?s push-notification engagement changes",
+      "customerTrigger": "A user's push-notification engagement changes",
       "journey": "Two users get 4 push notifications a week by default. One taps almost every one; cadence for them can safely increase during a launch week. The other hasn't tapped one in a month — instead of continuing to push (and risking a full opt-out or uninstall), cadence automatically tapers down and shifts to only the highest-relevance moments.",
       "exampleBefore": "Every user gets the same push frequency regardless of whether they engage with it",
       "exampleAfter": "Highly engaged users get more; disengaging users get fewer, more relevant-only pushes",
