@@ -202,6 +202,7 @@ against `data/schema.json`. Required fields:
 | `cdpDataUsed` | List of the CDP data points the use case relies on |
 | `businessProblems` | Ids from `data/business-problems.json` — the client-facing problems this case addresses. This is what both the "Browse by business problem" filter and the AI search key off of. |
 | `industries` | Ids from `data/industries.json` — which of the six industries this case is relevant for. Powers the "Industry" filter and the AI search. |
+| `dataCategories` | Optional. Ids from `data/data-categories.json` — the kinds of CDP data the use case needs (e.g. `purchase-history`, `loyalty-membership`). Powers the "Data you already have" readiness filter; entries without it are never hidden by that filter. |
 | `dataMaturity` | Foundational / Intermediate / Advanced — how much CDP capability a client needs first |
 | `complexity` | Low / Medium / High implementation effort |
 | `quickWin` | `true`/`false` — powers the "Quick wins only" filter |

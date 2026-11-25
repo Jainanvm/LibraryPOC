@@ -18,6 +18,9 @@ Several ways to find something relevant:
   underrepresented parts of the journey easy to spot.
 - **Refine one shortlist** — industry, business problem, channel, and effort
   filters are grouped together and can be removed from the active-filter row.
+- **Check data readiness** — in *Refine your shortlist*, tick the kinds of CDP data a client already has (data/data-categories.json); only ideas they could run today are shown, plus a hint for the one data type that would unlock the most extra ideas.
+- **Save, compare, and export** — bookmark ideas into a shortlist (kept in this browser), compare them side by side, and export as a print-ready PDF, CSV, or copied text summary.
+- **Share a link** — *Copy link* captures filters, keyword, saved ideas, and an open idea in the URL, so a colleague reopens exactly the same view. Nothing is sent to a server.
 - **Filter by keyword** — use the small search control above the results;
   it’s fuzzy and typo-tolerant, ignores common filler words, and ranks cases
   by how many topic terms match. Synonyms help too ("newsletter" matches
@@ -46,6 +49,7 @@ assets/js/app.js                 search, filtering, synonyms, AI search wiring, 
 data/use-cases.json              the use cases — this is what you'll edit/extend
 data/business-problems.json      the canonical "business problem" taxonomy used for filtering + AI matching
 data/industries.json             the six industries used for the industry filter + AI matching
+data/data-categories.json      the CDP data categories behind the data-readiness filter
 data/schema.json                 the validation schema for every use case entry
 netlify/functions/diagnose.js    the AI problem-search function (optional — see SETUP.md)
 netlify.toml                     Netlify config (static site + function)
