@@ -21,6 +21,10 @@
         "high-cart-abandonment",
         "generic-experience"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "predictive-scores"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
       "quickWin": true,
@@ -78,6 +82,10 @@
         "generic-experience",
         "low-repeat-purchase"
       ],
+      "dataCategories": [
+        "purchase-history",
+        "predictive-scores"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
       "quickWin": true,
@@ -131,6 +139,9 @@
       "businessProblems": [
         "low-loyalty-engagement",
         "generic-experience"
+      ],
+      "dataCategories": [
+        "loyalty-membership"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
@@ -190,6 +201,11 @@
         "low-app-retention",
         "cdp-data-not-activated"
       ],
+      "dataCategories": [
+        "location-context",
+        "purchase-history",
+        "declared-preferences"
+      ],
       "dataMaturity": "Advanced",
       "complexity": "High",
       "quickWin": false,
@@ -246,6 +262,10 @@
         "low-repeat-purchase",
         "low-post-purchase-engagement"
       ],
+      "dataCategories": [
+        "purchase-history",
+        "declared-preferences"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -301,6 +321,11 @@
         "poor-search-conversion",
         "generic-experience"
       ],
+      "dataCategories": [
+        "declared-preferences",
+        "purchase-history",
+        "predictive-scores"
+      ],
       "dataMaturity": "Advanced",
       "complexity": "High",
       "quickWin": false,
@@ -354,6 +379,10 @@
       ],
       "businessProblems": [
         "high-cart-abandonment"
+      ],
+      "dataCategories": [
+        "purchase-history",
+        "predictive-scores"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -410,6 +439,10 @@
         "poor-new-visitor-conversion",
         "generic-experience"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "purchase-history"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
       "quickWin": true,
@@ -463,6 +496,10 @@
       "businessProblems": [
         "insufficient-zero-party-data",
         "low-app-retention"
+      ],
+      "dataCategories": [
+        "declared-preferences",
+        "browsing-behavior"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
@@ -518,6 +555,11 @@
       "businessProblems": [
         "poor-win-back-performance",
         "low-repeat-purchase"
+      ],
+      "dataCategories": [
+        "predictive-scores",
+        "email-engagement",
+        "browsing-behavior"
       ],
       "dataMaturity": "Advanced",
       "complexity": "High",
@@ -576,6 +618,10 @@
         "low-email-open-rate",
         "high-unsubscribe-rate"
       ],
+      "dataCategories": [
+        "email-engagement",
+        "location-context"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": true,
@@ -628,6 +674,10 @@
       ],
       "businessProblems": [
         "low-email-open-rate"
+      ],
+      "dataCategories": [
+        "predictive-scores",
+        "loyalty-membership"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Low",
@@ -682,6 +732,10 @@
         "high-unsubscribe-rate",
         "poor-win-back-performance"
       ],
+      "dataCategories": [
+        "email-engagement",
+        "purchase-history"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -733,6 +787,10 @@
       ],
       "businessProblems": [
         "low-loyalty-engagement"
+      ],
+      "dataCategories": [
+        "loyalty-membership",
+        "purchase-history"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
@@ -787,6 +845,11 @@
       "businessProblems": [
         "low-loyalty-engagement"
       ],
+      "dataCategories": [
+        "loyalty-membership",
+        "product-service-data",
+        "predictive-scores"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": true,
@@ -840,6 +903,10 @@
         "high-unsubscribe-rate",
         "insufficient-zero-party-data",
         "low-email-open-rate"
+      ],
+      "dataCategories": [
+        "declared-preferences",
+        "email-engagement"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
@@ -896,6 +963,10 @@
         "low-app-retention",
         "high-unsubscribe-rate"
       ],
+      "dataCategories": [
+        "email-engagement",
+        "browsing-behavior"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -947,6 +1018,11 @@
       "businessProblems": [
         "low-app-retention",
         "low-loyalty-engagement"
+      ],
+      "dataCategories": [
+        "purchase-history",
+        "loyalty-membership",
+        "browsing-behavior"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -1001,6 +1077,10 @@
         "inconsistent-cross-channel-experience",
         "high-cart-abandonment"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "purchase-history"
+      ],
       "dataMaturity": "Advanced",
       "complexity": "High",
       "quickWin": false,
@@ -1054,6 +1134,10 @@
       "businessProblems": [
         "inconsistent-cross-channel-experience"
       ],
+      "dataCategories": [
+        "email-engagement",
+        "product-service-data"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -1106,6 +1190,10 @@
       "businessProblems": [
         "poor-search-conversion",
         "insufficient-zero-party-data"
+      ],
+      "dataCategories": [
+        "declared-preferences",
+        "purchase-history"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
@@ -1162,6 +1250,11 @@
         "high-return-rate",
         "generic-experience"
       ],
+      "dataCategories": [
+        "purchase-history",
+        "feedback-reviews",
+        "declared-preferences"
+      ],
       "dataMaturity": "Advanced",
       "complexity": "High",
       "quickWin": false,
@@ -1212,6 +1305,10 @@
       "businessProblems": [
         "low-post-purchase-engagement",
         "low-repeat-purchase"
+      ],
+      "dataCategories": [
+        "purchase-history",
+        "predictive-scores"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
@@ -1264,6 +1361,10 @@
       "businessProblems": [
         "low-review-ugc-volume"
       ],
+      "dataCategories": [
+        "purchase-history",
+        "feedback-reviews"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
       "quickWin": true,
@@ -1314,6 +1415,11 @@
       "businessProblems": [
         "wasted-ad-spend",
         "cdp-data-not-activated"
+      ],
+      "dataCategories": [
+        "purchase-history",
+        "predictive-scores",
+        "third-party-audience"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -1368,6 +1474,9 @@
       "businessProblems": [
         "insufficient-zero-party-data",
         "generic-experience"
+      ],
+      "dataCategories": [
+        "declared-preferences"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
@@ -1430,6 +1539,11 @@
       ],
       "industries": [
         "healthcare-public-sector-utilities"
+      ],
+      "dataCategories": [
+        "email-engagement",
+        "browsing-behavior",
+        "declared-preferences"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "High",
@@ -1495,6 +1609,12 @@
       "industries": [
         "healthcare-public-sector-utilities"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "declared-preferences",
+        "location-context",
+        "email-engagement"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -1554,6 +1674,11 @@
       ],
       "industries": [
         "healthcare-public-sector-utilities"
+      ],
+      "dataCategories": [
+        "product-service-data",
+        "declared-preferences",
+        "browsing-behavior"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
@@ -1615,6 +1740,11 @@
       ],
       "industries": [
         "healthcare-public-sector-utilities"
+      ],
+      "dataCategories": [
+        "declared-preferences",
+        "email-engagement",
+        "product-service-data"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -1680,6 +1810,13 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "purchase-history",
+        "browsing-behavior",
+        "loyalty-membership",
+        "declared-preferences",
+        "predictive-scores"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -1744,6 +1881,10 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "purchase-history"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -1807,6 +1948,12 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "purchase-history",
+        "loyalty-membership",
+        "product-service-data"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
       "quickWin": true,
@@ -1861,6 +2008,9 @@
       ],
       "industries": [
         "telecom-media-technology"
+      ],
+      "dataCategories": [
+        "browsing-behavior"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -1943,6 +2093,10 @@
       "industries": [
         "automotive-manufacturing"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "declared-preferences"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
       "quickWin": false,
@@ -2012,6 +2166,11 @@
       ],
       "industries": [
         "automotive-manufacturing"
+      ],
+      "dataCategories": [
+        "purchase-history",
+        "product-service-data",
+        "declared-preferences"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -2100,6 +2259,11 @@
       "industries": [
         "automotive-manufacturing"
       ],
+      "dataCategories": [
+        "account-firmographic",
+        "browsing-behavior",
+        "declared-preferences"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -2182,6 +2346,9 @@
       ],
       "industries": [
         "automotive-manufacturing"
+      ],
+      "dataCategories": [
+        "account-firmographic"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
@@ -2273,6 +2440,10 @@
       ],
       "industries": [
         "automotive-manufacturing"
+      ],
+      "dataCategories": [
+        "browsing-behavior",
+        "predictive-scores"
       ],
       "dataMaturity": "Advanced",
       "complexity": "High",
@@ -2370,6 +2541,10 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "product-service-data"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -2433,6 +2608,9 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "declared-preferences"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -2501,6 +2679,9 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "purchase-history"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
       "quickWin": true,
@@ -2561,6 +2742,10 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "location-context",
+        "browsing-behavior"
       ],
       "dataMaturity": "Advanced",
       "complexity": "High",
@@ -2626,6 +2811,10 @@
       ],
       "industries": [
         "healthcare-public-sector-utilities"
+      ],
+      "dataCategories": [
+        "email-engagement",
+        "declared-preferences"
       ],
       "dataMaturity": "Advanced",
       "complexity": "High",
@@ -2705,6 +2894,10 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "declared-preferences",
+        "browsing-behavior"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
       "quickWin": true,
@@ -2770,6 +2963,11 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "declared-preferences",
+        "purchase-history",
+        "feedback-reviews"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -2840,6 +3038,10 @@
       "industries": [
         "telecom-media-technology"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "purchase-history"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -2907,6 +3109,10 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "declared-preferences",
+        "feedback-reviews"
       ],
       "dataMaturity": "Advanced",
       "complexity": "High",
@@ -2979,6 +3185,9 @@
       ],
       "industries": [
         "travel-hospitality"
+      ],
+      "dataCategories": [
+        "purchase-history"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -3058,6 +3267,10 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "purchase-history",
+        "declared-preferences"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
       "quickWin": true,
@@ -3115,6 +3328,11 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "browsing-behavior",
+        "email-engagement",
+        "purchase-history"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -3174,6 +3392,10 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "loyalty-membership",
+        "browsing-behavior"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -3249,6 +3471,10 @@
       "industries": [
         "telecom-media-technology"
       ],
+      "dataCategories": [
+        "purchase-history",
+        "browsing-behavior"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
       "quickWin": false,
@@ -3315,6 +3541,9 @@
       ],
       "industries": [
         "automotive-manufacturing"
+      ],
+      "dataCategories": [
+        "third-party-audience"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
@@ -3387,6 +3616,9 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "account-firmographic"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
       "quickWin": true,
@@ -3438,6 +3670,10 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "account-firmographic",
+        "email-engagement"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -3491,6 +3727,9 @@
       "industries": [
         "automotive-manufacturing"
       ],
+      "dataCategories": [
+        "account-firmographic"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
       "quickWin": false,
@@ -3539,6 +3778,10 @@
       ],
       "industries": [
         "telecom-media-technology"
+      ],
+      "dataCategories": [
+        "account-firmographic",
+        "location-context"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "High",
@@ -3592,6 +3835,10 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "predictive-scores"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -3642,6 +3889,10 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "location-context",
+        "purchase-history"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -3690,6 +3941,9 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "purchase-history"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -3737,6 +3991,9 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "browsing-behavior"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -3788,6 +4045,11 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "purchase-history",
+        "feedback-reviews"
+      ],
       "dataMaturity": "Advanced",
       "complexity": "High",
       "quickWin": false,
@@ -3838,6 +4100,9 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "purchase-history"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -3885,6 +4150,10 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "browsing-behavior",
+        "purchase-history"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
@@ -3937,6 +4206,10 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "declared-preferences",
+        "browsing-behavior"
+      ],
       "dataMaturity": "Advanced",
       "complexity": "High",
       "quickWin": false,
@@ -3984,6 +4257,10 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "purchase-history",
+        "email-engagement"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
@@ -4036,6 +4313,10 @@
       "industries": [
         "travel-hospitality"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "purchase-history"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -4087,6 +4368,10 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "purchase-history",
+        "third-party-audience"
+      ],
       "dataMaturity": "Advanced",
       "complexity": "Medium",
       "quickWin": false,
@@ -4133,6 +4418,9 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "browsing-behavior"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
@@ -4181,6 +4469,9 @@
       "industries": [
         "telecom-media-technology"
       ],
+      "dataCategories": [
+        "browsing-behavior"
+      ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
       "quickWin": true,
@@ -4228,6 +4519,9 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "browsing-behavior"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
@@ -4280,6 +4574,11 @@
       ],
       "industries": [
         "retail-consumer-goods"
+      ],
+      "dataCategories": [
+        "purchase-history",
+        "loyalty-membership",
+        "product-service-data"
       ],
       "dataMaturity": "Advanced",
       "complexity": "High",
@@ -4335,6 +4634,13 @@
       "industries": [
         "telecom-media-technology"
       ],
+      "dataCategories": [
+        "declared-preferences",
+        "browsing-behavior",
+        "email-engagement",
+        "product-service-data",
+        "third-party-audience"
+      ],
       "dataMaturity": "Advanced",
       "complexity": "High",
       "quickWin": false,
@@ -4388,6 +4694,10 @@
       "industries": [
         "financial-services"
       ],
+      "dataCategories": [
+        "predictive-scores",
+        "browsing-behavior"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -4435,6 +4745,9 @@
       ],
       "industries": [
         "telecom-media-technology"
+      ],
+      "dataCategories": [
+        "loyalty-membership"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Low",
@@ -4486,6 +4799,10 @@
       "industries": [
         "retail-consumer-goods"
       ],
+      "dataCategories": [
+        "loyalty-membership",
+        "predictive-scores"
+      ],
       "dataMaturity": "Intermediate",
       "complexity": "Medium",
       "quickWin": false,
@@ -4534,6 +4851,10 @@
       ],
       "industries": [
         "telecom-media-technology"
+      ],
+      "dataCategories": [
+        "declared-preferences",
+        "account-firmographic"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
@@ -4584,6 +4905,9 @@
       ],
       "industries": [
         "telecom-media-technology"
+      ],
+      "dataCategories": [
+        "declared-preferences"
       ],
       "dataMaturity": "Foundational",
       "complexity": "Medium",
@@ -4641,6 +4965,11 @@
       "industries": [
         "telecom-media-technology"
       ],
+      "dataCategories": [
+        "browsing-behavior",
+        "feedback-reviews",
+        "location-context"
+      ],
       "dataMaturity": "Advanced",
       "complexity": "High",
       "quickWin": false,
@@ -4693,6 +5022,11 @@
       "industries": [
         "telecom-media-technology",
         "travel-hospitality"
+      ],
+      "dataCategories": [
+        "browsing-behavior",
+        "location-context",
+        "declared-preferences"
       ],
       "dataMaturity": "Intermediate",
       "complexity": "High",

@@ -65,6 +65,20 @@
       "enum": ["Foundational", "Intermediate", "Advanced"],
       "description": "How much CDP capability a client needs before this use case is realistic."
     },
+    "dataCategories": {
+      "type": "array",
+      "description": "Optional. Ids from data/data-categories.json — the kinds of CDP data this use case needs. Powers the 'data readiness' filter; a use case without it is never hidden by that filter.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "browsing-behavior", "purchase-history", "loyalty-membership", "declared-preferences",
+          "email-engagement", "location-context", "product-service-data", "feedback-reviews",
+          "predictive-scores", "account-firmographic", "third-party-audience"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
     "complexity": { "type": "string", "enum": ["Low", "Medium", "High"] },
     "quickWin": { "type": "boolean" },
     "customerTrigger": {

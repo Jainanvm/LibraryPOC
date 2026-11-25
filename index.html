@@ -155,7 +155,7 @@
           <button type="button" id="browseAllBtn" class="intake-browse">Explore everything</button>
         </div>
       </form>
-      <p class="intake-note">Your choices are used only to filter this visit and aren’t saved.</p>
+      <p class="intake-note">Your choices are used only to filter this visit and aren’t sent anywhere. Ideas you save stay in this browser, and you can copy a link to share a shortlist.</p>
     </section>
 
     <section class="brief-bar" id="briefBar" hidden aria-label="Your current brief">
@@ -163,7 +163,10 @@
         <p class="brief-label">YOUR SHORTLIST</p>
         <p id="briefSummary" class="brief-summary"></p>
       </div>
-      <button type="button" id="editBriefBtn" class="brief-edit">Edit brief</button>
+      <div class="brief-actions">
+        <button type="button" id="shareBtn" class="brief-edit" title="Copy a link that reopens this exact shortlist">Copy link</button>
+        <button type="button" id="editBriefBtn" class="brief-edit">Edit brief</button>
+      </div>
     </section>
 
     <section class="search-panel" id="searchPanel" hidden>
@@ -208,6 +211,8 @@
         <span id="resultCount" class="result-count"></span>
       </div>
 
+      <div id="readinessHint" class="readiness-hint" hidden></div>
+
       <section id="cardGrid" class="card-grid" aria-live="polite">
         <!-- cards injected by JS -->
       </section>
@@ -224,6 +229,42 @@
       <!-- populated by JS -->
     </div>
   </aside>
+
+  <!-- Saved-ideas tray -->
+  <div id="shortlistTray" class="shortlist-tray" role="region" aria-label="Saved ideas" hidden>
+    <span id="trayCount" class="tray-count"></span>
+    <div class="tray-actions">
+      <button type="button" id="trayReview" class="tray-primary">Review &amp; compare</button>
+      <button type="button" id="trayShare" class="tray-secondary">Copy link</button>
+      <button type="button" id="trayClear" class="tray-secondary">Clear</button>
+    </div>
+  </div>
+
+  <!-- Compare & export dialog -->
+  <dialog id="shortlistModal" class="shortlist-modal" aria-labelledby="shortlistModalTitle">
+    <div class="shortlist-inner">
+      <div class="shortlist-head">
+        <div>
+          <p class="brief-label">YOUR SHORTLIST</p>
+          <h2 id="shortlistModalTitle">Compare saved ideas</h2>
+          <p id="shortlistModalCount" class="shortlist-sub"></p>
+        </div>
+        <button type="button" id="shortlistClose" class="shortlist-close" aria-label="Close shortlist">×</button>
+      </div>
+      <div class="shortlist-actions" role="group" aria-label="Share or export this shortlist">
+        <button type="button" class="action-btn" data-export="print">Print / save as PDF</button>
+        <button type="button" class="action-btn" data-export="csv">Download CSV</button>
+        <button type="button" class="action-btn" data-export="text">Copy summary</button>
+        <button type="button" class="action-btn" data-export="link">Copy link</button>
+      </div>
+      <div id="shortlistBody"></div>
+    </div>
+  </dialog>
+
+  <!-- Print-only version of the shortlist (filled in just before printing) -->
+  <div id="printSheet" class="print-sheet" aria-hidden="true"></div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
   <footer class="site-footer">
     <p>Built for internal &amp; client use &mdash; add new cases via <code>data/use-cases.json</code>. See <code>SETUP.md</code> in the repo for hosting and maintenance instructions.</p>

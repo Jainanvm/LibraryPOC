@@ -26,6 +26,9 @@ values in a single cell, e.g.:
                        (must match ids in data/business-problems.json)
     industries:        retail-consumer-goods|travel-hospitality
                        (must match ids in data/industries.json)
+    dataCategories:   (optional column) browsing-behavior|purchase-history
+                       (must match ids in data/data-categories.json; powers
+                        the "data readiness" filter, blank is allowed)
     quickWin:         true / false / yes / no
 """
 import argparse
@@ -37,7 +40,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA_FILE = ROOT / "data" / "use-cases.json"
 
-LIST_FIELDS = {"channels", "cdpDataUsed", "businessProblems", "industries", "kpiSecondary", "toolsNeeded", "tags"}
+LIST_FIELDS = {"channels", "cdpDataUsed", "dataCategories", "businessProblems", "industries", "kpiSecondary", "toolsNeeded", "tags"}
 BOOL_FIELDS = {"quickWin"}
 REQUIRED_COLUMNS = [
     "id", "title", "oneLiner", "channels", "funnelStage", "personalizationTactic",
@@ -66,6 +69,10 @@ def row_to_use_case(row):
             uc[key] = parse_bool(value)
         else:
             uc[key] = value
+
+    # dataCategories is optional: a blank cell means "not specified", not an empty list.
+    if not uc.get("dataCategories"):
+        uc.pop("dataCategories", None)
 
     # kpiPrimary / kpiSecondary flatten into the nested `kpis` object
     uc["kpis"] = {"primary": uc.pop("kpiPrimary"), "secondary": uc.pop("kpiSecondary")}

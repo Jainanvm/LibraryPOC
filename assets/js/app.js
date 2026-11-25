@@ -12,6 +12,9 @@
     all: [],
     problemsById: {},
     industriesById: {},
+    categoriesById: {},
+    saved: [], // ordered use-case ids the visitor has saved to a shortlist
+    detailId: null,
     browsingStarted: false,
     editingBrief: false,
     query: "",
@@ -22,6 +25,7 @@
       complexity: new Set(),
       dataMaturity: new Set(),
       businessProblems: new Set(),
+      dataAvailable: new Set(), // data categories the client already has (readiness filter)
       quickWin: false,
     },
     ai: {
@@ -72,6 +76,19 @@
     searchPanel: document.querySelector(".search-panel"),
     activeFilters: document.getElementById("activeFilters"),
     refinePanel: document.getElementById("refinePanel"),
+    readinessHint: document.getElementById("readinessHint"),
+    shareBtn: document.getElementById("shareBtn"),
+    tray: document.getElementById("shortlistTray"),
+    trayCount: document.getElementById("trayCount"),
+    trayReview: document.getElementById("trayReview"),
+    trayShare: document.getElementById("trayShare"),
+    trayClear: document.getElementById("trayClear"),
+    modal: document.getElementById("shortlistModal"),
+    modalBody: document.getElementById("shortlistBody"),
+    modalCount: document.getElementById("shortlistModalCount"),
+    modalClose: document.getElementById("shortlistClose"),
+    printSheet: document.getElementById("printSheet"),
+    toast: document.getElementById("toast"),
   };
 
   // ---------- Data loading ----------
@@ -89,9 +106,16 @@
       if (!r.ok) throw new Error("HTTP " + r.status + " loading industries.json");
       return r.json();
     }),
+    // Optional taxonomy: if it can't be loaded the library still works, just without the data-readiness filter.
+    fetch("data/data-categories.json", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : { categories: [] }))
+      .catch(() => ({ categories: [] })),
   ])
-    .then(([useCaseData, problemData, industryData]) => {
+    .then(([useCaseData, problemData, industryData, categoryData]) => {
       state.all = useCaseData.useCases || [];
+      (categoryData.categories || []).forEach((category) => {
+        state.categoriesById[category.id] = category;
+      });
       (problemData.problems || []).forEach((p) => {
         state.problemsById[p.id] = p;
       });
@@ -101,12 +125,17 @@
       populateIntakeOptions();
       buildIndustryCards();
       buildFilterGroups();
-      const selectedIndustry = new URLSearchParams(window.location.search).get("industry");
-      if (selectedIndustry && state.industriesById[selectedIndustry]) {
-        els.intakeIndustry.value = selectedIndustry;
-        startBrowsing("", selectedIndustry, false, "");
-        window.history.replaceState(null, "", window.location.pathname);
+      const restored = restoreFromURL();
+      if (restored.browse) {
+        // A shared or bookmarked link: rebuild the same shortlist, then jump to it.
+        els.intakeProblem.value = state.filters.businessProblems.values().next().value || "";
+        els.intakeIndustry.value = state.filters.industries.values().next().value || "";
+        els.intakeFunnelStage.value = state.filters.funnelStage.values().next().value || "";
+        render();
+        scrollToSection(els.resultsArea);
+        if (restored.caseId) openDetail(restored.caseId);
       } else {
+        if (restored.caseId) openDetail(restored.caseId);
         render();
         const navigationEntries = window.performance && window.performance.getEntriesByType
           ? window.performance.getEntriesByType("navigation")
@@ -319,8 +348,18 @@
 
   // ---------- Filtering ----------
 
-  function passesFilters(uc) {
+  // Data categories this use case needs that the client has not said they have.
+  // Empty when the readiness filter is off, or when the use case has no category data
+  // (so older/imported entries are never hidden by a filter they cannot answer).
+  function missingData(uc) {
+    const have = state.filters.dataAvailable;
+    if (!have.size || !Array.isArray(uc.dataCategories)) return [];
+    return uc.dataCategories.filter((category) => !have.has(category));
+  }
+
+  function passesFilters(uc, options) {
     const f = state.filters;
+    if (!(options && options.skipReadiness) && missingData(uc).length) return false;
     if (f.industries.size && !(uc.industries || []).some((id) => f.industries.has(id))) return false;
     if (f.channels.size && !uc.channels.some((c) => f.channels.has(c))) return false;
     if (f.funnelStage.size && !f.funnelStage.has(uc.funnelStage)) return false;
@@ -371,6 +410,17 @@
     state.all.forEach((uc) => (uc.businessProblems || []).forEach((id) => usedProblemIds.add(id)));
     const problemEntries = Object.values(state.problemsById).filter((p) => usedProblemIds.has(p.id));
     appendTaxonomyFilterGroup("Business problem", problemEntries, "businessProblems");
+
+    // Data readiness: which kinds of CDP data does the client already have?
+    const usedCategoryIds = new Set();
+    state.all.forEach((uc) => (uc.dataCategories || []).forEach((id) => usedCategoryIds.add(id)));
+    const categoryEntries = Object.values(state.categoriesById).filter((c) => usedCategoryIds.has(c.id));
+    appendTaxonomyFilterGroup(
+      "Data you already have",
+      categoryEntries,
+      "dataAvailable",
+      "Select the data your CDP holds today. Only ideas you could run with it are shown."
+    );
 
     FILTER_DEFS.forEach((def) => {
       const presentValues = def.values.filter((v) =>
@@ -423,13 +473,18 @@
     els.filterGroups.appendChild(qwGroup);
   }
 
-  function appendTaxonomyFilterGroup(labelText, entries, filterKey) {
+  function appendTaxonomyFilterGroup(labelText, entries, filterKey, hint) {
     if (!entries.length) return;
     const group = document.createElement("div");
     group.className = "filter-group filter-group-wide";
     const label = document.createElement("span");
     label.className = "filter-group-label";
     label.textContent = labelText;
+    const hintEl = hint ? document.createElement("span") : null;
+    if (hintEl) {
+      hintEl.className = "filter-group-hint";
+      hintEl.textContent = hint;
+    }
     const chips = document.createElement("div");
     chips.className = "filter-chips";
 
@@ -446,6 +501,7 @@
     });
 
     group.appendChild(label);
+    if (hintEl) group.appendChild(hintEl);
     group.appendChild(chips);
     els.filterGroups.appendChild(group);
   }
@@ -456,13 +512,21 @@
     return { web: "Web", app: "App", email: "Email" }[c] || c;
   }
 
+  const BOOKMARK_ICON =
+    '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">' +
+    '<path d="M6 3.5h12a.5.5 0 0 1 .5.5v17l-6.5-4.2L5.5 21V4a.5.5 0 0 1 .5-.5Z"/></svg>';
+
   function cardHTML(uc, rationale) {
     const channels = uc.channels.map((channel) => `<span class="meta-pill">${escapeHTML(channelLabel(channel))}</span>`).join("");
     const rationaleBlock = rationale
       ? `<p class="ai-rationale">${escapeHTML(rationale)}</p>`
       : "";
+    const isSaved = state.saved.includes(uc.id);
     return `
       <article class="card" tabindex="0" data-id="${uc.id}">
+        <button type="button" class="save-btn${isSaved ? " saved" : ""}" data-save-id="${escapeHTML(uc.id)}"
+          aria-pressed="${isSaved}" aria-label="${isSaved ? "Remove from" : "Save to"} shortlist: ${escapeHTML(uc.title)}"
+          title="${isSaved ? "Saved — click to remove" : "Save to shortlist"}">${BOOKMARK_ICON}</button>
         <h3 class="card-title">${escapeHTML(uc.title)}</h3>
         <p class="card-oneliner">${escapeHTML(uc.oneLiner)}</p>
         <div class="card-customer-moment">
@@ -485,6 +549,8 @@
   }
 
   function render() {
+    renderTray();
+    scheduleURLSync();
     els.intakePanel.hidden = state.browsingStarted && !state.editingBrief;
     els.briefBar.hidden = !state.browsingStarted || state.editingBrief;
     els.searchPanel.hidden = !state.browsingStarted;
@@ -506,14 +572,25 @@
     els.resultCount.textContent = `${results.length} use case${results.length === 1 ? "" : "s"}`;
     els.grid.innerHTML = results.map((uc) => cardHTML(uc)).join("");
     els.emptyState.hidden = results.length !== 0;
-
-    els.grid.querySelectorAll(".card").forEach((card) => {
-      card.addEventListener("click", () => openDetail(card.dataset.id));
-      card.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") openDetail(card.dataset.id);
-      });
-    });
+    renderReadinessHint();
   }
+
+  // Card clicks are delegated once, so cards can be re-rendered freely and the
+  // save button never also opens the detail panel.
+  els.grid.addEventListener("click", (event) => {
+    const saveBtn = event.target.closest(".save-btn");
+    if (saveBtn) {
+      toggleSaved(saveBtn.dataset.saveId);
+      return;
+    }
+    const card = event.target.closest(".card");
+    if (card) openDetail(card.dataset.id);
+  });
+  els.grid.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    const card = event.target.closest(".card");
+    if (card && event.target === card) openDetail(card.dataset.id);
+  });
 
   // ---------- Detail panel ----------
 
@@ -540,6 +617,26 @@
       <p class="journey-story-kpi">Measured by <strong>${escapeHTML(uc.kpis.primary)}</strong></p>
       <p class="journey-story-narrative">${escapeHTML(uc.journey)}</p>
     `;
+  }
+
+  // "Data you need" pills. When the readiness filter is on, flag what the client is missing.
+  function dataNeededHTML(uc) {
+    const pills = dataPillsHTML(uc);
+    return pills ? `<div class="detail-section"><h3>Data you need</h3><div class="detail-badges">${pills}</div></div>` : "";
+  }
+
+  function dataPillsHTML(uc) {
+    const categories = (uc.dataCategories || []).map((id) => state.categoriesById[id]).filter(Boolean);
+    if (!categories.length) return "";
+    const missing = new Set(missingData(uc));
+    const checking = state.filters.dataAvailable.size > 0;
+    const pills = categories.map((category) => {
+      const isMissing = missing.has(category.id);
+      const status = checking ? (isMissing ? " — you don’t have this yet" : " — you have this") : "";
+      return `<span class="data-pill${checking ? (isMissing ? " missing" : " have") : ""}" title="${escapeHTML(category.description || "")}">` +
+        `${checking ? (isMissing ? "✕ " : "✓ ") : ""}${escapeHTML(category.label)}<span class="visually-hidden">${escapeHTML(status)}</span></span>`;
+    }).join("");
+    return pills;
   }
 
   function detailHTML(uc) {
@@ -595,6 +692,11 @@
           <span class="meta-pill">${escapeHTML(uc.dataMaturity)} data</span>
           ${uc.quickWin ? '<span class="quickwin-badge">Quick win</span>' : ""}
         </div>
+
+        <div class="detail-actions">
+          <button type="button" class="action-btn" data-detail-save="${escapeHTML(uc.id)}"></button>
+          <button type="button" class="action-btn" data-detail-copy="${escapeHTML(uc.id)}">Copy link to this idea</button>
+        </div>
       </div>
 
       ${sourceSection}
@@ -611,6 +713,8 @@
           <div class="ba-box after"><span class="ba-label">After</span>${uc.exampleAfter}</div>
         </div>
       </div>
+
+      ${dataNeededHTML(uc)}
 
       <div class="detail-section">
         <h3>CDP data used</h3>
@@ -642,13 +746,30 @@
       const currentState = history.state && typeof history.state === "object" ? history.state : {};
       history.pushState({ ...currentState, useCaseDetail: id }, "", window.location.href);
     }
+    state.detailId = id;
     els.detailContent.innerHTML = detailHTML(uc);
     els.overlay.hidden = false;
     els.detailPanel.hidden = false;
     els.detailPanel.setAttribute("aria-hidden", "false");
     document.getElementById("detailCloseBtn").addEventListener("click", closeDetail);
     document.body.style.overflow = "hidden";
+    syncSavedUI();
+    syncURL();
   }
+
+  els.detailContent.addEventListener("click", (event) => {
+    const saveBtn = event.target.closest("[data-detail-save]");
+    if (saveBtn) {
+      toggleSaved(saveBtn.dataset.detailSave);
+      return;
+    }
+    const copyBtn = event.target.closest("[data-detail-copy]");
+    if (copyBtn) {
+      copyText(buildShareURL({ caseId: copyBtn.dataset.detailCopy, bare: true })).then((ok) =>
+        showToast(ok ? "Link to this idea copied" : "Couldn’t copy — copy the address bar instead")
+      );
+    }
+  });
 
   function closeDetail() {
     if (history.state?.useCaseDetail) {
@@ -659,10 +780,12 @@
   }
 
   function hideDetail() {
+    state.detailId = null;
     els.overlay.hidden = true;
     els.detailPanel.hidden = true;
     els.detailPanel.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    syncURL();
   }
 
   window.addEventListener("popstate", () => {
@@ -738,13 +861,7 @@
     els.grid.innerHTML = cards;
     els.emptyState.hidden = matches.length !== 0;
     els.resultCount.textContent = `${matches.length} match${matches.length === 1 ? "" : "es"}`;
-
-    els.grid.querySelectorAll(".card").forEach((card) => {
-      card.addEventListener("click", () => openDetail(card.dataset.id));
-      card.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") openDetail(card.dataset.id);
-      });
-    });
+    els.readinessHint.hidden = true;
   }
 
   function setAIStatus(message, isError) {
@@ -1000,6 +1117,10 @@
       if (state.industriesById[id]) parts.push(state.industriesById[id].label);
     });
     state.filters.funnelStage.forEach((stage) => parts.push(stage));
+    if (state.filters.dataAvailable.size) {
+      const n = state.filters.dataAvailable.size;
+      parts.push(`${n} data type${n === 1 ? "" : "s"} available`);
+    }
     if (state.filters.quickWin) parts.push("Quick wins");
     els.briefSummary.textContent = parts.length ? parts.join(" · ") : "Exploring the whole library";
     els.editBriefBtn.textContent = state.editingBrief ? "Update shortlist" : "Edit brief";
@@ -1026,6 +1147,9 @@
         appendSet("".concat(definition.key), {});
       }
     });
+    appendSet("dataAvailable", Object.fromEntries(
+      Object.values(state.categoriesById).map((category) => [category.id, "Has: " + category.label])
+    ));
     if (state.filters.quickWin) active.push({ key: "quickWin", value: "true", label: "Quick wins" });
     return active;
   }
@@ -1059,6 +1183,461 @@
     }
     render();
   });
+
+  // ---------- Data readiness: what would unlock more ideas? ----------
+
+  function renderReadinessHint() {
+    const hide = () => {
+      els.readinessHint.hidden = true;
+      els.readinessHint.innerHTML = "";
+    };
+    if (!state.filters.dataAvailable.size) return hide();
+
+    // Count ideas that are blocked by exactly one missing data type, ignoring only the readiness filter.
+    const unlocks = {};
+    state.all.forEach((uc) => {
+      if (!passesFilters(uc, { skipReadiness: true })) return;
+      if (state.query && !matchesQuery(uc, state.query).match) return;
+      const missing = missingData(uc);
+      if (missing.length === 1) unlocks[missing[0]] = (unlocks[missing[0]] || 0) + 1;
+    });
+    const top = Object.entries(unlocks)
+      .filter(([id]) => state.categoriesById[id])
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 3);
+    if (!top.length) return hide();
+
+    els.readinessHint.hidden = false;
+    els.readinessHint.innerHTML =
+      '<span class="readiness-hint-label">Just one data type away</span>' +
+      top.map(([id, count]) =>
+        `<button type="button" class="readiness-unlock" data-unlock="${escapeHTML(id)}">` +
+        `Add ${escapeHTML(state.categoriesById[id].label)} <strong>+${count} idea${count === 1 ? "" : "s"}</strong></button>`
+      ).join("");
+  }
+
+  els.readinessHint.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-unlock]");
+    if (!button) return;
+    state.filters.dataAvailable.add(button.dataset.unlock);
+    render();
+  });
+
+  // ---------- Saved shortlist ----------
+
+  const SAVED_STORAGE_KEY = "plc.saved.v1";
+  const MAX_SAVED_FROM_URL = 50;
+
+  function findCase(id) {
+    return state.all.find((uc) => uc.id === id);
+  }
+
+  function loadSavedFromStorage() {
+    try {
+      const stored = JSON.parse(window.localStorage.getItem(SAVED_STORAGE_KEY) || "[]");
+      return Array.isArray(stored) ? stored.filter((id) => typeof id === "string" && findCase(id)) : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function persistSaved() {
+    try {
+      window.localStorage.setItem(SAVED_STORAGE_KEY, JSON.stringify(state.saved));
+    } catch (error) {
+      /* storage can be blocked (private mode); the shortlist still works for this visit and via links */
+    }
+  }
+
+  function toggleSaved(id) {
+    if (!findCase(id)) return;
+    const index = state.saved.indexOf(id);
+    if (index >= 0) state.saved.splice(index, 1);
+    else state.saved.push(id);
+    persistSaved();
+    syncSavedUI();
+    scheduleURLSync();
+    if (!state.saved.length && els.modal.open) els.modal.close();
+  }
+
+  function syncSavedUI() {
+    els.grid.querySelectorAll(".save-btn").forEach((button) => {
+      const id = button.dataset.saveId;
+      const uc = findCase(id);
+      const on = state.saved.includes(id);
+      button.classList.toggle("saved", on);
+      button.setAttribute("aria-pressed", String(on));
+      button.setAttribute("aria-label", `${on ? "Remove from" : "Save to"} shortlist: ${uc ? uc.title : ""}`);
+      button.title = on ? "Saved — click to remove" : "Save to shortlist";
+    });
+    const detailButton = els.detailContent.querySelector("[data-detail-save]");
+    if (detailButton) {
+      const on = state.saved.includes(detailButton.dataset.detailSave);
+      detailButton.textContent = on ? "★ Saved to shortlist" : "☆ Save to shortlist";
+      detailButton.setAttribute("aria-pressed", String(on));
+      detailButton.classList.toggle("saved", on);
+    }
+    renderTray();
+    if (els.modal.open) renderShortlistModal();
+  }
+
+  function renderTray() {
+    const count = state.saved.length;
+    els.tray.hidden = count === 0;
+    document.body.classList.toggle("has-tray", count > 0);
+    els.trayCount.textContent = `${count} idea${count === 1 ? "" : "s"} saved`;
+  }
+
+  function savedCases() {
+    return state.saved.map(findCase).filter(Boolean);
+  }
+
+  // ---------- Compare & shortlist dialog ----------
+
+  function labelsFor(ids, byId) {
+    return (ids || []).map((id) => (byId[id] ? byId[id].label : id));
+  }
+
+  function listHTML(items) {
+    return items && items.length
+      ? `<ul class="compare-list">${items.map((item) => `<li>${escapeHTML(item)}</li>`).join("")}</ul>`
+      : "—";
+  }
+
+  const COMPARE_ROWS = [
+    ["What it does", (uc) => escapeHTML(uc.oneLiner)],
+    ["Customer moment", (uc) => escapeHTML(uc.customerTrigger)],
+    ["Journey stage", (uc) => escapeHTML(uc.funnelStage)],
+    ["Channels", (uc) => uc.channels.map((c) => `<span class="meta-pill">${escapeHTML(channelLabel(c))}</span>`).join(" ")],
+    ["Effort", (uc) =>
+      `<span class="meta-pill complexity-${escapeHTML(uc.complexity)}">${escapeHTML(uc.complexity)} complexity</span>` +
+      (uc.quickWin ? ' <span class="quickwin-badge">Quick win</span>' : "")],
+    ["CDP maturity needed", (uc) => escapeHTML(uc.dataMaturity)],
+    ["Data you need", (uc) => dataPillsHTML(uc) || "—"],
+    ["CDP data points", (uc) => listHTML(uc.cdpDataUsed)],
+    ["Primary measure", (uc) => `<strong>${escapeHTML(uc.kpis.primary)}</strong>`],
+    ["Other measures", (uc) => listHTML(uc.kpis.secondary)],
+    ["Build requirements", (uc) => listHTML(uc.toolsNeeded)],
+    ["Solves for", (uc) => listHTML(labelsFor(uc.businessProblems, state.problemsById))],
+  ];
+
+  function renderShortlistModal() {
+    const cases = savedCases();
+    els.modalCount.textContent = `${cases.length} idea${cases.length === 1 ? "" : "s"} · side-by-side`;
+    if (!cases.length) {
+      els.modalBody.innerHTML = '<p class="empty-state">Nothing saved yet. Use the bookmark on any idea to add it here.</p>';
+      return;
+    }
+    const head = cases.map((uc) =>
+      `<th scope="col"><button type="button" class="compare-title" data-open="${escapeHTML(uc.id)}">${escapeHTML(uc.title)}</button>` +
+      `<button type="button" class="compare-remove" data-remove="${escapeHTML(uc.id)}" aria-label="Remove ${escapeHTML(uc.title)} from shortlist">Remove</button></th>`
+    ).join("");
+    const body = COMPARE_ROWS.map(([label, cell]) =>
+      `<tr><th scope="row">${escapeHTML(label)}</th>${cases.map((uc) => `<td>${cell(uc)}</td>`).join("")}</tr>`
+    ).join("");
+    els.modalBody.innerHTML =
+      '<div class="compare-scroll" tabindex="0" role="region" aria-label="Comparison table, scrolls sideways on small screens">' +
+      `<table class="compare-table"><thead><tr><th scope="col" class="compare-corner"><span class="visually-hidden">Attribute</span></th>${head}</tr></thead>` +
+      `<tbody>${body}</tbody></table></div>`;
+  }
+
+  function openShortlistModal() {
+    if (!state.saved.length) return;
+    renderShortlistModal();
+    if (!els.modal.open) els.modal.showModal();
+  }
+
+  els.trayReview.addEventListener("click", openShortlistModal);
+  els.modalClose.addEventListener("click", () => els.modal.close());
+  els.modal.addEventListener("click", (event) => {
+    if (event.target === els.modal) els.modal.close(); // click on the backdrop
+    const openBtn = event.target.closest("[data-open]");
+    if (openBtn) {
+      els.modal.close();
+      openDetail(openBtn.dataset.open);
+      return;
+    }
+    const removeBtn = event.target.closest("[data-remove]");
+    if (removeBtn) {
+      toggleSaved(removeBtn.dataset.remove);
+      return;
+    }
+    const exportBtn = event.target.closest("[data-export]");
+    if (exportBtn) runExport(exportBtn.dataset.export);
+  });
+
+  let clearTimer = null;
+  function resetClearButton() {
+    clearTimeout(clearTimer);
+    els.trayClear.textContent = "Clear";
+    els.trayClear.dataset.armed = "";
+  }
+  els.trayClear.addEventListener("click", () => {
+    if (!els.trayClear.dataset.armed) {
+      // Two-step so a stray click can't wipe the list.
+      els.trayClear.dataset.armed = "1";
+      els.trayClear.textContent = "Click again to clear";
+      clearTimer = setTimeout(resetClearButton, 3000);
+      return;
+    }
+    resetClearButton();
+    state.saved = [];
+    persistSaved();
+    syncSavedUI();
+    scheduleURLSync();
+  });
+
+  // ---------- Export ----------
+
+  function today() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function ideaLink(uc) {
+    return buildShareURL({ caseId: uc.id, bare: true });
+  }
+
+  function sourceUrlOf(uc) {
+    return uc.source && typeof uc.source.url === "string" ? uc.source.url.trim() : "";
+  }
+
+  // Neutralize spreadsheet formulas (=, +, -, @) so opening the CSV in Excel can't run injected content.
+  function csvCell(value) {
+    let text = String(value == null ? "" : value);
+    if (/^[=+\-@\t\r]/.test(text)) text = "'" + text;
+    return '"' + text.replace(/"/g, '""') + '"';
+  }
+
+  function downloadFile(filename, text, mimeType) {
+    const url = URL.createObjectURL(new Blob([text], { type: mimeType }));
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function exportCSV(cases) {
+    const header = [
+      "Title", "What it does", "Journey stage", "Channels", "Complexity", "Quick win", "CDP maturity needed",
+      "Data you need", "CDP data points", "Customer moment", "Primary measure", "Other measures",
+      "Build requirements", "Solves for", "Industries", "Source", "Link",
+    ];
+    const rows = cases.map((uc) => [
+      uc.title, uc.oneLiner, uc.funnelStage, uc.channels.map(channelLabel).join("; "), uc.complexity,
+      uc.quickWin ? "Yes" : "No", uc.dataMaturity, labelsFor(uc.dataCategories, state.categoriesById).join("; "),
+      uc.cdpDataUsed.join("; "), uc.customerTrigger, uc.kpis.primary, (uc.kpis.secondary || []).join("; "),
+      uc.toolsNeeded.join("; "), labelsFor(uc.businessProblems, state.problemsById).join("; "),
+      labelsFor(uc.industries, state.industriesById).join("; "), sourceUrlOf(uc), ideaLink(uc),
+    ]);
+    // BOM so Excel reads the file as UTF-8.
+    const csv = "﻿" + [header].concat(rows).map((row) => row.map(csvCell).join(",")).join("\r\n");
+    downloadFile(`personalization-shortlist-${today()}.csv`, csv, "text/csv;charset=utf-8");
+  }
+
+  function shortlistAsText(cases) {
+    const lines = [`# Personalization shortlist (${cases.length} idea${cases.length === 1 ? "" : "s"})`, `Prepared ${today()}`, ""];
+    cases.forEach((uc, index) => {
+      lines.push(`## ${index + 1}. ${uc.title}`, uc.oneLiner, "");
+      lines.push(`- Customer moment: ${uc.customerTrigger}`);
+      lines.push(`- Journey stage: ${uc.funnelStage} · Channels: ${uc.channels.map(channelLabel).join(", ")}`);
+      lines.push(`- Effort: ${uc.complexity} complexity${uc.quickWin ? " (quick win)" : ""} · CDP maturity needed: ${uc.dataMaturity}`);
+      const data = labelsFor(uc.dataCategories, state.categoriesById);
+      if (data.length) lines.push(`- Data you need: ${data.join(", ")}`);
+      lines.push(`- Primary measure: ${uc.kpis.primary}`);
+      lines.push(`- More: ${ideaLink(uc)}`, "");
+    });
+    return lines.join("\n");
+  }
+
+  function renderPrintSheet(cases) {
+    const context = state.browsingStarted ? els.briefSummary.textContent : "";
+    const summaryRows = cases.map((uc) =>
+      `<tr><td>${escapeHTML(uc.title)}</td><td>${escapeHTML(uc.funnelStage)}</td><td>${escapeHTML(uc.channels.map(channelLabel).join(", "))}</td>` +
+      `<td>${escapeHTML(uc.complexity)}${uc.quickWin ? " · quick win" : ""}</td><td>${escapeHTML(uc.dataMaturity)}</td></tr>`
+    ).join("");
+    const details = cases.map((uc, index) => {
+      const data = labelsFor(uc.dataCategories, state.categoriesById).join(", ");
+      return `<section class="print-case">
+        <h2>${index + 1}. ${escapeHTML(uc.title)}</h2>
+        <p>${escapeHTML(uc.oneLiner)}</p>
+        <dl>
+          <dt>Customer moment</dt><dd>${escapeHTML(uc.customerTrigger)}</dd>
+          <dt>Journey</dt><dd>${escapeHTML(uc.journey)}</dd>
+          ${data ? `<dt>Data you need</dt><dd>${escapeHTML(data)}</dd>` : ""}
+          <dt>CDP data points</dt><dd>${escapeHTML(uc.cdpDataUsed.join("; "))}</dd>
+          <dt>Primary measure</dt><dd>${escapeHTML(uc.kpis.primary)}</dd>
+          <dt>Build requirements</dt><dd>${escapeHTML(uc.toolsNeeded.join("; "))}</dd>
+        </dl>
+      </section>`;
+    }).join("");
+    els.printSheet.innerHTML =
+      `<h1>Personalization shortlist</h1>
+       <p class="print-meta">${cases.length} idea${cases.length === 1 ? "" : "s"} · prepared ${escapeHTML(today())}${context ? " · " + escapeHTML(context) : ""}</p>
+       <table class="print-summary"><thead><tr><th>Idea</th><th>Journey stage</th><th>Channels</th><th>Effort</th><th>CDP maturity</th></tr></thead><tbody>${summaryRows}</tbody></table>
+       ${details}`;
+  }
+
+  function runExport(kind) {
+    const cases = savedCases();
+    if (kind === "link") {
+      copyText(buildShareURL()).then((ok) => showToast(ok ? "Shortlist link copied" : "Couldn’t copy — copy the address bar instead"));
+      return;
+    }
+    if (!cases.length) return;
+    if (kind === "csv") {
+      exportCSV(cases);
+      showToast("CSV downloaded");
+    } else if (kind === "text") {
+      copyText(shortlistAsText(cases)).then((ok) => showToast(ok ? "Summary copied" : "Couldn’t copy the summary"));
+    } else if (kind === "print") {
+      renderPrintSheet(cases);
+      window.print();
+    }
+  }
+
+  // ---------- Shareable links ----------
+  // The URL is a readable snapshot of the current shortlist: filters, keyword, saved ideas, and an
+  // open idea. Nothing is sent anywhere — it is only text the visitor can copy.
+
+  const URL_FILTER_PARAMS = [
+    ["industries", "industry"],
+    ["businessProblems", "problem"],
+    ["channels", "channel"],
+    ["funnelStage", "stage"],
+    ["complexity", "complexity"],
+    ["dataMaturity", "maturity"],
+    ["dataAvailable", "data"],
+  ];
+
+  function buildShareURL(options) {
+    const opts = options || {};
+    const params = new URLSearchParams();
+    if (!opts.bare) {
+      let hasFilter = false;
+      URL_FILTER_PARAMS.forEach(([key, param]) => {
+        if (!state.filters[key].size) return;
+        params.set(param, Array.from(state.filters[key]).join(","));
+        hasFilter = true;
+      });
+      if (state.filters.quickWin) {
+        params.set("quick", "1");
+        hasFilter = true;
+      }
+      if (state.query) {
+        params.set("q", state.query);
+        hasFilter = true;
+      }
+      if (state.browsingStarted && !hasFilter) params.set("view", "all");
+      if (state.saved.length) params.set("saved", state.saved.join(","));
+    }
+    if (opts.caseId) params.set("case", opts.caseId);
+    const base = window.location.href.split(/[?#]/)[0];
+    const query = params.toString().replace(/%2C/g, ",");
+    return query ? base + "?" + query : base;
+  }
+
+  function restoreFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const list = (name) => (params.get(name) || "").split(",").map((value) => value.trim()).filter(Boolean);
+    // Only accept values that exist in the library, so a hand-edited link can't inject junk.
+    const isKnown = {
+      industries: (v) => !!state.industriesById[v],
+      businessProblems: (v) => !!state.problemsById[v],
+      channels: (v) => ["web", "app", "email"].includes(v),
+      funnelStage: (v) => JOURNEY_STAGES.includes(v),
+      complexity: (v) => ["Low", "Medium", "High"].includes(v),
+      dataMaturity: (v) => ["Foundational", "Intermediate", "Advanced"].includes(v),
+      dataAvailable: (v) => !!state.categoriesById[v],
+    };
+
+    let browse = false;
+    URL_FILTER_PARAMS.forEach(([key, param]) => {
+      list(param).filter(isKnown[key]).forEach((value) => {
+        state.filters[key].add(value);
+        browse = true;
+      });
+    });
+    if (params.get("quick") === "1") {
+      state.filters.quickWin = true;
+      browse = true;
+    }
+    const query = (params.get("q") || "").trim().slice(0, 200);
+    if (query) {
+      state.query = query;
+      els.keywordSearchInput.value = query;
+      els.clearKeywordSearch.classList.add("visible");
+      browse = true;
+    }
+    if (params.get("view") === "all") browse = true;
+
+    const fromURL = list("saved").filter((id) => findCase(id)).slice(0, MAX_SAVED_FROM_URL);
+    state.saved = Array.from(new Set(fromURL.length ? fromURL : loadSavedFromStorage()));
+
+    if (browse) state.browsingStarted = true;
+    const caseId = params.get("case");
+    return { browse, caseId: caseId && findCase(caseId) ? caseId : null };
+  }
+
+  let urlTimer = null;
+  function scheduleURLSync() {
+    clearTimeout(urlTimer);
+    urlTimer = setTimeout(syncURL, 250); // browsers rate-limit history.replaceState, so don't call it per keystroke
+  }
+
+  function syncURL() {
+    clearTimeout(urlTimer);
+    try {
+      const target = buildShareURL({ caseId: state.detailId });
+      if (target !== window.location.href) window.history.replaceState(window.history.state, "", target);
+    } catch (error) {
+      /* file:// and some sandboxes refuse URL changes; the Copy link button still works */
+    }
+  }
+
+  async function copyText(text) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (error) {
+      /* fall through to the legacy path */
+    }
+    try {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      const ok = document.execCommand("copy");
+      area.remove();
+      return ok;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  let toastTimer = null;
+  function showToast(message) {
+    els.toast.textContent = message;
+    els.toast.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      els.toast.hidden = true;
+    }, 2600);
+  }
+
+  els.shareBtn.addEventListener("click", () => {
+    copyText(buildShareURL()).then((ok) =>
+      showToast(ok ? "Link copied — it reopens this shortlist" : "Couldn’t copy — copy the address bar instead")
+    );
+  });
+  els.trayShare.addEventListener("click", () => runExport("link"));
 
   els.aiSubmitBtn.addEventListener("click", submitAIQuery);
   els.aiClearBtn.addEventListener("click", clearAIResults);

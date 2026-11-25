@@ -1,0 +1,60 @@
+{
+  "$comment": "Canonical list of CDP data categories. Each use case references these by id in its dataCategories array, so a client can say which kinds of data they already have and see which ideas they could run today (the 'data readiness' filter). Keep ids in sync with the enum in data/schema.json.",
+  "categories": [
+    {
+      "id": "browsing-behavior",
+      "label": "Browsing & on-site behavior",
+      "description": "Page and product views, searches, clicks, session activity, and in-app events."
+    },
+    {
+      "id": "purchase-history",
+      "label": "Purchase & order history",
+      "description": "Past orders, baskets, returns, spend, and transaction records."
+    },
+    {
+      "id": "loyalty-membership",
+      "label": "Loyalty & membership",
+      "description": "Points, tiers, rewards, subscriptions, and membership status."
+    },
+    {
+      "id": "declared-preferences",
+      "label": "Declared preferences & profile",
+      "description": "Data customers share directly: quizzes, sizes, style, communication preferences, and profile fields."
+    },
+    {
+      "id": "email-engagement",
+      "label": "Email & message engagement",
+      "description": "Opens, clicks, send history, channel consent, and response to campaigns or notifications."
+    },
+    {
+      "id": "location-context",
+      "label": "Location & context",
+      "description": "Geography, device, time, weather, and other real-time context."
+    },
+    {
+      "id": "product-service-data",
+      "label": "Product, inventory & service data",
+      "description": "Catalog, pricing, availability, vehicle or asset records, and service history."
+    },
+    {
+      "id": "feedback-reviews",
+      "label": "Reviews & feedback",
+      "description": "Ratings, reviews, survey responses, and customer feedback."
+    },
+    {
+      "id": "predictive-scores",
+      "label": "Predictive scores & segments",
+      "description": "Modelled signals such as churn risk, propensity, affinity, lifecycle stage, and inferred interests."
+    },
+    {
+      "id": "account-firmographic",
+      "label": "Account & firmographic data",
+      "description": "B2B company, domain, CRM, and prospect or account records."
+    },
+    {
+      "id": "third-party-audience",
+      "label": "Third-party & audience data",
+      "description": "Data from ad platforms, social networks, and external or enrichment sources."
+    }
+  ]
+}
